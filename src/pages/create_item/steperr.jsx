@@ -20,10 +20,6 @@ const ButtonContainer = styled('div')`
 
 export default function StepperComponent(props) {
 
-  const handleNext = () => {
-    props.setCurrentStep((currentStep) => currentStep + 1);
-  };
-
   const handleBack = () => {
     props.setCurrentStep((currentStep) => currentStep - 1);
   };
@@ -53,7 +49,7 @@ export default function StepperComponent(props) {
           <Button disabled={props.currentStep === 0} onClick={handleBack}>
             Back
           </Button>
-          <Button variant="contained" color="primary" onClick={handleNext}>
+          <Button variant="contained" color="primary" onClick={props.handleNext}>
             {props.currentStep === props.steps.length - 1 ? 'Finish' : 'Next'}
           </Button>
         </ButtonContainer>

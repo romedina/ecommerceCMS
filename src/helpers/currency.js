@@ -1,5 +1,6 @@
 const currency = {
   toCurrency: (number) => {  
+    if (!number) return ''
     let stringParsed = number.toString()
     stringParsed = stringParsed.replace(/,/g, '')
     stringParsed = stringParsed.replace('$', '')
@@ -30,3 +31,5 @@ const currency = {
     return stringParsed
   }
 }
+
+export default currency
