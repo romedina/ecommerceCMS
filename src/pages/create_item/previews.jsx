@@ -1,0 +1,52 @@
+import React from 'react'
+import styled from 'styled-components'
+import Delete from '@material-ui/icons/Delete';
+
+const Previews = (props) => {
+  return (
+    <Container>
+      {props.pictures.map( (picture, index) => 
+        <ItemContent key={index}>
+          <DeleteIcon onClick={ () => props.handleDelete(picture)}/>
+          <Picture
+            src={typeof picture === 'string' ? picture : picture.preview}
+          />
+        </ItemContent>
+      )}
+    </Container>
+  )
+}
+
+export default Previews
+
+const Container = styled('div')`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+`
+const ItemContent = styled('div')`
+  display: block;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 20%;
+  position: relative;
+`
+const Picture = styled('img')`
+  width: 100%;
+  height: 150px;
+  border-radius: 5px;
+  display: block;
+  object-fit: cover;
+  background: red;
+  box-sizing: border-box;
+  overflow: hidden;
+`
+const DeleteIcon = styled(Delete)`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #000;
+  cursor: pointer;
+`

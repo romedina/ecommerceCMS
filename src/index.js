@@ -6,7 +6,6 @@ import { Provider } from 'react-redux'
 import store from './store'
 import { CssBaseline  } from '@material-ui/core'
 
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

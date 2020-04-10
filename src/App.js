@@ -1,16 +1,29 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom'
-
-//pages
 import CreateItem from './pages/create_item';
-
+import styled from 'styled-components'
+import { ThemeProvider } from '@material-ui/core'
+import mytheme from './theme'
+import './index.css'
 
 function App() {
  return (
-   <Switch>
-     <Route path='/create-item' component={CreateItem}/>
-   </Switch>
+  <ThemeProvider theme={mytheme}>
+    <Background>
+      <Switch>
+        <Route path='/create-item' component={CreateItem}/>
+      </Switch>
+    </Background>
+  </ThemeProvider>
  )
 }
 
 export default App;
+
+const Background = styled('div')`
+  background: #fff;
+  min-height: 100vh;
+  width: 100vw;
+  max-width: 100%;
+  
+`

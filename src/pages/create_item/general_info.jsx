@@ -3,16 +3,7 @@ import { Grid, Box } from '@material-ui/core'
 import styled from 'styled-components'
 import { TextField } from '@material-ui/core'
 import currencyParser from '../../helpers/currency'
-
-
-const Content = styled('div')`
-  max-width: 600px;
-  margin: auto;
-`
-
-const TextFieldStyled = styled(TextField)`
-  margin-bottom: 10px;
-`
+import CreateInput from '../../components/input'
 
 const GeneralInfo = (props) => {
 
@@ -20,64 +11,57 @@ const GeneralInfo = (props) => {
 
   return (
     <Content>
-      <TextFieldStyled
-        onClick={event => props.removeError(event.target)}
-        name='title'
-        value={props.title || ''}
-        onChange={(event) => props.handleChange(event.target)}
-        label="Titulo"
-        variant='outlined'
-        fullWidth
-        inputProps={{maxLength: 80}}
-        error={props.errors.includes('title')}
-      />
-      <TextFieldStyled
-        onClick={event => props.removeError(event.target)}
-        inputProps={{maxLength: 80}}
-        name='sku'
-        value={props.sku || ''}
-        onChange={(event) => props.handleChange(event.target)}
-        label="sku"
-        variant='outlined'
-        fullWidth
-        error={props.errors.includes('sku')}
-      />
-      <TextFieldStyled
-        onClick={event => props.removeError(event.target)}
-        name='price'
-        value={currencyParser.toCurrency(props.price) || ''}
-        onChange={event => props.handleChange({name: event.target.name, value: currencyParser.toNumber(event.target.value)})}
-        label="precio"
-        variant='outlined'
-        fullWidth
-        error={props.errors.includes('price')}
-      />
-      <TextFieldStyled
-        onClick={event => props.removeError(event.target)}
-        type='number'
-        inputProps={{max: 99, min: 0}}
-        name='stock'
-        value={props.stock || ''}
-        onChange={(event) => props.handleChange(event.target)}
-        label="Stock"
-        variant='outlined'
-        fullWidth
-        error={props.errors.includes('stock')}
-      />
-      <TextFieldStyled
-        onClick={event => props.removeError(event.target)}
-        inputProps={{maxLength: 240}}
-        name='description'
-        value={props.description || ''}
-        onChange={(event) => props.handleChange(event.target)}
-        label="Descripcion"
-        variant='outlined'
-        fullWidth
-        multiline={true}
-        error={props.errors.includes('description')}
-      />
+      <GroupForm>
+        <Label>Nombre del producto</Label>
+        <TitleInput
+          type='text'
+          name='title'
+          {...props}
+        />
+      </GroupForm>
+      <GroupForm>
+        <Label>¿Cual es el precio de tu producto?</Label>
+        <TitleInput
+          value={props.price ? currencyParser.toCurrency(props.price) : ''}
+          onChange={({name, value}) => props.handleChange({name, value: currencyParser.toNumber(value)})}
+          type='text'
+          name='price'
+          {...props}
+        />
+      </GroupForm>
+      <GroupForm>
+        <Label>¿Cual es el precio de tu producto?</Label>
+        <TitleInput
+          type='textarea'
+          name='description'
+          {...props}
+        />
+      </GroupForm>
     </Content>
   )
 }
+
+
+const Content = styled('div')`
+  max-width: 600px;
+  margin: auto;
+`
+const GroupForm = styled('div')`
+  margin: auto;
+  margin-bottom: 20px;
+  width: 80%;
+`
+const Label = styled('div')`
+  color: var(--main-blue-dark);
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+`
+const TitleInput = styled(CreateInput)`
+  width: 100%;
+  .MuiTextField-root{
+    color: red
+  }
+`
 
 export default GeneralInfo
