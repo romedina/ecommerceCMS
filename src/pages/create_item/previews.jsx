@@ -32,6 +32,12 @@ const ItemContent = styled('div')`
   box-sizing: border-box;
   width: 20%;
   position: relative;
+  @media screen and (max-width:800px) {
+    width: 25%
+  }
+  @media screen and (max-width:500px) {
+    width: 33%
+  }
 `
 const Picture = styled('img')`
   width: 100%;
@@ -42,6 +48,9 @@ const Picture = styled('img')`
   background: red;
   box-sizing: border-box;
   overflow: hidden;
+  @media screen and (max-width:1100px) {
+    height: 100px
+  }
 `
 const DeleteIcon = styled(Delete)`
   position: absolute;

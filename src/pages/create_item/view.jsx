@@ -15,12 +15,15 @@ const View = (props) => {
         <GeneralInfo {...props}/>
         <Multimedia {...props}/>
         <ButtonsContainer>
-        <Button 
-          variant='contained'
-          color='primary'
-          onClick={props.handleNext}>
-          {props.steps[props.currentStep + 1]}
-        </Button>
+        {props.currentStep + 1 < props.steps.length  && (
+          <Button
+            onClick={props.handleNext}
+            variant='contained'
+            color='primary'
+            onClick={props.handleNext}>
+            {props.steps[props.currentStep + 1]}
+          </Button>
+        )}
         </ButtonsContainer>
       </Content>    
     </Container>

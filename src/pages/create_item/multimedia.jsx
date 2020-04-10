@@ -51,7 +51,7 @@ const Title = styled('h6')`
   font-size: 1.5em;
   padding: 0px;
   margin: 0px;
-  color: var(--main-blue-dark)
+  color: var(--main-blue-dark);
 `
 
 const SubTitle = styled(Typography)`

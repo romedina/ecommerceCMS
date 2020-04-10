@@ -30,7 +30,7 @@ const GeneralInfo = (props) => {
         />
       </GroupForm>
       <GroupForm>
-        <Label>¿Cual es el precio de tu producto?</Label>
+        <Label>Descripcion del producto</Label>
         <TitleInput
           type='textarea'
           name='description'
@@ -50,6 +50,9 @@ const GroupForm = styled('div')`
   margin: auto;
   margin-bottom: 20px;
   width: 80%;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 `
 const Label = styled('div')`
   color: var(--main-blue-dark);
