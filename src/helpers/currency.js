@@ -1,5 +1,5 @@
 const currency = {
-  toCurrency: (number) => {  
+  toCurrency: (number) => {
     if (!number) return ''
     let stringParsed = number.toString()
     stringParsed = stringParsed.replace(/,/g, '')
@@ -9,7 +9,7 @@ const currency = {
     if (stringParsed.length === 0) return ''
     stringParsed = parseInt(stringParsed)
     stringParsed = stringParsed > 9999999 ? 9999999 : stringParsed
-    
+
     const formatter = new Intl.NumberFormat('en-US', {
       minimumFractionDigits: 0,
       maximumSignificantDigits: 7

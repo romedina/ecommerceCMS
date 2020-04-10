@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 
-//reducers 
+// reducers
 import session from './session'
 
 const reducer = combineReducers({
-  session,
+  session
 })
 
 export default reducer

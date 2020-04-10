@@ -5,10 +5,7 @@ const ContainerComponent = (props) => {
   return (
     <Container id='container_admin'>
       <MenuContainer>
-        MenuContainer
-        MenuContainer
-        MenuContainer
-        MenuContainer
+
       </MenuContainer>
       <Body>
         {props.children}
@@ -22,10 +19,11 @@ export default ContainerComponent
 const Container = styled('div')`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  
 `
 
-const MenuContainer = styled('div')`
+const MenuContainer = styled('nav')`
   width: 250px;
   min-width: 250px;
   max-width: 250px;
@@ -37,7 +35,7 @@ const MenuContainer = styled('div')`
     max-width: 250px
   }
   @media screen  and (max-width:700px){
-    display: none
+    display: none;
   }
 `
 

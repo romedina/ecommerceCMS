@@ -1,13 +1,18 @@
 import { createStore, applyMiddleware } from 'redux'
-import reducer from './flux/reducer'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import ReduxThunk from 'redux-thunk'
 import { logger } from 'redux-logger'
+import reducer from './flux/reducer'
+import sessionPersist from './helpers/sessionPersist'
 
+const session = sessionPersist.get()
+const initialState = {}
+if (session) initialState.session = session
 
 // creando store
-var store = createStore(
+const store = createStore(
   reducer,
+  initialState,
   composeWithDevTools(applyMiddleware(ReduxThunk, logger))
 )
 

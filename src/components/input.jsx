@@ -9,33 +9,57 @@ const CreateInput = (props) => {
     else props.handleChange(event.target)
   }
 
+  const handleRemoveError = (event) => {
+    if(props.removeError)
+    props.removeError(event.target)
+  }
+
+  const errorsCalculated = props.errors ? props.errors.includes(props.name) : false
   const valueCalculated = props.value ? props.value || '' : props[props.name] || '';
 
   if (props.type === 'text') return (
     <TextFiledStyled
+      placeholder={props.placeholder || null }
       className={props.className}
       onChange={onChange}
       value={valueCalculated}
       name={props.name}
       fullWidth={props.fullWidth}
       inputProps={{maxLength: props.maxLength || null}}
-      error={props.errors.includes(props.name)}
-      onClick={event => props.removeError(event.target)}
+      error={errorsCalculated}
+      onClick={handleRemoveError}
       variant='outlined'
       type={props.type || 'text'}
     />
   )
 
+  if (props.type === 'password') return (
+    <TextFiledStyled
+      placeholder={props.placeholder || null }
+      className={props.className}
+      onChange={onChange}
+      value={valueCalculated}
+      name={props.name}
+      fullWidth={props.fullWidth}
+      inputProps={{maxLength: props.maxLength || null}}
+      error={errorsCalculated}
+      onClick={handleRemoveError}
+      variant='outlined'
+      type={props.type || 'password'}
+    />
+  )
+
   if (props.type === 'number') return (
     <TextFiledStyled
+      placeholder={props.placeholder || null }
       className={props.className}
       onChange={onChange}
       value={props.value || props[props.name]}
       name={props.name}
       fullWidth={props.fullWidth}
       inputProps={{maxLength: props.max || null}}
-      error={props.errors.includes(props.name)}
-      onClick={event => props.removeError(event.target)}
+      error={errorsCalculated}
+      onClick={handleRemoveError}
       variant='outlined'
       type={props.type || 'text'}
     />
@@ -50,8 +74,8 @@ const CreateInput = (props) => {
       name={props.name}
       fullWidth={props.fullWidth}
       inputProps={{maxLength: props.maxLength || null}}
-      error={props.errors.includes(props.name)}
-      onClick={event => props.removeError(event.target)}
+      error={errorsCalculated}
+      onClick={handleRemoveError}
       variant='outlined'
       type={props.type || 'text'}
     />
