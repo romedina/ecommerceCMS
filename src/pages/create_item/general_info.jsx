@@ -1,16 +1,21 @@
 import React from 'react'
-import { Grid, Box } from '@material-ui/core'
 import styled from 'styled-components'
-import { TextField } from '@material-ui/core'
 import currencyParser from '../../helpers/currency'
 import CreateInput from '../../components/input'
+import { Alert } from '@material-ui/lab'
+import { Fade } from '@material-ui/core'
+import propTypes from 'prop-types'
 
 const GeneralInfo = (props) => {
-
   if (props.currentStep !== 0) return null
 
   return (
     <Content>
+      <Fade in={props.errors.length !== 0}>
+        <GroupForm>
+          <Alert severity='error'>Algunos campos son necesarios</Alert>
+        </GroupForm>
+      </Fade>
       <GroupForm>
         <Label>Nombre del producto</Label>
         <TitleInput
@@ -23,7 +28,7 @@ const GeneralInfo = (props) => {
         <Label>¿Cual es el precio de tu producto?</Label>
         <TitleInput
           value={props.price ? currencyParser.toCurrency(props.price) : ''}
-          onChange={({name, value}) => props.handleChange({name, value: currencyParser.toNumber(value)})}
+          onChange={({ name, value }) => props.handleChange({ name, value: currencyParser.toNumber(value) })}
           type='text'
           name='price'
           {...props}
@@ -34,6 +39,7 @@ const GeneralInfo = (props) => {
         <TitleInput
           type='textarea'
           name='description'
+          maxLength={240}
           {...props}
         />
       </GroupForm>
@@ -41,6 +47,12 @@ const GeneralInfo = (props) => {
   )
 }
 
+GeneralInfo.propTypes = {
+  errors: propTypes.array,
+  currentStep: propTypes.number,
+  price: propTypes.number,
+  handleChange: propTypes.func
+}
 
 const Content = styled('div')`
   max-width: 600px;

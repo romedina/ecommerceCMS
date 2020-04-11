@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField, MenuItem } from '@material-ui/core'
+import { TextField } from '@material-ui/core'
 import styled from 'styled-components'
 
 const CreateInput = (props) => {
@@ -19,7 +19,7 @@ const CreateInput = (props) => {
 
   if (props.type === 'text') return (
     <TextFiledStyled
-      placeholder={props.placeholder || null }
+      placeholder={props.placeholder || null}
       className={props.className}
       onChange={onChange}
       value={valueCalculated}
@@ -65,8 +65,9 @@ const CreateInput = (props) => {
     />
   )
 
-  if ( props.type === 'textarea') return (
+  if (props.type === 'textarea') return (
     <TextAreaStyled
+      rows={6}
       multiline={true}
       className={props.className}
       onChange={onChange}
@@ -84,11 +85,10 @@ const CreateInput = (props) => {
   return null
 }
 
-
 const TextFiledStyled = styled(TextField)`
   .MuiOutlinedInput-notchedOutline {
     border: 1px solid;
-    border-color: var(--main-blue)!important
+    ${props => !props.error ? 'border-color: var(--main-blue)!important' : ''}
   }
   .MuiInputBase-root {
     border-color: var(--main-blue)!important
@@ -104,7 +104,7 @@ const TextAreaStyled = styled(TextField)`
   
   .MuiOutlinedInput-notchedOutline {
     border: 1px solid;
-    border-color: var(--main-blue)!important
+    ${props => !props.error ? 'border-color: var(--main-blue)!important' : ''}
   }
   .MuiInputBase-root {
     border-color: var(--main-blue)!important

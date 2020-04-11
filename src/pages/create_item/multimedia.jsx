@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Box, Typography } from '@material-ui/core'
 import Dropzone from './Dropzone'
 import Previews from './previews'
+import { Alert } from '@material-ui/lab'
 
 const Multimedia = (props) => {
 
@@ -10,12 +11,15 @@ const Multimedia = (props) => {
 
   return (
     <Box>
+      {props.errors.length !== 0 && (
+        <Alert severity='error'>Agrega almenos la imagen principal de tu articulo</Alert>
+      )}
       <TextContainer>
         <Title>Foto Principal</Title>
         <SubTitle>Agrega una foto principal a tu producto</SubTitle>
       </TextContainer>
       {!props.picture && (
-        <Dropzone 
+        <Dropzone
           multiple={false}
           handleDrop={props.handleDropPicture}
         />
