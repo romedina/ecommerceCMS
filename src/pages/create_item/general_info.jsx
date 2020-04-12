@@ -25,6 +25,14 @@ const GeneralInfo = (props) => {
         />
       </GroupForm>
       <GroupForm>
+        <Label>SKU</Label>
+        <TitleInput
+          type='text'
+          name='sku'
+          {...props}
+        />
+      </GroupForm>
+      <GroupForm>
         <Label>¿Cual es el precio de tu producto?</Label>
         <TitleInput
           value={props.price ? currencyParser.toCurrency(props.price) : ''}

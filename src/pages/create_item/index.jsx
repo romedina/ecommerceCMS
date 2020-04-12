@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import View from './view'
 import validateForm from '../../helpers/validateform'
-import { checkPropTypes } from 'prop-types'
+import article from '../../modules/article'
 
 const CreateItem = () => {
   const steps = ['Informacion general', 'Multimedia', 'Resumen']
@@ -10,6 +10,32 @@ const CreateItem = () => {
   const [errors, setErrors] = useState([])
   const [picture, setPicture] = useState(null)
   const [pictures, setPictures] = useState([])
+  const [numPicturesUploaded, setPicturesUploaded] = useState(0)
+  const [currentView, setCurrenView] = useState('form') // form || loading || success
+  const [idCreated, setIdCreated] = useState(null)
+
+  var numPicturesToUpload = pictures.filter(item => typeof item !== 'string').length
+  numPicturesToUpload = typeof picture === 'string' ? numPicturesToUpload : numPicturesToUpload + 1
+
+  const handleUpload = async () => {
+    setCurrenView('loading')
+    var counter = 0
+    const urlPictures = []
+    const id = await article.upload(data)
+    setIdCreated(id)
+    const urlPicture = await article.uploadPicture(id, picture, true)
+    await article.update(id, { picture: urlPicture })
+    counter++
+    setPicturesUploaded(counter)
+    for (const pic of pictures) {
+      const url = await article.uploadPicture(id, pic)
+      urlPictures.push(url)
+      await article.update(id, { pictures: urlPictures })
+      counter++
+      setPicturesUploaded(counter)
+    }
+    setCurrenView('success')
+  }
 
   const handleDropPicture = (ArrayOfpicture) => {
     setPicture(ArrayOfpicture ? ArrayOfpicture[0] : null)
@@ -30,6 +56,16 @@ const CreateItem = () => {
       ...data,
       [name]: value
     })
+  }
+
+  const onReset = () => {
+    setData({})
+    setCurrenView('form')
+    setCurrentStep(0)
+    setErrors([])
+    setPicture(null)
+    setPictures([])
+    setPicturesUploaded(0)
   }
 
   const handleNext = () => {
@@ -78,6 +114,8 @@ const CreateItem = () => {
   return (
     <View
       {...data}
+      currentView={currentView}
+      setCurrenView={setCurrenView}
       errors={errors}
       setData={setData}
       currentStep={currentStep}
@@ -93,6 +131,12 @@ const CreateItem = () => {
       handleBack={handleBack}
       picture={picture}
       pictures={pictures}
+      handleUpload={handleUpload}
+      numPicturesUploaded={numPicturesUploaded}
+      numPicturesToUpload={numPicturesToUpload}
+      idCreated={idCreated}
+      setIdCreated={setIdCreated}
+      onReset={onReset}
     />
   )
 }

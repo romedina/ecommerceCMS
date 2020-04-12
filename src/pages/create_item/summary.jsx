@@ -24,17 +24,17 @@ Summary.propTypes = {
 }
 
 const Container = styled('div')`
-  border: 1px dashed red;
-  max-width: 600px;
+  max-width: 500px;
   margin: auto;
+  
 `
-const Title = styled('h3')`
+const Title = styled('h2')`
   color: var(--main-blue-dark);
 `
 const Picture = styled('img')`
   width: 100%;
-  max-width: 300px;
   height: 300px;
+  object-fit: cover;
   margin: auto;
   display: block;
 `

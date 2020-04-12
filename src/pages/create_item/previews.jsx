@@ -45,7 +45,6 @@ const Picture = styled('img')`
   border-radius: 5px;
   display: block;
   object-fit: cover;
-  background: red;
   box-sizing: border-box;
   overflow: hidden;
   @media screen and (max-width:1100px) {

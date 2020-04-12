@@ -41,6 +41,6 @@ const MenuContainer = styled('nav')`
 
 const Body = styled('section')`
   width: 100%;
-  padding: 10px;
+  padding: 25px;
   box-sizing: border-box;
 `
