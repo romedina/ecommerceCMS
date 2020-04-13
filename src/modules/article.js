@@ -9,7 +9,7 @@ const article = {
   **/
   async upload ({ title = '', description = '', sku = '', price = 0, picture = '', pictures = [] }) {
     try {
-      const { id } = await db.collection('Articulos').add({ title, description, sku, price, picture, pictures })
+      const { id } = await db.collection('Articulos').add({ isActive: true, title, description, sku, price, picture, pictures })
       await db.collection('Articulos').doc(id).update({ id })
       return id
     } catch (error) {

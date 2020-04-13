@@ -3,6 +3,10 @@ import LayoutAdmin from '../../components/layout_admin'
 import { fetchItems } from '../../flux/items'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import Skeleton from './skeleton'
+import PageTitle from '../../components/page_title'
+import Article from '../../components/Article'
+import styled from 'styled-components'
 
 const MyArticles = (props) => {
   const { loading, items } = useSelector(state => state.items)
@@ -17,16 +21,26 @@ const MyArticles = (props) => {
 
   return (
     <LayoutAdmin>
+      <PageTitle>Mis articulos</PageTitle>
       {loading && (
-        <h1>Loading</h1>
+        <Skeleton />
       )}
       {!loading && (
-        items.map((item, index) => (
-          <h2 onClick={() => { history.push('create-item', JSON.parse(JSON.stringify(item))) }} key={index}>{item.title}</h2>
-        ))
+        <Content>
+          {items.map(item => (
+            <Article key={item.id} {...item} />
+          ))}
+        </Content>
       )}
     </LayoutAdmin>
   )
 }
+
+const Content = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: stretch;
+`
 
 export default MyArticles
