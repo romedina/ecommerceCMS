@@ -8,6 +8,7 @@ import './index.css'
 // pages
 import CreateItem from './pages/create_item'
 import Login from './pages/login'
+import MyArticles from './pages/my_articles'
 
 function App () {
   return (
@@ -15,6 +16,7 @@ function App () {
       <Background>
         <Switch>
           <Route path='/create-item' component={CreateItem} />
+          <Route path='/my-articles' component={MyArticles} />
           <Route path='/login' component={Login} />
         </Switch>
       </Background>

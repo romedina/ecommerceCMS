@@ -1,4 +1,5 @@
 import { db, storageRef } from './firebase'
+import snapshotParser from '../helpers/snapshotparser'
 
 const article = {
   /**
@@ -31,7 +32,7 @@ const article = {
     }
   },
   /**
-   * @params id_article::int and photo::file and OPTIONAL::bool 
+   * @params id_article::int and photo::file and OPTIONAL::bool
    * @return url or false
    */
   async uploadPicture (id, picture, primary) {
@@ -44,7 +45,43 @@ const article = {
     var urlTransformed = url.replace(nameEncoded, newNameEncoded)
     urlTransformed = urlTransformed.split('&token')[0]
     return urlTransformed
+  },
+  /**
+   * @params lastItem::snap, Limit::int
+   * @return Object of = Items::array, lastItem::snap
+   */
+  async getList (lastItem = null, limit = null) {
+    try {
+      var query = db.collection('Articulos')
+      if (limit) query = query.limit(limit)
+      if (lastItem) query.startAfter(lastItem)
+      const snapshot = await query.get()
+      const items = snapshotParser(snapshot)
+      return { items, last: snapshot.docs[snapshot.docs.length - 1] }
+    } catch (error) {
+      console.error('error_description:', error)
+      return { items: [], last: null }
+    }
+  },
+
+  /**
+   * @param urlPicture::string and idarticle::string
+   * @return true or false :: bool
+   */
+  async deletePicture (id, url) {
+    try {
+      const urlDecoded = decodeURIComponent(url)
+      var urlToDelete = urlDecoded.split(id)[1]
+      urlToDelete = urlToDelete.split('?')[0]
+      urlToDelete = `${id}/${urlToDelete}`
+      await storageRef.child(urlToDelete).delete()
+      return true
+    } catch (error) {
+      console.log('error_description:', error)
+      return false
+    }
   }
 
 }
+
 export default article

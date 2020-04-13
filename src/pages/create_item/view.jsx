@@ -11,6 +11,11 @@ import Loading from './loading'
 import Success from './success'
 
 const View = (props) => {
+  const handleClick = () => {
+    if (props.idEditing) props.handleUpdate()
+    else (props.handleUpload())
+  }
+
   return (
     <Container>
       <Content>
@@ -31,8 +36,8 @@ const View = (props) => {
                 </ButtonStyled>
               )}
               {props.steps[props.currentStep] === 'Resumen' && (
-                <ButtonStyled onClick={props.handleUpload} variant='contained' color='primary'>
-                  Publicar Articulo
+                <ButtonStyled onClick={handleClick} variant='contained' color='primary'>
+                  {props.idEditing ? 'Guardar' : 'publicar'}
                 </ButtonStyled>
               )}
             </ButtonsContainer>
@@ -54,7 +59,9 @@ View.propTypes = {
   handleBack: propTypes.func,
   steps: propTypes.array,
   handleUpload: propTypes.func,
-  currentView: propTypes.string
+  currentView: propTypes.string,
+  idEditing: propTypes.string,
+  handleUpdate: propTypes.func
 }
 
 const Content = styled('div')`
