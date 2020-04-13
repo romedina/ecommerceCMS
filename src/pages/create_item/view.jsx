@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Container from '../../components/LayoutAdmin'
+import Container from '../../components/layout_admin'
 import Stepper from './stepper'
 import GeneralInfo from './general_info'
 import Multimedia from './multimedia'

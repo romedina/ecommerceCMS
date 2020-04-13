@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import LayoutAdmin from '../../components/LayoutAdmin'
+import LayoutAdmin from '../../components/layout_admin'
 import CreateInput from '../../components/input'
 import { Button, CircularProgress, Fade } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import LayoutAdmin from '../../components/LayoutAdmin'
+import LayoutAdmin from '../../components/layout_admin'
 import { fetchItems } from '../../flux/items'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
