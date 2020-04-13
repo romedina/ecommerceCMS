@@ -18,6 +18,14 @@ code {
   --main-blue-dark: #0E3F67;
   --main-blue: #008FFD;
   --main-blue-light: #CCE9FF;
+
+  /* user colors */
+  --user-primary: #fff;
+  --user-secondary: #cdcdcd;
+  --user-black: #000;
+  --user-black-light: #504f4f;
+  --user-gray: gray;
+  --user-gray-light: gainsboro;
 }
 * {
   box-sizing: border-box;

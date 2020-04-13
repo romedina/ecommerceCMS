@@ -6,6 +6,7 @@ const specificData = [
   { type: 'checkbox', keyname: 'keynameCheck', label: 'checkbox', options: [] }
 ]
 
+// firebase config
 const firebase = {
   apiKey: 'AIzaSyDGmuP3Cp8D3LgMAr89IcZBfq4y1g9fzj4',
   authDomain: 'somos-marketplace.firebaseapp.com',
@@ -17,7 +18,19 @@ const firebase = {
   measurementId: 'G-PV24KTN13F'
 }
 
+// contacts
+const contacts = {
+  email: 'somos@somos.work',
+  number: '5589876543'
+}
+
+const message = {
+  copyright: '2020 derechos reservados'
+}
+
 export default {
   firebase,
-  specificData
+  specificData,
+  contacts,
+  message
 }

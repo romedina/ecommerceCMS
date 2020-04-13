@@ -9,12 +9,14 @@ import './index.css'
 import CreateItem from './pages/create_item'
 import Login from './pages/login'
 import MyArticles from './pages/my_articles'
+import Home from './pages/home'
 
 function App () {
   return (
     <ThemeProvider theme={mytheme}>
       <Background>
         <Switch>
+          <Route path='/' exact component={Home} />
           <Route path='/create-item' component={CreateItem} />
           <Route path='/my-articles' component={MyArticles} />
           <Route path='/login' component={Login} />

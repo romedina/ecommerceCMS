@@ -13,7 +13,7 @@ const MyArticles = (props) => {
     if (items.length === 0) {
       dispatch(fetchItems())
     }
-  }, [])
+  }, [dispatch, items])
 
   return (
     <LayoutAdmin>
