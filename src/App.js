@@ -7,10 +7,11 @@ import mytheme from './theme'
 import './index.css'
 
 // pages
-import CreateItem from './pages/create_item'
-import Login from './pages/login'
-import MyArticles from './pages/my_articles'
-import Home from './pages/home'
+import CreateItem from './admin/pages/create_item'
+import Login from './admin/pages/login'
+import MyArticles from './admin/pages/my_articles'
+
+import Home from './user/pages/home'
 
 function App () {
   return (

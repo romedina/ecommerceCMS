@@ -2,7 +2,7 @@ import React from 'react'
 import { Skeleton } from '@material-ui/lab'
 import { Grid } from '@material-ui/core'
 import styled from 'styled-components'
-import Responsive from '../../components/responsive'
+import Responsive from '../../../components/responsive'
 
 const SkeletonGroup = () => {
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import styled from 'styled-components'
-import shortText from '../helpers/short_text'
+import shortText from '../../helpers/short_text'
 import { Button } from '@material-ui/core'
 
 const Article = (props) => {

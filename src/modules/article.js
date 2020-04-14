@@ -1,6 +1,10 @@
 import { db, storageRef } from './firebase'
 import snapshotParser from '../helpers/snapshotparser'
-
+/**
+ * @param id::int
+ * @return true||false::bool
+ * delete item on database
+ */
 const article = {
   async delete (id) {
     try {
@@ -18,7 +22,7 @@ const article = {
   **/
   async upload ({ title = '', description = '', sku = '', price = 0, picture = '', pictures = [] }) {
     try {
-      const { id } = await db.collection('Articulos').add({ isActive: true, title, description, sku, price, picture, pictures })
+      const { id } = await db.collection('Articulos').add({ date: new Date(), isActive: true, title, description, sku, price, picture, pictures })
       await db.collection('Articulos').doc(id).update({ id })
       return id
     } catch (error) {
@@ -33,6 +37,7 @@ const article = {
    */
   async update (id, data) {
     try {
+      data.date = new Date()
       await db.doc(`Articulos/${id}`).update(data)
       return true
     } catch (error) {

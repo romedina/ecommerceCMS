@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import LayoutAdmin from '../../components/layout_admin'
-import { fetchItems, deleteItems } from '../../flux/items'
+import { fetchItems, deleteItems } from '../../../flux/items'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Skeleton from './skeleton'
 import PageTitle from '../../components/page_title'
 import Article from '../../components/Article'
 import styled from 'styled-components'
-import { setAlert } from '../../flux/alert'
+import { setAlert } from '../../../flux/alert'
 
 const MyArticles = () => {
   const { loading, items } = useSelector(state => state.items)
@@ -28,7 +28,8 @@ const MyArticles = () => {
     dispatch(setAlert({
       title: 'Seguro que quieres borrar este articulo',
       message: 'Una vez realizada esta accion no podras recurar la informacion',
-      action: deleteItems(data.id)
+      action: deleteItems(data.id),
+      textAction: 'Eliminar'
     }))
   }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import View from './view'
-import validateForm from '../../helpers/validateform'
-import article from '../../modules/article'
+import validateForm from '../../../helpers/validateform'
+import article from '../../../modules/article'
 import propTypes from 'prop-types'
 
 const CreateItem = (props) => {

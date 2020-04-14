@@ -7,13 +7,11 @@ import store from './store'
 import App from './App'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <CssBaseline />
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <CssBaseline />
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 )

@@ -5,7 +5,7 @@ import CreateInput from '../../components/input'
 import { Button, CircularProgress, Fade } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { useDispatch, useSelector } from 'react-redux'
-import { start } from '../../flux/session'
+import { start } from '../../../flux/session'
 
 const Login = () => {
   const [email, setEmail] = useState('')

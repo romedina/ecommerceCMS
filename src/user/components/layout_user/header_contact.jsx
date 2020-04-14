@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ContainerBase from '../container'
-import config from '../../config'
+import config from '../../../config'
 import MailOutlineIcon from '@material-ui/icons/MailOutline'
 import PhoneIcon from '@material-ui/icons/Phone'
 

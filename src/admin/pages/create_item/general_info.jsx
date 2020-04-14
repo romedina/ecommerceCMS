@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import currencyParser from '../../helpers/currency'
+import currencyParser from '../../../helpers/currency'
 import CreateInput from '../../components/input'
 import { Alert } from '@material-ui/lab'
 import { Fade } from '@material-ui/core'

@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import config from '../../config'
+import config from '../../../config'
 import ContainerBase from '../container'
 import MailOutlineIcon from '@material-ui/icons/MailOutline'
 import PhoneIcon from '@material-ui/icons/Phone'
-import Link from '../link'
-import Responsive from '../responsive'
+import Link from '../../../components/link'
+import Responsive from '../../../components/responsive'
 
 const Footer = () => {
   return (
