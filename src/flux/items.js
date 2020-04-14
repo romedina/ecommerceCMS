@@ -22,11 +22,24 @@ export const fetchItems = () => async (dispatch, getState) => {
   if (response.items.length < state.limit) dispatch(setFinally(true))
 }
 
+// deleteItems
+export const deleteItems = (id) => async (dispatch) => {
+  await article.delete(id)
+  dispatch(deleteItem(id))
+}
+
 // actions
 export const addItems = flux.createAction('ADD_ITEMS', (state, payload) => {
   return {
     ...state,
     items: [...state.items, ...payload]
+  }
+})
+
+export const deleteItem = flux.createAction('SET_ITEMS', (state, payload) => {
+  return {
+    ...state,
+    items: state.items.filter(item => item.id !== payload)
   }
 })
 

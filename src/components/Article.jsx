@@ -14,9 +14,9 @@ const Article = (props) => {
           <Title>{props.title}</Title>
           <Description>{shortText(props.description)}</Description>
           <ButtonContainer>
-            <ButtonStyled onClick={props.handleEdit} color='secondary' variant='outlined'>Editar</ButtonStyled>
-            <ButtonStyled onClik={props.handleDisable} color='secondary' variant='contained'>Desactivar</ButtonStyled>
-            <ButtonStyled onClik={props.handleDelet} color='secondary' variant='contained'>Eliminar</ButtonStyled>
+            <ButtonStyled onClick={() => props.handleEdit(props)} color='secondary' variant='outlined'>Editar</ButtonStyled>
+            <ButtonStyled onClick={() => props.handleDisable(props)} color='secondary' variant='contained'>Desactivar</ButtonStyled>
+            <ButtonStyled onClick={() => props.handleDelete(props)} color='secondary' variant='contained'>Eliminar</ButtonStyled>
           </ButtonContainer>
         </Actions>
       </ItemContent>
@@ -30,7 +30,7 @@ Article.propTypes = {
   description: propTypes.string,
   title: propTypes.string,
   handleEdit: propTypes.func,
-  handleDelet: propTypes.func,
+  handleDelete: propTypes.func,
   handleDisable: propTypes.func
 }
 

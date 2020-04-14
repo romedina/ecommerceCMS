@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import { ThemeProvider } from '@material-ui/core'
+import Alert from './components/alert'
 import mytheme from './theme'
 import './index.css'
 
@@ -15,6 +16,7 @@ function App () {
   return (
     <ThemeProvider theme={mytheme}>
       <Background>
+        <Alert />
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/create-item' component={CreateItem} />

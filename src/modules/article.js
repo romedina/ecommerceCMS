@@ -2,6 +2,15 @@ import { db, storageRef } from './firebase'
 import snapshotParser from '../helpers/snapshotparser'
 
 const article = {
+  async delete (id) {
+    try {
+      await db.doc(`Articulos/${id}`).delete()
+      return true
+    } catch (error) {
+      console.error('error_Descript:', error)
+      return false
+    }
+  },
   /**
    * @params data::object
    * @return id created or false
