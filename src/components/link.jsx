@@ -6,8 +6,7 @@ import { useHistory } from 'react-router-dom'
 const Link = (props) => {
   const histoy = useHistory()
 
-  const handleClick = (event) => {
-    event.stopPropagation()
+  const handleClick = () => {
     histoy.push(props.to)
   }
 

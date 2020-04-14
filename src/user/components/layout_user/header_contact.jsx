@@ -4,21 +4,24 @@ import ContainerBase from '../container'
 import config from '../../../config'
 import MailOutlineIcon from '@material-ui/icons/MailOutline'
 import PhoneIcon from '@material-ui/icons/Phone'
+import Responsive from '../../../components/responsive'
 
 const HeaderContact = () => {
   return (
-    <FullWidth>
-      <Container>
-        <ContactItem>
-          <EmailIconStyled />
-          {config.contacts.email}
-        </ContactItem>
-        <ContactItem>
-          <PhoneconStyled />
-          {config.contacts.number}
-        </ContactItem>
-      </Container>
-    </FullWidth>
+    <Responsive rule='min-width:700px'>
+      <FullWidth>
+        <Container>
+          <ContactItem>
+            <EmailIconStyled />
+            {config.contacts.email}
+          </ContactItem>
+          <ContactItem>
+            <PhoneconStyled />
+            {config.contacts.number}
+          </ContactItem>
+        </Container>
+      </FullWidth>
+    </Responsive>
   )
 }
 
