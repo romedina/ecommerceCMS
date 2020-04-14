@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import LayoutAdmin from '../../components/layout_admin'
-import { fetchItems, deleteItems } from '../../../flux/items'
+import { fetchItems, deleteItems, disable, enable } from '../../../flux/items'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Skeleton from './skeleton'
@@ -33,6 +33,20 @@ const MyArticles = () => {
     }))
   }
 
+  const handleStatus = (data) => {
+    console.log(data)
+    if (data.isActive) {
+      dispatch(setAlert({
+        title: '¿Seguro quieres desabilitar este articulo?',
+        message: 'Los articulos desabilitados no seran visibles para tus clientes.',
+        action: disable(data.id),
+        textAction: 'Desabilitar'
+      }))
+    } else {
+      dispatch(enable(data.id))
+    }
+  }
+
   return (
     <LayoutAdmin>
       <PageTitle>Mis articulos</PageTitle>
@@ -46,6 +60,7 @@ const MyArticles = () => {
               key={item.id}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
+              handleStatus={handleStatus}
               {...item}
             />
           ))}

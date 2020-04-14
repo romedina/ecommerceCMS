@@ -1,11 +1,14 @@
 import React from 'react'
 import HeaderDesktop from './header_desktop'
 import styled from 'styled-components'
+import Responsive from '../../../components/responsive'
 
 const Header = (props) => {
   return (
     <HeaderContainer>
-      <HeaderDesktop />
+      <Responsive rule='min-width:600px'>
+        <HeaderDesktop />
+      </Responsive>
     </HeaderContainer>
   )
 }

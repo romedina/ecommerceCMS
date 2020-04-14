@@ -1,11 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import propsTypes from 'prop-types'
+import MenuRight from '../menu_right'
 
 const ContainerComponent = (props) => {
   return (
     <Container id='container_admin'>
       <MenuContainer>
-        hello menu
+        <Fixed>
+          <MenuContainer>
+            <MenuRight />
+          </MenuContainer>
+        </Fixed>
       </MenuContainer>
       <Body>
         {props.children}
@@ -14,21 +20,31 @@ const ContainerComponent = (props) => {
   )
 }
 
+ContainerComponent.propTypes = {
+  children: propsTypes.oneOfType([propsTypes.object, propsTypes.array])
+}
+
 export default ContainerComponent
+
+const Fixed = styled('div')`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+`
 
 const Container = styled('div')`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  
 `
 
 const MenuContainer = styled('nav')`
+  background: #0E3F67;
+  overflow: hidden;
   width: 250px;
   min-width: 250px;
   max-width: 250px;
-  background: #0E3F67;
-  height: 100vh;
+  height: 100%;
   @media screen  and (max-width:800px){
     width: 200px;
     min-width: 200px;

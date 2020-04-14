@@ -12,7 +12,7 @@ const Link = (props) => {
   }
 
   return (
-    <ButtonBase className={props.className} onClick={handleClick}>
+    <ButtonBase className={props.className} onClick={props.handleClick || handleClick}>
       {props.children}
     </ButtonBase>
   )
@@ -21,7 +21,8 @@ const Link = (props) => {
 Link.propTypes = {
   className: propTypes.string,
   children: propTypes.oneOfType([propTypes.string, propTypes.object, propTypes.array]),
-  to: propTypes.string
+  to: propTypes.string,
+  handleClick: propTypes.func
 }
 
 export default Link

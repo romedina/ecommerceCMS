@@ -5,7 +5,6 @@ const Responsive = (props) => {
   const { matches } = window.matchMedia(`(${props.rule})`)
 
   if (!matches) return null
-
   return (
     <>
       {props.children}

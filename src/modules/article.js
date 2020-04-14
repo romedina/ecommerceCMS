@@ -1,11 +1,34 @@
 import { db, storageRef } from './firebase'
 import snapshotParser from '../helpers/snapshotparser'
-/**
+
+const article = {
+  /**
+   * @param id::int
+   * @return true||false::bool
+   * set disable on status
+   */
+  async setInactive (id) {
+    await db.doc(`Articulos/${id}`).update({
+      isActive: false
+    })
+  },
+
+  /**
+   * @param id::int
+   * @return true||false::bool
+   * set active on status
+   */
+  async setActive (id) {
+    await db.doc(`Articulos/${id}`).update({
+      isActive: true
+    })
+  },
+
+  /**
  * @param id::int
  * @return true||false::bool
  * delete item on database
  */
-const article = {
   async delete (id) {
     try {
       await db.doc(`Articulos/${id}`).delete()

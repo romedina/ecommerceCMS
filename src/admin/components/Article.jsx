@@ -15,7 +15,7 @@ const Article = (props) => {
           <Description>{shortText(props.description)}</Description>
           <ButtonContainer>
             <ButtonStyled onClick={() => props.handleEdit(props)} color='secondary' variant='outlined'>Editar</ButtonStyled>
-            <ButtonStyled onClick={() => props.handleDisable(props)} color='secondary' variant='contained'>Desactivar</ButtonStyled>
+            <ButtonStyled onClick={() => props.handleStatus(props)} color='secondary' variant='contained'>{props.isActive ? 'Desactivar' : 'Activar'}</ButtonStyled>
             <ButtonStyled onClick={() => props.handleDelete(props)} color='secondary' variant='contained'>Eliminar</ButtonStyled>
           </ButtonContainer>
         </Actions>
@@ -31,7 +31,8 @@ Article.propTypes = {
   title: propTypes.string,
   handleEdit: propTypes.func,
   handleDelete: propTypes.func,
-  handleDisable: propTypes.func
+  handleStatus: propTypes.func,
+  isActive: propTypes.bool
 }
 
 const Wrapped = styled.article`
@@ -39,10 +40,13 @@ const Wrapped = styled.article`
   padding: 10px;
   @media screen and (max-width:1400px){ width:33%; padding: 5px;}
   @media screen and (max-width:1100px){ width:50% }
-  @media screen and (max-width:1100px){ width:100% }
+  @media screen and (max-width:750px){ width:100% }
+  @media screen and (max-width:700px){ width:50% }
+  @media screen and (max-width:500px){ width:100% }
 `
 
 const ItemContent = styled('div')`
+  position: relative;
   border-radius: 7px;
   overflow: hidden;
   display: block;

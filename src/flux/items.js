@@ -22,6 +22,18 @@ export const fetchItems = () => async (dispatch, getState) => {
   if (response.items.length < state.limit) dispatch(setFinally(true))
 }
 
+export const enable = id => async dispatch => {
+  dispatch(setStatus({ id, status: true }))
+  const status = await article.setActive(id)
+  return status
+}
+
+export const disable = (id) => async (dispatch) => {
+  const status = await article.setInactive(id)
+  dispatch(setStatus({ id, status: false }))
+  return status
+}
+
 // deleteItems
 export const deleteItems = (id) => async (dispatch) => {
   await article.delete(id)
@@ -29,6 +41,17 @@ export const deleteItems = (id) => async (dispatch) => {
 }
 
 // actions
+export const setStatus = flux.createAction('SET_DISABLE', (state, payload) => {
+  return {
+    ...state,
+    items: state.items.map(item => {
+      const newItem = { ...item }
+      if (payload.id === newItem.id) { newItem.isActive = payload.status }
+      return newItem
+    })
+  }
+})
+
 export const addItems = flux.createAction('ADD_ITEMS', (state, payload) => {
   return {
     ...state,
