@@ -28,8 +28,14 @@ export default ContainerComponent
 
 const Fixed = styled('div')`
   position: fixed;
-  width: 100%;
+  width: 250px;
   height: 100%;
+  z-index: 0;
+  @media screen  and (max-width:800px){
+    width: 200px;
+    min-width: 200px;
+    max-width: 250px
+  }
 `
 
 const Container = styled('div')`

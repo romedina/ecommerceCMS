@@ -8,6 +8,7 @@ import PageTitle from '../../components/page_title'
 import Article from '../../components/Article'
 import styled from 'styled-components'
 import { setAlert } from '../../../flux/alert'
+import Admin from '../../hoc/admin'
 
 const MyArticles = () => {
   const { loading, items } = useSelector(state => state.items)
@@ -77,4 +78,4 @@ const Content = styled.div`
   align-items: stretch;
 `
 
-export default MyArticles
+export default Admin(MyArticles)

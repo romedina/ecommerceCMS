@@ -3,7 +3,7 @@ import security from '../modules/security'
 import sessionPersist from '../helpers/sessionPersist'
 
 const flux = createFlux('SESSION')
-const initial_state = {
+const initialState = {
   logged: false,
   loading: false,
   name: null,
@@ -25,6 +25,12 @@ export const start = ({ password, email }) => async (dispatch) => {
   }
 }
 
+export const close = () => dispatch => {
+  dispatch(setInitialSTate())
+  sessionPersist.delete()
+  security.sessionClose()
+}
+
 // actions
 const setLoading = flux.createAction('LOADING', (state, payload) => {
   return {
@@ -39,6 +45,10 @@ const setError = flux.createAction('SET_ERROR', (state, payload) => {
     : { ...state, error: false }
 })
 
+const setInitialSTate = flux.createAction('SET_INITITL_STATE', (state, payload) => {
+  return { ...initialState }
+})
+
 const setData = flux.createAction('SET_DATA', (state, payload) => {
   const { name, lastname, id } = payload
   return {
@@ -51,4 +61,4 @@ const setData = flux.createAction('SET_DATA', (state, payload) => {
   }
 })
 
-export default flux.createReducer(initial_state)
+export default flux.createReducer(initialState)

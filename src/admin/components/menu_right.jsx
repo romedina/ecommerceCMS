@@ -2,10 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 import Link from '../../components/link'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { close } from '../../flux/session'
 
 const MenuRight = props => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const { pathname } = history.location
+
+  const handleCloseSession = () => {
+    dispatch(close())
+  }
 
   return (
     <Container>
@@ -13,7 +20,7 @@ const MenuRight = props => {
       <div>
         <MenuItem active={pathname === '/my-articles'} to='/my-articles'> Mis productos </MenuItem>
         <MenuItem active={pathname === '/create-item'} to='/create-item'> Subir Producto </MenuItem>
-        <MenuItem handleClick={() => {}}> Cerra session </MenuItem>
+        <MenuItem handleClick={handleCloseSession}> Cerra session </MenuItem>
       </div>
     </Container>
   )

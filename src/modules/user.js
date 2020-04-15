@@ -2,9 +2,9 @@ import { db } from './firebase'
 import snapshotParser from '../helpers/snapshotparser'
 
 const user = {
-  async getData (user_id) {
+  async getData (userId) {
     try {
-      const snapshot = await db.doc(`Users/${user_id}`).get()
+      const snapshot = await db.doc(`Users/${userId}`).get()
       const data = snapshotParser(snapshot)
       return data
     } catch (error) {

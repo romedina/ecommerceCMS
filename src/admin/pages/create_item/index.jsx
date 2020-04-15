@@ -3,6 +3,7 @@ import View from './view'
 import validateForm from '../../../helpers/validateform'
 import article from '../../../modules/article'
 import propTypes from 'prop-types'
+import Admin from '../../hoc/admin'
 
 const CreateItem = (props) => {
   var preloadedState = props.location.state || {}
@@ -190,4 +191,4 @@ CreateItem.propTypes = {
   location: propTypes.object
 }
 
-export default CreateItem
+export default Admin(CreateItem)

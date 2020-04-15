@@ -5,12 +5,16 @@ const security = {
   async sessionStart ({ email, password }) {
     try {
       const result = await firebase.auth().signInWithEmailAndPassword(email, password)
-      const user_data = await user.getData(result.user.uid)
-      return user_data
+      const userData = await user.getData(result.user.uid)
+      return userData
     } catch (error) {
       console.error('error_description:', error)
       return false
     }
+  },
+
+  async sessionClose () {
+    await firebase.auth().signOut()
   }
 }
 
