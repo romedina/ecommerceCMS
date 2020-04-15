@@ -16,7 +16,7 @@ const Item = props => {
   const myCart = useSelector(state => state.cart)
   const itemSelected = items.filter(item => item.id === id)[0] || null
   const [quantity, setQuantity] = useState(1)
-  const isThisInMyCart = (myCart.filter(item => item.id === itemSelected.id).length > 0)
+  const isThisInMyCart = (myCart.filter(item => itemSelected && item.id === itemSelected.id).length > 0)
 
   console.log(isThisInMyCart)
 
