@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Picture from './picture'
 import propTypes from 'prop-types'
@@ -6,19 +6,6 @@ import { Divider } from '@material-ui/core'
 import ButtonBase from '../../../components/link'
 
 const Data = props => {
-  const [quantity, setQuantity] = useState(1)
-
-  const handleChange = event => {
-    var newValue = event.target.value
-    if (newValue === '') {
-      setQuantity('')
-      return false
-    }
-    newValue = parseInt(newValue)
-    if (isNaN(newValue)) newValue = 1
-    setQuantity(newValue)
-  }
-
   return (
     <Flex>
       <PictureBox>
@@ -40,20 +27,25 @@ const Data = props => {
         <Cuantity>
           Cantidad:
           <FormContainer>
-            <div onClick={evenet => setQuantity(quantity < 1 ? 1 : quantity - 1)}>-</div>
+            <div onClick={evenet => props.setQuantity(props.quantity < 1 ? 1 : props.quantity - 1)}>-</div>
             <div>
               <input
                 type='text'
-                value={quantity}
-                onChange={handleChange}
+                value={props.quantity}
+                onChange={props.onQuantityChange}
               />
             </div>
-            <div onClick={evenet => setQuantity(quantity + 1)}>+</div>
+            <div onClick={evenet => props.setQuantity(props.quantity + 1)}>+</div>
           </FormContainer>
         </Cuantity>
         <ButtonContainer>
           <Button to='/' variant='outlined'>Seguir comprando</Button>
-          <Button variant='contained'>Agregar al carrito</Button>
+          {!props.isThisInMyCart && (
+            <Button handleClick={props.AddToCart} variant='contained'>Agregar al carrito</Button>
+          )}
+          {props.isThisInMyCart && (
+            <Button handleClick={props.removeFromMyCart} variant='contained'>Quitar al carrito</Button>
+          )}
         </ButtonContainer>
       </DataBox>
     </Flex>
@@ -65,7 +57,13 @@ Data.propTypes = {
   pictures: propTypes.array,
   description: propTypes.string,
   price: propTypes.number,
-  title: propTypes.string
+  title: propTypes.string,
+  AddToCart: propTypes.func,
+  onQuantityChange: propTypes.func,
+  quantity: propTypes.oneOfType([propTypes.number, propTypes.string]),
+  setQuantity: propTypes.func,
+  isThisInMyCart: propTypes.bool,
+  removeFromMyCart: propTypes.func
 }
 
 const ButtonContainer = styled.div`
