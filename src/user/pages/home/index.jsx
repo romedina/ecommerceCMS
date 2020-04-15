@@ -12,6 +12,7 @@ import { fetchItems } from '../../../flux/items'
 const Home = () => {
   const dispatch = useDispatch()
   const { loading, items } = useSelector(state => state.items)
+  const itemsFiltered = items.filter(item => item.isActive)
 
   // fetch items if not exist
   useEffect(() => {
@@ -27,7 +28,7 @@ const Home = () => {
         {!loading && (
           <ListItem
             loading={loading}
-            items={items}
+            items={itemsFiltered}
           />
         )}
       </Container>

@@ -8,17 +8,18 @@ const Article = (props) => {
   return (
     <Wrapped>
       <ItemContent>
+        {!props.isActive && (<Shadow />)}
         <Picture src={props.picture} />
         <Actions>
           <Price>{props.price}</Price>
           <Title>{props.title}</Title>
           <Description>{shortText(props.description)}</Description>
-          <ButtonContainer>
-            <ButtonStyled onClick={() => props.handleEdit(props)} color='secondary' variant='outlined'>Editar</ButtonStyled>
-            <ButtonStyled onClick={() => props.handleStatus(props)} color='secondary' variant='contained'>{props.isActive ? 'Desactivar' : 'Activar'}</ButtonStyled>
-            <ButtonStyled onClick={() => props.handleDelete(props)} color='secondary' variant='contained'>Eliminar</ButtonStyled>
-          </ButtonContainer>
         </Actions>
+        <ButtonContainer>
+          <ButtonStyled onClick={() => props.handleEdit(props)} color='secondary' variant='outlined'>Editar</ButtonStyled>
+          <ButtonStyled onClick={() => props.handleStatus(props)} color='secondary' variant='contained'>{props.isActive ? 'Desactivar' : 'Activar'}</ButtonStyled>
+          <ButtonStyled onClick={() => props.handleDelete(props)} color='secondary' variant='contained'>Eliminar</ButtonStyled>
+        </ButtonContainer>
       </ItemContent>
     </Wrapped>
   )
@@ -62,6 +63,7 @@ const Picture = styled.img`
 
 const Actions = styled.div`
   padding: 8px;
+  margin-bottom: 35px;
 `
 
 const Price = styled.div`
@@ -86,12 +88,23 @@ const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  padding: 0px 6px;
+  z-index: 2;
 `
 const ButtonStyled = styled(Button)`
   text-align: center;
   width: 32%;
   font-size: .7em;
   border-radius: 15px;
+`
+const Shadow = styled.div`
+  width: 100%;
+  height: 100%;
+  position:absolute;
+  background: #0000003b;
+  z-index: 1;
 `
 export default Article
