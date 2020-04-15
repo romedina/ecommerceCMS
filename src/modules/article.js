@@ -3,7 +3,23 @@ import snapshotParser from '../helpers/snapshotparser'
 
 const article = {
   /**
-   * @param id::int
+   * @param id::string
+   * @return data::object || false
+   * getSpecific article
+   */
+  async get (id) {
+    try {
+      const snap = await db.doc(`Articulos/${id}`).get()
+      const data = snapshotParser(snap)
+      return data
+    } catch (error) {
+      console.error('error_description:', error)
+      return false
+    }
+  },
+
+  /**
+   * @param id::strinf
    * @return true||false::bool
    * set disable on status
    */
@@ -14,7 +30,7 @@ const article = {
   },
 
   /**
-   * @param id::int
+   * @param id::strinf
    * @return true||false::bool
    * set active on status
    */
@@ -25,7 +41,7 @@ const article = {
   },
 
   /**
- * @param id::int
+ * @param id::strinf
  * @return true||false::bool
  * delete item on database
  */

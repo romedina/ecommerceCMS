@@ -12,6 +12,7 @@ import Login from './admin/pages/login'
 import MyArticles from './admin/pages/my_articles'
 
 import Home from './user/pages/home'
+import Item from './user/pages/item'
 
 function App () {
   return (
@@ -19,10 +20,11 @@ function App () {
       <Background>
         <Alert />
         <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/create-item' component={CreateItem} />
-          <Route path='/my-articles' component={MyArticles} />
-          <Route path='/login' component={Login} />
+          <Route exact path='/' component={Home} />
+          <Route exact path='/create-item' component={CreateItem} />
+          <Route exact path='/my-articles' component={MyArticles} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/item/:id' component={Item} />
         </Switch>
       </Background>
     </ThemeProvider>

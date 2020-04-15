@@ -22,6 +22,15 @@ export const fetchItems = () => async (dispatch, getState) => {
   if (response.items.length < state.limit) dispatch(setFinally(true))
 }
 
+export const fetchSpecificItem = (id) => async (dispatch) => {
+  dispatch(setLoading(true))
+  const response = await article.get(id)
+  if (response) {
+    dispatch(addItems([response]))
+  }
+  dispatch(setLoading(false))
+}
+
 export const enable = id => async dispatch => {
   dispatch(setStatus({ id, status: true }))
   const status = await article.setActive(id)
