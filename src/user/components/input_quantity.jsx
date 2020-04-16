@@ -8,7 +8,7 @@ const InputQuantity = props => {
       <div onClick={evenet => props.setQuantity(props.quantity < 1 ? 1 : props.quantity - 1)}>-</div>
       <div>
         <input
-          type='text'
+          type='number'
           value={props.quantity}
           onChange={props.onQuantityChange}
         />
@@ -49,6 +49,10 @@ const FormContainer = styled.div`
     font-size: 1em;
     background: initial;
     border: none;
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 `
 

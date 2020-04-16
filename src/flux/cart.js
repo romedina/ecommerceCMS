@@ -16,4 +16,16 @@ export const RemoveItem = flux.createAction('REMOVE_ITEM', (state, payload) => {
   return newItems
 })
 
+export const updateQuantity = flux.createAction('UPDATE_QUANTITY', (state, { id, quantity }) => {
+  return state.map(item => {
+    console.log(id === item.id)
+    if (id === item.id) {
+      const itemMatched = { ...item }
+      itemMatched.quantity = quantity
+      return itemMatched
+    }
+    return item
+  })
+})
+
 export default flux.createReducer(initialState)

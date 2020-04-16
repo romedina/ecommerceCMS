@@ -17,7 +17,7 @@ const Alert = () => {
   }
 
   return (
-    <Dialog open={active}>
+    <Dialog open={active} onClose={handleCancel}>
       <Box>
         {!loading && (
           <Body>

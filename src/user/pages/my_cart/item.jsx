@@ -7,6 +7,14 @@ import Currency from '../../../helpers/currency'
 import Responsive from '../../../components/responsive'
 
 const ItemOnCart = (props) => {
+  const onQuantityChange = event => {
+    props.handleChangeQuantity(props, parseInt(event.target.value))
+  }
+
+  const handleQuantityChange = value => {
+    props.handleChangeQuantity(props, value)
+  }
+
   return (
     <Content>
       <PictureContent>
@@ -16,14 +24,22 @@ const ItemOnCart = (props) => {
         <Title>{props.title}</Title>
         <Price>$ {Currency.formatMoney(props.price)}</Price>
         <QuantityControls>
-          <Responsive rule='min-width:851px'><InputQuantity /></Responsive>
+          <Responsive rule='min-width:851px'>
+            <InputQuantity
+              onQuantityChange={onQuantityChange}
+              quantity={props.quantity}
+              setQuantity={handleQuantityChange}
+            />
+          </Responsive>
           <Responsive rule='max-width:850px'>
             <DescribeQuiantity>Cantidad:</DescribeQuiantity>
             <span>{props.quantity}</span>
           </Responsive>
         </QuantityControls>
       </DataContent>
-      <DeleteIcon />
+      <DeleteIcon
+        onClick={event => props.handleRemoveItem(props)}
+      />
     </Content>
   )
 }
@@ -32,7 +48,9 @@ ItemOnCart.propTypes = {
   price: propTypes.number,
   title: propTypes.string,
   picture: propTypes.string,
-  quantity: propTypes.number
+  quantity: propTypes.oneOfType([propTypes.number, propTypes.string]),
+  handleRemoveItem: propTypes.func,
+  handleChangeQuantity: propTypes.func
 }
 
 const Content = styled.div`
