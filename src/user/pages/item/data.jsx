@@ -4,6 +4,7 @@ import Picture from './picture'
 import propTypes from 'prop-types'
 import { Divider } from '@material-ui/core'
 import ButtonBase from '../../../components/link'
+import InputQuiantity from '../../components/input_quantity'
 
 const Data = props => {
   return (
@@ -26,17 +27,11 @@ const Data = props => {
         <Divider />
         <Cuantity>
           Cantidad:
-          <FormContainer>
-            <div onClick={evenet => props.setQuantity(props.quantity < 1 ? 1 : props.quantity - 1)}>-</div>
-            <div>
-              <input
-                type='text'
-                value={props.quantity}
-                onChange={props.onQuantityChange}
-              />
-            </div>
-            <div onClick={evenet => props.setQuantity(props.quantity + 1)}>+</div>
-          </FormContainer>
+          <InputQuiantity
+            onQuantityChange={props.onQuantityChange}
+            quantity={props.quantity}
+            setQuantity={props.setQuantity}
+          />
         </Cuantity>
         <ButtonContainer>
           <Button to='/' variant='outlined'>Seguir comprando</Button>
@@ -44,7 +39,7 @@ const Data = props => {
             <Button handleClick={props.AddToCart} variant='contained'>Agregar al carrito</Button>
           )}
           {props.isThisInMyCart && (
-            <Button handleClick={props.removeFromMyCart} variant='contained'>Quitar al carrito</Button>
+            <Button handleClick={props.removeFromMyCart} variant='contained'>Quitar del carrito</Button>
           )}
         </ButtonContainer>
       </DataBox>
@@ -141,31 +136,5 @@ const Cuantity = styled.div`
   font-weight: bold;
   padding: 10px 0px;
 `
-const FormContainer = styled.div`
-  background: var(--user-gray-light);
-  width: 150px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  & div {
-    width: 33%;
-    text-align: center;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-  & input {
-    width: 100%;
-    height: 100%;
-    outline: none;
-    text-align: center;
-    font-size: 1em;
-    background: initial;
-    border: none;
-  }
-`
+
 export default Data

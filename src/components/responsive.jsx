@@ -13,7 +13,7 @@ const Responsive = (props) => {
 }
 
 Responsive.propTypes = {
-  children: propTypes.oneOfType([propTypes.string, propTypes.array, propTypes.object]),
+  children: propTypes.oneOfType([propTypes.string, propTypes.array, propTypes.object, propTypes.element, propTypes.number]),
   rule: propTypes.string
 }
 

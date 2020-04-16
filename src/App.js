@@ -13,6 +13,7 @@ import MyArticles from './admin/pages/my_articles'
 
 import Home from './user/pages/home'
 import Item from './user/pages/item'
+import MyCart from './user/pages/my_cart'
 
 function App () {
   return (
@@ -25,6 +26,7 @@ function App () {
           <Route exact path='/my-articles' component={MyArticles} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/item/:id' component={Item} />
+          <Route exact path='/my-cart' component={MyCart} />
         </Switch>
       </Background>
     </ThemeProvider>
