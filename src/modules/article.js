@@ -105,9 +105,9 @@ const article = {
    */
   async getList (lastItem = null, limit = null) {
     try {
-      var query = db.collection('Articulos')
+      var query = db.collection('Articulos').orderBy('date', 'desc')
       if (limit) query = query.limit(limit)
-      if (lastItem) query.startAfter(lastItem)
+      if (lastItem) query = query.startAfter(lastItem)
       const snapshot = await query.get()
       const items = snapshotParser(snapshot)
       return { items, last: snapshot.docs[snapshot.docs.length - 1] }

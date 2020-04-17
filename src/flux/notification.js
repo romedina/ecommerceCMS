@@ -6,7 +6,7 @@ const initialState = []
 // async
 export const remove = key => dispatch => {
   dispatch(setClose(key))
-  setTimeout(event => dispatch(setRemove(key)), 500)
+  setTimeout(event => dispatch(setRemove(key)), 700)
 }
 
 export const setNotification = data => async dispatch => {

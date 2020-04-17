@@ -4,8 +4,11 @@ import validateForm from '../../../helpers/validateform'
 import article from '../../../modules/article'
 import propTypes from 'prop-types'
 import Admin from '../../hoc/admin'
+import { useDispatch } from 'react-redux'
+import { setInitialState } from '../../../flux/items'
 
 const CreateItem = (props) => {
+  const dispatch = useDispatch()
   var preloadedState = props.location.state || {}
   const steps = ['Informacion general', 'Multimedia', 'Resumen']
   const [currentStep, setCurrentStep] = useState(0)
@@ -39,6 +42,7 @@ const CreateItem = (props) => {
       setPicturesUploaded(counter)
     }
     setCurrenView('success')
+    dispatch(setInitialState())
   }
 
   const handleUpdate = async () => {

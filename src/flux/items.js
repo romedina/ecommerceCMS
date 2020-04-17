@@ -6,20 +6,19 @@ const initialState = {
   items: [],
   loading: true,
   last: null,
-  finally: false,
+  isfinally: false,
   limit: 10
 }
 
 // async actions
 export const fetchItems = () => async (dispatch, getState) => {
-  console.log('fetching items...')
   dispatch(setLoading(true))
   const state = getState()
-  const response = await article.getList(state.last, state.limit)
-  dispatch(addItems(response.items))
+  const response = await article.getList(state.items.last, state.items.limit)
   dispatch(setLast(response.last))
+  dispatch(addItems(response.items))
   dispatch(setLoading(false))
-  if (response.items.length < state.limit) dispatch(setFinally(true))
+  if (response.items.length < state.items.limit) dispatch(setFinally(true))
 }
 
 export const fetchSpecificItem = (id) => async (dispatch) => {
@@ -85,7 +84,7 @@ export const setLoading = flux.createAction('SET_LOADING', (state, payload) => {
 export const setFinally = flux.createAction('SET_FINALLY', (state, payload) => {
   return {
     ...state,
-    finally: payload
+    isfinally: payload
   }
 })
 
@@ -95,5 +94,7 @@ export const setLast = flux.createAction('SET_LAST', (state, payload) => {
     last: payload
   }
 })
+
+export const setInitialState = flux.createAction('SET_INITIAL_STATE', any => ({ ...initialState }))
 
 export default flux.createReducer(initialState)

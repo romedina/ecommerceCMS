@@ -9,9 +9,12 @@ import Article from '../../components/Article'
 import styled from 'styled-components'
 import { setAlert } from '../../../flux/alert'
 import Admin from '../../hoc/admin'
+import lastPosition from '../../../helpers/last_position'
+import { CircularProgress } from '@material-ui/core'
+import { setNotification } from '../../../flux/notification'
 
 const MyArticles = () => {
-  const { loading, items } = useSelector(state => state.items)
+  const { loading, items, isfinally } = useSelector(state => state.items)
   const history = useHistory()
   const dispatch = useDispatch()
 
@@ -34,27 +37,49 @@ const MyArticles = () => {
     }))
   }
 
-  const handleStatus = (data) => {
-    console.log(data)
+  const handleStatus = data => {
     if (data.isActive) {
       dispatch(setAlert({
         title: '¿Seguro quieres desabilitar este articulo?',
         message: 'Los articulos desabilitados no seran visibles para tus clientes.',
-        action: disable(data.id),
+        action: dispatch => {
+          dispatch(disable(data.id))
+          dispatch(setNotification({
+            message: 'El articulo de ha desactivado',
+            type: 'warning'
+          }))
+        },
         textAction: 'Desabilitar'
       }))
     } else {
-      dispatch(enable(data.id))
+      dispatch(dispatch => {
+        dispatch(enable(data.id))
+        dispatch(setNotification({
+          message: 'El articulo de ha habilitado',
+          type: 'info'
+        }))
+      })
     }
   }
+
+  useEffect(event => {
+    const handleScroll = event => {
+      const isInLastPosition = lastPosition(500)
+      if (!loading && isInLastPosition && !isfinally) {
+        dispatch(fetchItems())
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    return event => window.removeEventListener('scroll', handleScroll)
+  }, [loading, isfinally, dispatch])
 
   return (
     <LayoutAdmin>
       <PageTitle>Mis articulos</PageTitle>
-      {loading && (
+      {loading && items.length === 0 && (
         <Skeleton />
       )}
-      {!loading && (
+      {items.length > 0 && (
         <Content>
           {items.map(item => (
             <Article
@@ -67,6 +92,11 @@ const MyArticles = () => {
           ))}
         </Content>
       )}
+      {items.length > 0 && loading && (
+        <CircularProgressContet>
+          <CircularProgress />
+        </CircularProgressContet>
+      )}
     </LayoutAdmin>
   )
 }
@@ -77,5 +107,9 @@ const Content = styled.div`
   flex-wrap: wrap;
   align-items: stretch;
 `
-
+const CircularProgressContet = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 50px 0px;
+`
 export default Admin(MyArticles)
