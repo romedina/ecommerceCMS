@@ -3,8 +3,8 @@ import LayoutUser from '../../components/layout_user'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchSpecificItem } from '../../../flux/items'
-import { addItem, RemoveItem } from '../../../flux/cart'
-import { setAlert } from '../../../flux/alert'
+import { addItem } from '../../../flux/cart'
+import { setNotification } from '../../../flux/notification'
 import Container from '../../components/container'
 import Data from './data'
 import Skeleton from './skeleton'
@@ -13,12 +13,8 @@ const Item = props => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const { items, loading } = useSelector(state => state.items)
-  const myCart = useSelector(state => state.cart)
   const itemSelected = items.filter(item => item.id === id)[0] || null
   const [quantity, setQuantity] = useState(1)
-  const isThisInMyCart = (myCart.filter(item => itemSelected && item.id === itemSelected.id).length > 0)
-
-  console.log(isThisInMyCart)
 
   // fetch data
   useEffect(() => {
@@ -27,17 +23,11 @@ const Item = props => {
 
   //
   const AddToCart = event => {
-    dispatch(addItem({ ...itemSelected, quantity }))
-  }
-
-  const removeFromMyCart = event => {
-    dispatch(setAlert({
-      action: () => dispatch(RemoveItem(itemSelected.id)),
-      message: '¿Estas seguro de quitar este articulo de tu carrito?',
-      title: 'Quitar Articulo',
-      type: 'warning',
-      textAction: 'Aceptar'
+    dispatch(setNotification({
+      type: 'success',
+      message: `Se han agregado ${quantity} ${itemSelected.title} en tu carrito`
     }))
+    dispatch(addItem({ ...itemSelected, quantity }))
   }
 
   const onQuantityChange = event => {
@@ -62,8 +52,6 @@ const Item = props => {
             onQuantityChange={onQuantityChange}
             quantity={quantity}
             setQuantity={setQuantity}
-            removeFromMyCart={removeFromMyCart}
-            isThisInMyCart={isThisInMyCart}
           />
         )}
       </Container>

@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import { ThemeProvider } from '@material-ui/core'
 import Alert from './components/alert'
+import Notification from './components/notification'
 import mytheme from './theme'
 import './index.css'
 
@@ -20,6 +21,7 @@ function App () {
   return (
     <ThemeProvider theme={mytheme}>
       <Background>
+        <Notification />
         <Alert />
         <Switch>
           <Route exact path='/' component={Home} />

@@ -5,10 +5,20 @@ const flux = createFlux('CART')
 
 // actions
 export const addItem = flux.createAction('ADD_ITEM', (state, payload) => {
-  return [
-    ...state,
-    payload
-  ]
+  const ItemsOnCart = state.map(item => item.id)
+  if (ItemsOnCart.includes(payload.id)) {
+    return state.map(item => {
+      if (item.id === payload.id) {
+        const newItem = { ...item }
+        newItem.quantity = (item.quantity + payload.quantity)
+        return newItem
+      } else {
+        return item
+      }
+    })
+  } else {
+    return [...state, payload]
+  }
 })
 
 export const RemoveItem = flux.createAction('REMOVE_ITEM', (state, payload) => {

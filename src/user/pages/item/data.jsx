@@ -35,12 +35,7 @@ const Data = props => {
         </Cuantity>
         <ButtonContainer>
           <Button to='/' variant='outlined'>Seguir comprando</Button>
-          {!props.isThisInMyCart && (
-            <Button handleClick={props.AddToCart} variant='contained'>Agregar al carrito</Button>
-          )}
-          {props.isThisInMyCart && (
-            <Button handleClick={props.removeFromMyCart} variant='contained'>Quitar del carrito</Button>
-          )}
+          <Button handleClick={props.AddToCart} variant='contained'>Agregar al carrito</Button>
         </ButtonContainer>
       </DataBox>
     </Flex>
@@ -56,9 +51,7 @@ Data.propTypes = {
   AddToCart: propTypes.func,
   onQuantityChange: propTypes.func,
   quantity: propTypes.oneOfType([propTypes.number, propTypes.string]),
-  setQuantity: propTypes.func,
-  isThisInMyCart: propTypes.bool,
-  removeFromMyCart: propTypes.func
+  setQuantity: propTypes.func
 }
 
 const ButtonContainer = styled.div`

@@ -2,10 +2,13 @@ import React from 'react'
 import ContainerBase from '../container'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { ButtonBase } from '@material-ui/core'
+import ButtonBase from '../../../components/link'
 import { ShoppingCart, Search } from '@material-ui/icons'
+import { useSelector } from 'react-redux'
 
 const HeaderDesktop = (props) => {
+  const cartCounter = useSelector(state => state.cart).length
+
   return (
     <FullWidth>
       <Container>
@@ -20,14 +23,30 @@ const HeaderDesktop = (props) => {
             <ButtonBaseStyled><LinkStyled to='/'>Contacto</LinkStyled></ButtonBaseStyled>
           </MenuContainer>
           <ActionsPrimary>
-            <ActionsItem><ShoppingCart /></ActionsItem>
-            <ActionsItem><Search /></ActionsItem>
+            <ActionsItem to='/my-cart'>
+              {cartCounter > 0 && (
+                <CounterItems>{cartCounter}</CounterItems>
+              )}
+              <ShoppingCart />
+            </ActionsItem>
+            <ActionsItem to='/search'><Search /></ActionsItem>
           </ActionsPrimary>
         </ActionContainer>
       </Container>
     </FullWidth>
   )
 }
+
+const CounterItems = styled.div`
+  background: red;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  top: -5px;
+  right: -5px;
+  
+`
 
 const Container = styled(ContainerBase)`
   display: flex;
@@ -69,6 +88,7 @@ const ActionsPrimary = styled('div')`
 `
 
 const ActionsItem = styled(ButtonBase)`
+  position: relative;
   margin-right: 15px;
   &:last-of-type {
     margin: 0px;
