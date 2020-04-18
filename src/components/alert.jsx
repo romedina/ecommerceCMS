@@ -6,13 +6,14 @@ import { action, setInitialState } from '../flux/alert'
 
 const Alert = () => {
   const dispatch = useDispatch()
-  const { message, title, active, textAction, loading } = useSelector(state => state.alert)
+  const { message, title, active, textAction, loading, fallback } = useSelector(state => state.alert)
 
   const handleAction = () => {
     dispatch(action())
   }
 
   const handleCancel = () => {
+    if (fallback) dispatch(fallback)
     dispatch(setInitialState())
   }
 

@@ -3,6 +3,27 @@ import snapshotParser from '../helpers/snapshotparser'
 
 const article = {
   /**
+   * @param data::object
+   * @return id created || false
+   * save order on database
+   */
+  async saveOrder (data) {
+    try {
+      const date = new Date()
+      const period = `${date.getMonth() + 1}-${date.getFullYear()}`
+      const result = await db.collection(`Ordenes/Pedidos/${period}`).add({
+        ...data,
+        date: new Date()
+      })
+      await db.doc(`Ordenes/Pedidos/${period}/${result.id}`).update({ id: result.id })
+      return result.id
+    } catch (error) {
+      console.error('error_description:', error)
+      return false
+    }
+  },
+
+  /**
    * @param id::string
    * @return data::object || false
    * getSpecific article

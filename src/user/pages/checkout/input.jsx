@@ -20,7 +20,7 @@ const Input = props => {
       onChange={onChange}
       error={errors.includes(props.name)}
       onFocus={props.handleRemoveErrors}
-      value={props.data[props.name]}
+      value={props.data[props.name] || ''}
     />
   )
 }

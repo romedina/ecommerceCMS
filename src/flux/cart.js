@@ -38,4 +38,6 @@ export const updateQuantity = flux.createAction('UPDATE_QUANTITY', (state, { id,
   })
 })
 
+export const setInitialState = flux.createAction('SET_INITIAL_STATE', any => [])
+
 export default flux.createReducer(initialState)

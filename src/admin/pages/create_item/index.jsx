@@ -6,6 +6,7 @@ import propTypes from 'prop-types'
 import Admin from '../../hoc/admin'
 import { useDispatch } from 'react-redux'
 import { setInitialState } from '../../../flux/items'
+import { Prompt } from 'react-router-dom'
 
 const CreateItem = (props) => {
   const dispatch = useDispatch()
@@ -43,6 +44,7 @@ const CreateItem = (props) => {
     }
     setCurrenView('success')
     dispatch(setInitialState())
+    setData({})
   }
 
   const handleUpdate = async () => {
@@ -82,6 +84,7 @@ const CreateItem = (props) => {
         article.deletePicture(idEditing, item)
       }
       setCurrenView('success')
+      setData({})
     } catch (error) {
       console.error('error_description:', error)
     }
@@ -160,34 +163,37 @@ const CreateItem = (props) => {
   }
 
   return (
-    <View
-      {...data}
-      currentView={currentView}
-      setCurrenView={setCurrenView}
-      errors={errors}
-      setData={setData}
-      currentStep={currentStep}
-      setCurrentStep={setCurrentStep}
-      steps={steps}
-      handleChange={handleChange}
-      handleNext={handleNext}
-      removeError={removeError}
-      handleDropPicture={handleDropPicture}
-      handleDropPictures={handleDropPictures}
-      handleDeletePictures={handleDeletePictures}
-      handleDeletePicture={handleDeletePicture}
-      handleBack={handleBack}
-      picture={picture}
-      pictures={pictures}
-      handleUpload={handleUpload}
-      numPicturesUploaded={numPicturesUploaded}
-      numPicturesToUpload={numPicturesToUpload}
-      idCreated={idCreated}
-      setIdCreated={setIdCreated}
-      onReset={onReset}
-      idEditing={idEditing}
-      handleUpdate={handleUpdate}
-    />
+    <>
+      <Prompt message='' when={JSON.stringify(data) !== '{}'} />
+      <View
+        {...data}
+        currentView={currentView}
+        setCurrenView={setCurrenView}
+        errors={errors}
+        setData={setData}
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+        steps={steps}
+        handleChange={handleChange}
+        handleNext={handleNext}
+        removeError={removeError}
+        handleDropPicture={handleDropPicture}
+        handleDropPictures={handleDropPictures}
+        handleDeletePictures={handleDeletePictures}
+        handleDeletePicture={handleDeletePicture}
+        handleBack={handleBack}
+        picture={picture}
+        pictures={pictures}
+        handleUpload={handleUpload}
+        numPicturesUploaded={numPicturesUploaded}
+        numPicturesToUpload={numPicturesToUpload}
+        idCreated={idCreated}
+        setIdCreated={setIdCreated}
+        onReset={onReset}
+        idEditing={idEditing}
+        handleUpdate={handleUpdate}
+      />
+    </>
   )
 }
 

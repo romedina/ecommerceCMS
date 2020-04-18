@@ -1,17 +1,31 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
+import { Provider, useDispatch } from 'react-redux'
 import { CssBaseline } from '@material-ui/core'
 import store from './store'
 import App from './App'
 
-ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
+import { setAlert } from './flux/alert'
+
+const Client = props => {
+  const dispatch = useDispatch()
+
+  const customUserConfirmation = (message, follow) => {
+    dispatch(setAlert({
+      action: any => follow(true),
+      fallback: any => follow(false),
+      title: '¿Seguro quieres salir?',
+      message: 'Se perderan todos los datos del formulario'
+    }))
+  }
+
+  return (
+    <BrowserRouter getUserConfirmation={customUserConfirmation}>
       <CssBaseline />
       <App />
     </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
-)
+  )
+}
+
+ReactDOM.render(<Provider store={store}><Client /></Provider>, document.getElementById('root'))

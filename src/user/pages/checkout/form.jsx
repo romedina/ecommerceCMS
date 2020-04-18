@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Stepper from './stepper'
 import UserInfo from './user_info'
 import propTypes from 'prop-types'
-import Shipping from './shipping'
+import Shipping from './shipping_and_pay'
 import validateForm from '../../../helpers/validateform'
 
 const Form = props => {
@@ -20,6 +20,22 @@ const Form = props => {
         setCurrenStep(currentStep + 1)
       }
     }
+    if (steps[currentStep] === 'Envio') {
+      setCurrenStep(currentStep + 1)
+    }
+    if (steps[currentStep] === 'Pago') {
+      const requires = ['methodPay']
+      const errors = validateForm(props.data, requires)
+      if (errors) {
+        setErrors(errors)
+      } else {
+        props.handlePay()
+      }
+    }
+  }
+
+  const goToStep = (stepName) => {
+    setCurrenStep(steps.indexOf(stepName))
   }
 
   const handleRemoveErrors = (event) => {
@@ -39,16 +55,23 @@ const Form = props => {
       {steps[currentStep] === 'Informacion' && (
         <UserInfo
           errors={errors}
+          steps={steps}
+          currentStep={currentStep}
           handleNext={handleNext}
+          goToStep={goToStep}
           {...props}
           setCurrenStep={setCurrenStep}
           handleRemoveErrors={handleRemoveErrors}
+          handleChangeDirections={handleChangeDirections}
         />
       )}
-      {steps[currentStep] === 'Envio' && (
+      {(steps[currentStep] === 'Envio' || steps[currentStep] === 'Pago') && (
         <Shipping
           errors={errors}
+          steps={steps}
+          currentStep={currentStep}
           handleNext={handleNext}
+          goToStep={goToStep}
           {...props}
           setCurrenStep={setCurrenStep}
           handleRemoveErrors={handleRemoveErrors}
@@ -61,7 +84,8 @@ const Form = props => {
 
 Form.propTypes = {
   errors: propTypes.array,
-  data: propTypes.object
+  data: propTypes.object,
+  handlePay: propTypes.func
 }
 
 export default Form

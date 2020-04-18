@@ -14,7 +14,6 @@ const Summary = props => {
   const dispatch = useDispatch()
   const items = useSelector(state => state.cart)
   const subTotal = items.reduce((acumulator, currentItem) => { return acumulator + (currentItem.price * currentItem.quantity) }, 0)
-  const shipping = 50
 
   const handleRemoveItem = item => {
     dispatch(setAlert({
@@ -41,19 +40,32 @@ const Summary = props => {
         </FlexBetween>
         <FlexBetween>
           <span>Envio:</span>
-          $ {Currency.formatMoney(shipping)}
+          $ {Currency.formatMoney(props.shipping)}
         </FlexBetween>
       </Group>
       <Divider />
       <Group>
         <FlexBetween>
           <span>Total:</span>
-          $ {Currency.formatMoney(shipping + subTotal)}
+          $ {Currency.formatMoney(props.shipping + subTotal)}
         </FlexBetween>
       </Group>
       <FlexBetween style={{ fontSize: '1rem' }}>
-        <Button to='/my-cart' variant='outlined'>Volver al carrito</Button>
-        <Button handleClick={props.handleNext} variant='contained'>Continuar</Button>
+        {props.steps[props.currentStep] === 'Informacion' && (
+          <Button to='/my-cart' variant='outlined'>Volver al carrito</Button>
+        )}
+        {props.steps[props.currentStep] === 'Envio' && (
+          <Button handleClick={event => props.goToStep('Informacion')} variant='outlined'>Volver a Informacion</Button>
+        )}
+        {props.steps[props.currentStep] === 'Pago' && (
+          <Button handleClick={event => props.goToStep('Envio')} variant='outlined'>Volver a Envio</Button>
+        )}
+        {(props.steps[props.currentStep] === 'Envio' || props.steps[props.currentStep] === 'Informacion') && (
+          <Button handleClick={props.handleNext} variant='contained'>Continuar</Button>
+        )}
+        {props.steps[props.currentStep] === 'Pago' && (
+          <Button handleClick={props.handleNext} variant='contained'>Pagar</Button>
+        )}
       </FlexBetween>
 
     </Content>
@@ -61,7 +73,12 @@ const Summary = props => {
 }
 
 Summary.propTypes = {
-  handleNext: propTypes.func
+  handleNext: propTypes.func,
+  currentStep: propTypes.number,
+  goToStep: propTypes.func,
+  steps: propTypes.array,
+  handlePay: propTypes.func,
+  shipping: propTypes.number
 }
 
 const Content = styled.div`
