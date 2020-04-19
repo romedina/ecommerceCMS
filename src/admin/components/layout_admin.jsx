@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import propsTypes from 'prop-types'
-import MenuRight from '../menu_right'
+import MenuRight from './menu_right'
+import { setCounter } from '../../flux/messages'
+import { useDispatch } from 'react-redux'
+import { onCounterCHange } from '../../modules/message'
 
 const ContainerComponent = (props) => {
+  const dispatch = useDispatch()
+
+  // subscribe on counter messages
+  useEffect(any => {
+    return onCounterCHange(counter => {
+      dispatch(setCounter(counter))
+    })
+  }, [])
+
   return (
     <Container id='container_admin'>
       <MenuContainer>
