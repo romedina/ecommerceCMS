@@ -17,6 +17,7 @@ import Item from './user/pages/item'
 import MyCart from './user/pages/my_cart'
 import Checkout from './user/pages/checkout'
 import About from './user/pages/about'
+import Contact from './user/pages/contact'
 
 function App () {
   return (
@@ -33,6 +34,7 @@ function App () {
           <Route exact path='/my-cart' component={MyCart} />
           <Route exact path='/checkout' component={Checkout} />
           <Route exact path='/about' component={About} />
+          <Route exact path='/contact' component={Contact} />
         </Switch>
       </Background>
     </ThemeProvider>

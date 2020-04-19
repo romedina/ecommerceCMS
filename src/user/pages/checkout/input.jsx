@@ -9,6 +9,12 @@ const Input = props => {
     props.handleChange(event.target)
   }
 
+  const handleRemoveErrors = event => {
+    if (props.handleRemoveErrors) {
+      props.handleRemoveErrors(event.target)
+    }
+  }
+
   return (
     <TextFiledStyled
       className={props.className}
@@ -19,8 +25,10 @@ const Input = props => {
       placeholder={props.placeholder}
       onChange={onChange}
       error={errors.includes(props.name)}
-      onFocus={props.handleRemoveErrors}
+      onFocus={handleRemoveErrors}
       value={props.data[props.name] || ''}
+      multiline={props.multiline || false}
+      rows={props.rows || 1}
     />
   )
 }
@@ -35,7 +43,9 @@ Input.propTypes = {
   className: propTypes.string,
   errors: propTypes.array,
   handleRemoveErrors: propTypes.func,
-  data: propTypes.object
+  data: propTypes.object,
+  multiline: propTypes.bool,
+  rows: propTypes.number
 }
 
 const TextFiledStyled = styled(TextField)`
