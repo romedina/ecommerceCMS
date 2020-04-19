@@ -16,6 +16,7 @@ import Home from './user/pages/home'
 import Item from './user/pages/item'
 import MyCart from './user/pages/my_cart'
 import Checkout from './user/pages/checkout'
+import About from './user/pages/about'
 
 function App () {
   return (
@@ -31,6 +32,7 @@ function App () {
           <Route exact path='/item/:id' component={Item} />
           <Route exact path='/my-cart' component={MyCart} />
           <Route exact path='/checkout' component={Checkout} />
+          <Route exact path='/about' component={About} />
         </Switch>
       </Background>
     </ThemeProvider>
