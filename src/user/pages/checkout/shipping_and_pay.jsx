@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Section from './Sections'
 import styled from 'styled-components'
 import propTypes from 'prop-types'
 import { Radio, RadioGroup } from '@material-ui/core'
 import { Alert as AlertBase } from '@material-ui/lab'
+import { createOrder } from './paypal'
 
 const Shipping = props => {
+  useEffect(any => {
+    if (props.currentStep === 2) {
+      window.paypal.Buttons({
+        createOrder: createOrder('10.00')
+      }).render('#paypal-button')
+    }
+  }, [props.currentStep])
+
   return (
     <Section {...props}>
       <Group>
@@ -33,6 +42,7 @@ const Shipping = props => {
             <Alert severity='error'>Porfavor selecciona un methodo de pago</Alert>
           )}
           <Row>
+            <div id='paypal-button' />
             <Radio value='PayPal' onClick={props.handleRemoveErrors} />
             Paypal
           </Row>
