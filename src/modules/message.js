@@ -54,9 +54,20 @@ export const resetCounter = async any => {
   })
 }
 
+export const setInactiveStatus = async id => {
+  try {
+    await db.doc(`contact/messages/items/${id}`).update({ isActive: false })
+    return true
+  } catch (error) {
+    console.error('error_description', error)
+    return false
+  }
+}
+
 export default {
   add,
   getList,
   onCounterCHange,
-  resetCounter
+  resetCounter,
+  setInactiveStatus
 }
