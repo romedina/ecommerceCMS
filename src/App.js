@@ -12,6 +12,7 @@ import CreateItem from './admin/pages/create_item'
 import Login from './admin/pages/login'
 import MyArticles from './admin/pages/my_articles'
 import Messages from './admin/pages/messages'
+import Orders from './admin/pages/orders'
 
 import Home from './user/pages/home'
 import Item from './user/pages/item'
@@ -37,6 +38,7 @@ function App () {
           <Route exact path='/about' component={About} />
           <Route exact path='/contact' component={Contact} />
           <Route exact path='/messages' component={Messages} />
+          <Route exact path='/orders' component={Orders} />
         </Switch>
       </Background>
     </ThemeProvider>
@@ -50,5 +52,4 @@ const Background = styled('div')`
   min-height: 100vh;
   width: 100vw;
   max-width: 100%;
-  
 `

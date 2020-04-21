@@ -27,7 +27,6 @@ Item.propTypes = {
 const WrapperItem = styled(Link)`
   width: 20%;
   padding: 7px;
-  height: 100%;
   @media screen and (max-width:1200px) {
     width: 25%;
   }

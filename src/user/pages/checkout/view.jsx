@@ -4,6 +4,7 @@ import ContainerBase from '../../components/container'
 import Form from './form'
 import propTypes from 'prop-types'
 import Loading from './loading'
+import SuccessPaypal from './success'
 
 const View = props => {
   return (
@@ -14,6 +15,9 @@ const View = props => {
         )}
         {props.currentView === 'loading' && (
           <Loading />
+        )}
+        {props.currentView === 'SuccessPaypal' && (
+          <SuccessPaypal />
         )}
       </ContainerBase>
     </Layout>

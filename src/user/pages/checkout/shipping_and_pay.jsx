@@ -4,16 +4,22 @@ import styled from 'styled-components'
 import propTypes from 'prop-types'
 import { Radio, RadioGroup } from '@material-ui/core'
 import { Alert as AlertBase } from '@material-ui/lab'
-import { createOrder } from './paypal'
+import paypalOption from './paypal'
 
 const Shipping = props => {
+  // render mark paypal
   useEffect(any => {
     if (props.currentStep === 2) {
-      window.paypal.Buttons({
-        createOrder: createOrder('10.00')
-      }).render('#paypal-button')
+      window.paypal.Marks().render('#paypal-marks')
     }
   }, [props.currentStep])
+
+  // render button paypal
+  useEffect(any => {
+    if (props.data.methodPay === 'PayPal') {
+      window.paypal.Buttons(paypalOption({ ...props })).render('#render_button')
+    }
+  }, [props.data.methodPay])
 
   return (
     <Section {...props}>
@@ -41,11 +47,16 @@ const Shipping = props => {
           {props.errors.length > 0 && (
             <Alert severity='error'>Porfavor selecciona un methodo de pago</Alert>
           )}
-          <Row>
-            <div id='paypal-button' />
+          <RowPaypal>
             <Radio value='PayPal' onClick={props.handleRemoveErrors} />
-            Paypal
-          </Row>
+            <MarksPaypal id='paypal-marks' />
+            <span id='paypal_hidden' />
+          </RowPaypal>
+          {props.data.methodPay === 'PayPal' && (
+            <Row>
+              <span id='render_button' />
+            </Row>
+          )}
           <Row>
             <Radio value='Konecta' onClick={props.handleRemoveErrors} />
             Connecta
@@ -63,7 +74,8 @@ Shipping.propTypes = {
   steps: propTypes.array,
   currentStep: propTypes.number,
   errors: propTypes.array,
-  handleRemoveErrors: propTypes.func
+  handleRemoveErrors: propTypes.func,
+  totalPrice: propTypes.number
 }
 
 const Row = styled.div`
@@ -92,6 +104,13 @@ const Describe = styled.h2`
   color: var(--user-black);
 `
 const Alert = styled(AlertBase)`
-  margin-bottom: 15px
+  margin-bottom: 15px;
+`
+const MarksPaypal = styled.div`
+  display: inline;
+`
+const RowPaypal = styled(Row)`
+  display: flex;
+  align-items: center;
 `
 export default Shipping

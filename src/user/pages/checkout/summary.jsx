@@ -47,7 +47,7 @@ const Summary = props => {
       <Group>
         <FlexBetween>
           <span>Total:</span>
-          $ {Currency.formatMoney(props.shipping + subTotal)}
+          $ {Currency.formatMoney(props.totalPrice)}
         </FlexBetween>
       </Group>
       <FlexBetween style={{ fontSize: '1rem' }}>
@@ -78,7 +78,8 @@ Summary.propTypes = {
   goToStep: propTypes.func,
   steps: propTypes.array,
   handlePay: propTypes.func,
-  shipping: propTypes.number
+  shipping: propTypes.number,
+  totalPrice: propTypes.number
 }
 
 const Content = styled.div`
