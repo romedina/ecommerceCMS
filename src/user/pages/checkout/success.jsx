@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined'
 
 const SuccessPaypal = props => {
   return (
@@ -30,5 +30,6 @@ const Title = styled.div`
 `
 const Text = styled.div`
   font-size: 1.2em;
+  text-align: center;
 `
 export default SuccessPaypal
