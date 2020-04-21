@@ -32,7 +32,6 @@ const Contact = props => {
   }
 
   const handleRemoveErrors = params => {
-    console.log(params)
     setErrors(errors.filter(error => error !== params.name))
   }
 

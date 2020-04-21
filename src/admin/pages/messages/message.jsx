@@ -1,20 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
-import propTypes from 'prop-types'
-import { Avatar as AvatarBase } from '@material-ui/core'
-import User from '../../../assets/user.svg'
+import propTypes, { oneOfType } from 'prop-types'
+import { Paper } from '@material-ui/core'
 
 const Message = props => {
   const date = props.date.toDate()
+
   return (
     <Wrapper id={props.id}>
-      <Content isActive={props.isActive} onClick={event => props.showMessage(props)}>
-        <Avatar src={User} />
-        <Data>
-          <Name>{props.name}</Name>
-          <span>{props.email}</span>
-          <span>{date.getDate()}-{date.getMonth() + 1}-{date.getFullYear()}</span>
-        </Data>
+      <Content elevation={2}>
+        <Header>
+          <div>
+            <Name>{props.name}</Name>
+            <div> {props.email} </div>
+            <div> {props.number} </div>
+            <Date> {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()} </Date>
+          </div>
+        </Header>
+        <MessageContent>{props.content}</MessageContent>
       </Content>
     </Wrapper>
   )
@@ -25,12 +28,12 @@ Message.propTypes = {
   date: propTypes.object,
   email: propTypes.string,
   id: propTypes.string,
-  isActive: propTypes.bool,
-  showMessage: propTypes.func
+  content: propTypes.string,
+  number: oneOfType([propTypes.number, propTypes.string])
 }
 
 const Wrapper = styled.div`
-  padding: 10px;
+  padding: 20px;
   width: 50%;
   @media screen and (max-width:950px) {
     width: 100%;
@@ -38,31 +41,26 @@ const Wrapper = styled.div`
     margin: auto;
   }
 `
-const Content = styled.div`
+const Content = styled(Paper)`
   background: ${props => props.isActive ? '#0090ff42' : '#fff'};
   padding: 10px;
-  border: 1px solid var(--main-blue);
+`
+const MessageContent = styled.div`
+  padding: 5px;
   border-radius: 5px;
+  background: #d8edfe;
+  min-height: 140px;
+`
+const Header = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  cursor: pointer;
+  color: var(--main-blue-dark);
 `
-const Data = styled.div`
-  width: 100%;
-  & span {
-    display: block
-  }
+const Name = styled.h3`
+  margin: 0px;
 `
-const Avatar = styled(AvatarBase)`
-  width: 70px;
-  height: 70px;
-  min-width: 70px;
-  min-height: 70px;
-  margin-right: 10px;
+const Date = styled.div`
+  color: var(--main-blue)
 `
-const Name = styled.h4`
-  margin: 5px 0px;
-`
-
 export default Message

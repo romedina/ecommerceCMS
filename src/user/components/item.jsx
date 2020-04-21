@@ -27,6 +27,7 @@ Item.propTypes = {
 const WrapperItem = styled(Link)`
   width: 20%;
   padding: 7px;
+  height: 100%;
   @media screen and (max-width:1200px) {
     width: 25%;
   }
@@ -46,6 +47,7 @@ const ItemBody = styled.div`
   min-height: 150px;
   border-radius: 5px;
   overflow: hidden;
+  height: 100%;
   border: 1px solid var(--user-gray-light);
 `
 const Picture = styled.img`

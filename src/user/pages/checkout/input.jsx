@@ -2,11 +2,21 @@ import React from 'react'
 import styled from 'styled-components'
 import propTypes from 'prop-types'
 import { TextField } from '@material-ui/core'
+import { toNumber, limit } from '../../../helpers/input_parser'
 
 const Input = props => {
   const errors = props.errors || []
+
   const onChange = event => {
-    props.handleChange(event.target)
+    var { name, value } = event.target
+    if (props.filter === 'number') {
+      value = toNumber(value, props.maxLength)
+      props.handleChange({ name, value })
+    } else if (props.maxLength) {
+      props.handleChange({ name, value: limit(value, props.maxLength) })
+    } else {
+      props.handleChange({ name, value })
+    }
   }
 
   const handleRemoveErrors = event => {
@@ -18,7 +28,7 @@ const Input = props => {
   return (
     <TextFiledStyled
       className={props.className}
-      type={props.type || 'outlined'}
+      type={props.type || 'text'}
       variant={props.variant || 'outlined'}
       name={props.name}
       fullWidth={props.fullWidth || true}
@@ -45,7 +55,9 @@ Input.propTypes = {
   handleRemoveErrors: propTypes.func,
   data: propTypes.object,
   multiline: propTypes.bool,
-  rows: propTypes.number
+  rows: propTypes.number,
+  maxLength: propTypes.number,
+  filter: propTypes.string
 }
 
 const TextFiledStyled = styled(TextField)`

@@ -5,6 +5,7 @@ import propTypes from 'prop-types'
 import { Divider } from '@material-ui/core'
 import ButtonBase from '../../../components/link'
 import InputQuiantity from '../../components/input_quantity'
+import Currency from '../../../helpers/currency'
 
 const Data = props => {
   return (
@@ -17,7 +18,7 @@ const Data = props => {
       <DataBox>
         <Header>
           <Title>{props.title}</Title>
-          <Price>{props.price}</Price>
+          <Price>$ {Currency.formatMoney(props.price)}</Price>
         </Header>
         <Divider />
         <Description>

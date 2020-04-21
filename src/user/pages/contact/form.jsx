@@ -23,10 +23,13 @@ const Form = props => {
           data={props.data}
           handleChange={props.handleChange}
           name='name'
+          max={30}
+          maxLength={30}
         />
       </Grid>
       <GridSpacing item xs={12} md={6}>
         <Input
+          maxLength={50}
           errors={props.errors}
           handleRemoveErrors={props.handleRemoveErrors}
           placeholder='Correo electronico'
@@ -37,6 +40,9 @@ const Form = props => {
       </GridSpacing>
       <Grid item xs={12} md={6}>
         <Input
+          type='text'
+          filter='number'
+          maxLength={10}
           errors={props.errors}
           handleRemoveErrors={props.handleRemoveErrors}
           placeholder='Tel./cel.'
@@ -47,6 +53,7 @@ const Form = props => {
       </Grid>
       <Grid item xs={12}>
         <Input
+          maxLength={20}
           data={props.data}
           handleChange={props.handleChange}
           name='city_or_state'
@@ -64,6 +71,7 @@ const Form = props => {
           handleRemoveErrors={props.handleRemoveErrors}
           placeholder='Comentario'
           multiline
+          maxLength={240}
           rows={5}
         />
       </Grid>

@@ -14,7 +14,7 @@ import styled from 'styled-components'
 
 const Home = () => {
   const dispatch = useDispatch()
-  const { loading, items, limit, isfinally, last} = useSelector(state => state.items)
+  const { loading, items, limit, isfinally} = useSelector(state => state.items)
   const itemsFiltered = items.filter(item => item.isActive)
 
   // fetch items if not exist
@@ -26,7 +26,7 @@ const Home = () => {
     }
   }, [itemsFiltered.length, isfinally])
 
-  // pagination whit scrolling
+  // pagination with scrolling
   useEffect(event => {
     const handleScroll = event => {
       const isInLastPosition = lastPosition(500)
