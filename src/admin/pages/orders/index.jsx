@@ -1,18 +1,29 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import Layout from '../../components/layout_admin'
-import orders from '../../../modules/orders'
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchItems } from '../../../flux/orders'
+import transformer from '../../../helpers/transformer'
+import View from './view'
 
 const Orders = props => {
+  const date = new Date()
+  const initialPeriod = `${date.getMonth() + 1}-${date.getFullYear()}`
+  const dispatch = useDispatch()
+  const { loading, items } = useSelector(state => state.orders)
+  const [currentPeriod, setCurrentPeriod] = useState(initialPeriod)
+  const itemOnCurrentPeriod = transformer.toArray(items).filter(item => item.period === currentPeriod)
 
+  // fetch items if not exists
   useEffect(() => {
-    orders.getMonths().then(res => console.log())
-  }, [])
+    if (!itemOnCurrentPeriod.length) dispatch(fetchItems(currentPeriod))
+  }, [currentPeriod, dispatch])
 
   return (
-    <Layout>
-      <div>hello</div>
-    </Layout>
+    <View
+      loading={loading}
+      setCurrentPeriod={setCurrentPeriod}
+      items={itemOnCurrentPeriod}
+      currentPeriod={currentPeriod}
+    />
   )
 }
 

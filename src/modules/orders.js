@@ -1,10 +1,11 @@
 import { db } from './firebase'
+import snapshotParser from '../helpers/snapshotparser'
 
-export const getMonths = async () => {
-  const snap = await db.doc('Ordenes/Pedidos').collection()
-  return snap
+export const getList = async (period) => {
+  const snap = await db.collection(`Ordenes/Pedidos/${period}`).get()
+  return snapshotParser(snap)
 }
 
 export default {
-  getMonths
+  getList
 }
