@@ -2,6 +2,7 @@ import createFlux from '../createFlux'
 import transformer from '../helpers/transformer'
 import orders from '../modules/orders'
 
+
 const flux = createFlux('ORDERS')
 const initialSTate = {
   items: {},
@@ -21,6 +22,11 @@ export const fetchItems = (period) => async dispatch => {
   dispatch(addItems(newItems))
 }
 
+export const updateViewed = info => async dispatch => {
+  await orders.setViewed(info)
+  dispatch(setViewed(info.id))
+}
+
 export const setStatus = info => async dispatch => {
   const operationStatus = await orders.changeStatus(info)
   if (operationStatus) {
@@ -32,7 +38,7 @@ export const setStatus = info => async dispatch => {
 }
 
 // actions
-export const setLoading = flux.createAction('SET_LOADING', (state, payload) => {
+export const setLoading = flux.createAction('SET_LOADING', (state) => {
   return {
     ...state,
     loading: true
@@ -56,5 +62,15 @@ export const setCounter = flux.createAction('SET_COUNTER', (state, payload) => {
     counter: payload
   }
 })
+
+export const setViewed = flux.createAction('SET_VIEWED', (state, payload) => {
+  const newItem = { ...state.items[payload] }
+  newItem.isViewed = true
+  return {
+    ...state,
+    items: { ...state.items, [payload]: newItem }
+  }
+})
+
 
 export default flux.createReducer(initialSTate)

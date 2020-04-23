@@ -1,4 +1,4 @@
-import { db } from './firebase'
+import { db, firebase } from './firebase'
 import snapshotParser from '../helpers/snapshotparser'
 
 export const getList = async (period) => {
@@ -6,7 +6,20 @@ export const getList = async (period) => {
   return snapshotParser(snap)
 }
 
-export const changeStatus = async ({status, id, period}) => {
+export const setViewed = async ({ id, period }) => {
+  try {
+    await db.doc(`/Ordenes/Pedidos/${period}/${id}`).update({ isViewed: true })
+    await db.doc('Ordenes/Pedidos').update({
+      counter: firebase.firestore.FieldValue.increment(-1)
+    })
+    return true
+  } catch (error) {
+    console.error('error_description:', error)
+    return false
+  }
+}
+
+export const changeStatus = async ({ status, id, period }) => {
   try {
     await db.doc(`/Ordenes/Pedidos/${period}/${id}`).update({ status })
     return true
@@ -27,5 +40,6 @@ export const onCounterChange = handler => {
 export default {
   getList,
   changeStatus,
-  onCounterChange
+  onCounterChange,
+  setViewed
 }

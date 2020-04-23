@@ -7,7 +7,7 @@ import { toString } from '../../../helpers/date'
 const Order = props => {
   return (
     <Wrapper>
-      <Content>
+      <Content isViewed={props.isViewed}>
         <Date>{toString(props.date.toDate())}</Date>
         <Email>{props.user.email}</Email>
         <NoOrden>
@@ -17,7 +17,9 @@ const Order = props => {
         <Status>
           Estado:
           {props.status === 'payed' && (<Payed>Pagado</Payed>)}
-          {props.status === 'pending' && (<Peding>Pendiente pago</Peding>)}
+          {props.status === 'pending' && (<Peding>Pago pendiente</Peding>)}
+          {props.status === 'sent' && (<Sent>Enviado</Sent>)}
+          {props.status === 'cancelled' && (<Cancelled>Cancelado</Cancelled>)}
         </Status>
       </Content>
       <Button to={`/order/${props.period}/${props.id}`}>
@@ -31,7 +33,8 @@ Order.propTypes = {
   id: propTypes.string,
   status: propTypes.string,
   date: propTypes.object,
-  period: propTypes.string
+  period: propTypes.string,
+  isViewed: propTypes.bool
 }
 
 const Content = styled.div`
@@ -41,6 +44,7 @@ const Content = styled.div`
   text-align: center;
   font-size: 1.1em;
   overflow: hidden;
+  background: ${props => props.isViewed ? '' : '#008ffd0f'};
 `
 const Wrapper = styled.div`
   width: 33.3%;
@@ -86,6 +90,12 @@ const Payed = styled.div`
 
 const Peding = styled(Payed)`
   color: orange;
+`
+const Cancelled = styled(Payed)`
+  color: red;
+`
+const Sent = styled(Payed)`
+  color: var(--main-blue);
 `
 
 const Button = styled(ButtonBase)`
