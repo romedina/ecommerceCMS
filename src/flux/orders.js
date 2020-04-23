@@ -30,11 +30,19 @@ export const setLoading = flux.createAction('SET_LOADING', (state, payload) => {
 
 export const addItems = flux.createAction('ADD_ITEMS', (state, payload) => {
   return {
+    ...state,
     loading: false,
     items: {
       ...state.items,
       ...transformer.toObject(payload)
     }
+  }
+})
+
+export const setCounter = flux.createAction('SET_COUNTER', (state, payload) => {
+  return {
+    ...state,
+    counter: payload
   }
 })
 

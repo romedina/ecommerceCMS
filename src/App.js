@@ -13,6 +13,7 @@ import Login from './admin/pages/login'
 import MyArticles from './admin/pages/my_articles'
 import Messages from './admin/pages/messages'
 import Orders from './admin/pages/orders'
+import Order from './admin/pages/order'
 
 import Home from './user/pages/home'
 import Item from './user/pages/item'
@@ -39,6 +40,7 @@ function App () {
           <Route exact path='/contact' component={Contact} />
           <Route exact path='/messages' component={Messages} />
           <Route exact path='/orders' component={Orders} />
+          <Route exact path='/order/:period/:id' component={Order} />
         </Switch>
       </Background>
     </ThemeProvider>

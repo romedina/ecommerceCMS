@@ -6,6 +6,14 @@ export const getList = async (period) => {
   return snapshotParser(snap)
 }
 
+export const onCounterChange = handler => {
+  const unsubscribe = db.doc('Ordenes/Pedidos').onSnapshot(snap => {
+    const data = snapshotParser(snap)
+    handler(data.counter)
+  })
+  return unsubscribe
+}
+
 export default {
   getList
 }

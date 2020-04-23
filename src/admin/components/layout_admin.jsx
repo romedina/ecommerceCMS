@@ -5,6 +5,8 @@ import MenuRight from './menu_right'
 import { setCounter } from '../../flux/messages'
 import { useDispatch } from 'react-redux'
 import { onCounterCHange } from '../../modules/message'
+import { onCounterChange } from '../../modules/orders'
+import { setCounter as setCounterOrder } from '../../flux/orders'
 
 const ContainerComponent = (props) => {
   const dispatch = useDispatch()
@@ -13,6 +15,13 @@ const ContainerComponent = (props) => {
   useEffect(any => {
     return onCounterCHange(counter => {
       dispatch(setCounter(counter))
+    })
+  }, [])
+
+  // subscribe on counter messages
+  useEffect(any => {
+    return onCounterChange(counter => {
+      dispatch(setCounterOrder(counter))
     })
   }, [])
 

@@ -1,4 +1,4 @@
-import { db, storageRef } from './firebase'
+import { db, storageRef, firebase } from './firebase'
 import snapshotParser from '../helpers/snapshotparser'
 
 const article = {
@@ -16,6 +16,9 @@ const article = {
         date: new Date()
       })
       await db.doc(`Ordenes/Pedidos/${period}/${result.id}`).update({ id: result.id })
+      await db.doc('Ordenes/Pedidos').update({
+        counter: firebase.firestore.FieldValue.increment(1)
+      })
       return result.id
     } catch (error) {
       console.error('error_description:', error)

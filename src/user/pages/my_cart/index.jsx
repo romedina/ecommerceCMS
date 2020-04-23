@@ -36,6 +36,7 @@ const MyCart = props => {
   return (
     <Layout>
       <Container>
+        <Item header />
         {myCart.map(item => (
           <Item
             handleRemoveItem={handleRemoveItem}

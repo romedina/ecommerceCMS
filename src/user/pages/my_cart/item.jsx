@@ -15,6 +15,24 @@ const ItemOnCart = (props) => {
     props.handleChangeQuantity(props, value)
   }
 
+  if (props.header) {
+    return (
+      <Responsive rule='min-width:850px'>
+        <Content style={{ border: 'none', color: 'gray' }}>
+          <PictureContentHead />
+          <DataContent>
+            <Title>Producto</Title>
+            <Price>Precio</Price>
+            <QuantityControls>
+              Cantidad
+            </QuantityControls>
+          </DataContent>
+          <DeleteIconHeder />
+        </Content>
+      </Responsive>
+    )
+  }
+
   return (
     <Content>
       <PictureContent>
@@ -50,7 +68,8 @@ ItemOnCart.propTypes = {
   picture: propTypes.string,
   quantity: propTypes.oneOfType([propTypes.number, propTypes.string]),
   handleRemoveItem: propTypes.func,
-  handleChangeQuantity: propTypes.func
+  handleChangeQuantity: propTypes.func,
+  header: propTypes.bool
 }
 
 const Content = styled.div`
@@ -69,11 +88,14 @@ const Content = styled.div`
 `
 
 const PictureContent = styled.div`
-  background: red;
   width: 120px;
   height: 120px;
   min-width: 120px;
   min-height: 120px;
+`
+const PictureContentHead = styled(PictureContent)`
+  min-height: 0px!important;
+  height: 0px!important;
 `
 const DeleteIcon = styled(DeleteOutlinedIcon)`
   background: red;
@@ -85,12 +107,21 @@ const DeleteIcon = styled(DeleteOutlinedIcon)`
   color: #fff;
   padding: 5px;
   cursor: pointer;
+  margin-right: 20px;
+  @media screen and (max-width:500px){
+    margin-right: 0px;
+  }
 `
+const DeleteIconHeder = styled(DeleteIcon)`
+  height: 0px;
+  background: none;
+`
+
 const DataContent = styled.div`
   width: 100%;
-  margin: 0px 20px;
+  margin: 0px 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   @media screen and (max-width:600px){
     flex-wrap: wrap;
@@ -111,7 +142,7 @@ const DescribeQuiantity = styled.span`
 `
 
 const Title = styled.div`
-  width:50%;
+  width:40%;
   padding-left: 10px;
   @media screen and (max-width:850px){
     width: 60%;

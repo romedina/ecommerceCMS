@@ -20,7 +20,7 @@ const Order = props => {
           {props.status === 'pending' && (<Peding>Pendiente pago</Peding>)}
         </Status>
       </Content>
-      <Button to={`/order/${props.id}`}>
+      <Button to={`/order/${props.period}/${props.id}`}>
         Ver pedido
       </Button>
     </Wrapper>
@@ -30,7 +30,8 @@ Order.propTypes = {
   user: propTypes.object,
   id: propTypes.string,
   status: propTypes.string,
-  date: propTypes.object
+  date: propTypes.object,
+  period: propTypes.string
 }
 
 const Content = styled.div`

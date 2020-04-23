@@ -10,6 +10,7 @@ const MenuRight = props => {
   const dispatch = useDispatch()
   const { pathname } = history.location
   const { counter } = useSelector(state => state.messages)
+  const orders = useSelector(state => state.orders)
 
   const handleCloseSession = () => {
     dispatch(close())
@@ -21,6 +22,12 @@ const MenuRight = props => {
       <div>
         <MenuItem active={pathname === '/my-articles'} to='/my-articles'> Mis productos </MenuItem>
         <MenuItem active={pathname === '/create-item'} to='/create-item'> Subir Producto </MenuItem>
+        <MenuItem active={pathname === '/orders'} to='/orders'>
+          Pedidos
+          {orders.counter > 0 && (
+            <Counter>{orders.counter}</Counter>
+          )}
+        </MenuItem>
         <MenuItem active={pathname === '/messages'} to='/messages'>
           Mensajes
           {counter > 0 && (
