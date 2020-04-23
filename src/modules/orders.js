@@ -6,6 +6,16 @@ export const getList = async (period) => {
   return snapshotParser(snap)
 }
 
+export const changeStatus = async ({status, id, period}) => {
+  try {
+    await db.doc(`/Ordenes/Pedidos/${period}/${id}`).update({ status })
+    return true
+  } catch (error) {
+    console.error('error_description:', error)
+    return false
+  }
+}
+
 export const onCounterChange = handler => {
   const unsubscribe = db.doc('Ordenes/Pedidos').onSnapshot(snap => {
     const data = snapshotParser(snap)
@@ -15,5 +25,7 @@ export const onCounterChange = handler => {
 }
 
 export default {
-  getList
+  getList,
+  changeStatus,
+  onCounterChange
 }

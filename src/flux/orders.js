@@ -8,6 +8,7 @@ const initialSTate = {
   loading: true,
   counter: 0
 }
+
 export const fetchItems = (period) => async dispatch => {
   console.log('fetching...', period)
   dispatch(setLoading(true))
@@ -18,6 +19,16 @@ export const fetchItems = (period) => async dispatch => {
     return newItem
   })
   dispatch(addItems(newItems))
+}
+
+export const setStatus = info => async dispatch => {
+  const operationStatus = await orders.changeStatus(info)
+  if (operationStatus) {
+    dispatch(fetchItems(info.period))
+    return true
+  } else {
+    return false
+  }
 }
 
 // actions
