@@ -5,7 +5,7 @@ import { Paper } from '@material-ui/core'
 const Itme = props => {
   return (
     <Content>
-      <Picture src={props.picture} />
+      <Picture src={props.picture}/>
     </Content>
   )
 }
