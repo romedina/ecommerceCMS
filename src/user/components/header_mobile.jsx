@@ -4,9 +4,13 @@ import Container from '../components/container'
 import { Search, Menu, ShoppingCart, Apple } from '@material-ui/icons'
 import MenuLeft from './menu_left_mobile'
 import Link from '../../components/link'
+import { useSelector } from 'react-redux'
 
 const HeaderMobile = props => {
   const [menuActive, setMenuActive] = useState(false)
+  const itemsOnTheCart = useSelector(state => state.cart)
+
+  console.log(itemsOnTheCart)
 
   return (
     <header>
@@ -19,7 +23,12 @@ const HeaderMobile = props => {
       <Fixed>
         <Content>
           <LinkStyled to='/'><Apple /></LinkStyled>
-          <LinkStyled to='/my-cart'><ShoppingCart /></LinkStyled>
+          <LinkStyled to='/my-cart'>
+            {itemsOnTheCart.length > 0 && (
+              <Counter>{itemsOnTheCart.length}</Counter>
+            )}
+            <ShoppingCart />
+          </LinkStyled>
           <LinkStyled to='/search'><Search /></LinkStyled>
           <LinkStyled handleClick={() => setMenuActive(true)}><Menu /></LinkStyled>
         </Content>
@@ -29,6 +38,7 @@ const HeaderMobile = props => {
 }
 const LinkStyled = styled(Link)`
   padding: 5px;
+  position: relative;
   & svg {
     font-size: 2.2em;
   }
@@ -51,5 +61,16 @@ const Fixed = styled.div`
   z-index: 10;
   font-size: 2em;
 `
-
+const Counter = styled.div`
+  background: red;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  top: -5px;
+  right: -5px;
+  position: absolute;
+`
 export default HeaderMobile

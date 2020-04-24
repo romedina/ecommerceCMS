@@ -19,8 +19,8 @@ const HeaderDesktop = (props) => {
           <MenuContainer>
             <ButtonBaseStyled><LinkStyled to='/'>Home</LinkStyled></ButtonBaseStyled>
             <ButtonBaseStyled><LinkStyled to='/'>Productos</LinkStyled></ButtonBaseStyled>
-            <ButtonBaseStyled><LinkStyled to='/'>Nosotros</LinkStyled></ButtonBaseStyled>
-            <ButtonBaseStyled><LinkStyled to='/'>Contacto</LinkStyled></ButtonBaseStyled>
+            <ButtonBaseStyled><LinkStyled to='/about'>Nosotros</LinkStyled></ButtonBaseStyled>
+            <ButtonBaseStyled><LinkStyled to='/contact'>Contacto</LinkStyled></ButtonBaseStyled>
           </MenuContainer>
           <ActionsPrimary>
             <ActionsItem to='/my-cart'>
