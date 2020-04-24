@@ -2,7 +2,7 @@ import { db, firebase } from './firebase'
 import snapshotParser from '../helpers/snapshotparser'
 
 export const getList = async (period) => {
-  const snap = await db.collection(`Ordenes/Pedidos/${period}`).get()
+  const snap = await db.collection(`Ordenes/Pedidos/${period}`).orderBy('date', 'desc').get()
   return snapshotParser(snap)
 }
 

@@ -57,14 +57,11 @@ const Summary = props => {
         {props.steps[props.currentStep] === 'Envio' && (
           <Button handleClick={event => props.goToStep('Informacion')} variant='outlined'>Volver a Informacion</Button>
         )}
-        {props.steps[props.currentStep] === 'Pago' && (
+        {props.steps[props.currentStep] === 'Metodo de pago' && (
           <Button handleClick={event => props.goToStep('Envio')} variant='outlined'>Volver a Envio</Button>
         )}
-        {(props.steps[props.currentStep] === 'Envio' || props.steps[props.currentStep] === 'Informacion') && (
+        {props.currentStep < 3 && (
           <Button handleClick={props.handleNext} variant='contained'>Continuar</Button>
-        )}
-        {props.steps[props.currentStep] === 'Pago' && (
-          <Button handleClick={props.handleNext} variant='contained'>Pagar</Button>
         )}
       </FlexBetween>
 

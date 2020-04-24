@@ -6,6 +6,7 @@ import Dialog from '@material-ui/core/Dialog'
 import { func, bool, string } from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { setStatus } from '../../../flux/orders'
+import { setNotification } from '../../../flux/notification'
 
 function DialogCOmponent (props) {
   const dispatch = useDispatch()
@@ -16,6 +17,10 @@ function DialogCOmponent (props) {
       status: newStatus,
       id: props.id,
       period: props.period
+    }))
+    dispatch(setNotification({
+      message: 'El estado del pedido se ha actualizado correctamente',
+      type: 'success'
     }))
   }
 

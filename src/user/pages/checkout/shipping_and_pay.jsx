@@ -1,62 +1,43 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Section from './Sections'
 import styled from 'styled-components'
 import propTypes from 'prop-types'
 import { Radio, RadioGroup } from '@material-ui/core'
 import { Alert as AlertBase } from '@material-ui/lab'
-import paypalOption from './paypal'
 
 const Shipping = props => {
-  // render mark paypal
-  useEffect(any => {
-    if (props.currentStep === 2) {
-      window.paypal.Marks().render('#paypal-marks')
-    }
-  }, [props.currentStep])
-
-  // render button paypal
-  useEffect(any => {
-    if (props.data.methodPay === 'PayPal') {
-      window.paypal.Buttons(paypalOption({ ...props })).render('#render_button')
-    }
-  }, [props.data.methodPay])
-
   return (
     <Section {...props}>
-      <Group>
-        <Row>
-          <span>Contacto:</span>
-          {props.data.email}
-        </Row>
-        <Row>
-          <span>Enviar a:</span>
-          {`${props.data.name} 
-          ${props.data.lastname}, 
-          ${props.data.street_number}, 
-          ${props.data.suburb}, 
-          ${props.data.city}, 
-          ${props.data.postal_code}`}
-        </Row>
-        <ChangeOption onClick={props.handleChangeDirections}>
-          Cambiar
-        </ChangeOption>
-      </Group>
-      {props.steps[props.currentStep] === 'Pago' && (
+      {props.steps[props.currentStep] !== 'Metodo de pago' && (
+        <Group>
+          <Row>
+            <span>Contacto:</span>
+            {props.data.email}
+          </Row>
+          <Row>
+            <span>Enviar a:</span>
+            {`${props.data.name} 
+            ${props.data.lastname}, 
+            ${props.data.street_number}, 
+            ${props.data.suburb}, 
+            ${props.data.city}, 
+            ${props.data.postal_code}`}
+          </Row>
+          <ChangeOption onClick={props.handleChangeDirections}>
+            Cambiar
+          </ChangeOption>
+        </Group>
+      )}
+      {props.steps[props.currentStep] === 'Metodo de pago' && (
         <Group as={RadioGroup} onChange={event => props.handleChange(event.target)} value={props.data.methodPay || 'unselected'} name='methodPay'>
           <Describe>Metodo de pago</Describe>
           {props.errors.length > 0 && (
             <Alert severity='error'>Porfavor selecciona un methodo de pago</Alert>
           )}
-          <RowPaypal>
+          <Row>
             <Radio value='PayPal' onClick={props.handleRemoveErrors} />
-            <MarksPaypal id='paypal-marks' />
-            <span id='paypal_hidden' />
-          </RowPaypal>
-          {props.data.methodPay === 'PayPal' && (
-            <Row>
-              <span id='render_button' />
-            </Row>
-          )}
+            PayPal
+          </Row>
           <Row>
             <Radio value='Konecta' onClick={props.handleRemoveErrors} />
             Connecta
@@ -105,12 +86,5 @@ const Describe = styled.h2`
 `
 const Alert = styled(AlertBase)`
   margin-bottom: 15px;
-`
-const MarksPaypal = styled.div`
-  display: inline;
-`
-const RowPaypal = styled(Row)`
-  display: flex;
-  align-items: center;
 `
 export default Shipping

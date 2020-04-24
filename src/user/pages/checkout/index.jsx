@@ -39,7 +39,7 @@ const Checkout = props => {
   }
 
   const handlePay = event => {
-    onApprove()
+    window.alert('paying...')
   }
 
   return (

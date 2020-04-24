@@ -3,6 +3,12 @@ import createFlux from '../createFlux'
 const flux = createFlux('notifications')
 const initialState = []
 
+// notification example
+// {
+//   type: 'success',
+//   message: 'success',
+// }
+
 // async
 export const remove = key => dispatch => {
   dispatch(setClose(key))
