@@ -3,10 +3,16 @@ import { bool, func } from 'prop-types'
 import { Drawer, Content, Logo, LogoContent, ContentItems, MenuItem, Counter } from './styled'
 import { Home, Publish, List, LocalMall, Message, ExitToApp } from '@material-ui/icons'
 import { useSelector } from 'react-redux'
+import { dispatch } from '../../../store'
+import { close } from '../../../flux/session'
 
 const MenuMobile = props => {
   const messageCounter = useSelector(state => state.messages.counter)
   const ordersCounter = useSelector(state => state.orders.counter)
+
+  const handleCloseSession = props => {
+    dispatch(close())
+  }
 
   return (
     <Drawer open={props.isMenuActive} onClose={props.handleClose} onOpen={props.handleOpenMenu} anchor='right'>
@@ -41,9 +47,9 @@ const MenuMobile = props => {
               <Counter>{messageCounter}</Counter>
             )}
           </MenuItem>
-          <MenuItem handleClik={() => window.alert('close')}>
+          <MenuItem handleClick={handleCloseSession}>
             <ExitToApp />
-            Cerrar Sesion
+            Cerrar Sesión
           </MenuItem>
         </ContentItems>
       </Content>
