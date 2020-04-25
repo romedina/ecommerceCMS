@@ -22,7 +22,7 @@ const View = props => {
         <Content>
           <FlexHeader>
             <Dialog open={isDialogOpen} onClose={event => setDialogOpen(false)} {...props} />
-            <Title>Articulos</Title>
+            <Title>Artículos</Title>
             <StateContent onClick={event => setDialogOpen(true)}>
               <span>Estado: </span>
               {props.status === 'payed' && (<Payed> <EditIcon /> Pagado</Payed>)}

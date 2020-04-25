@@ -16,10 +16,10 @@ const Success = (props) => {
     <FlexFullWidth>
       <Content id='success-component'>
         <IconSucces color='secondary' />
-        <Describe>Su articulo se ha subido con exito.</Describe>
+        <Describe>Su artículo se ha subido con éxito.</Describe>
         <ButtonContainer>
           <ButtonStyled onClick={props.onReset} variant='contained' color='primary'>Volver a publicar</ButtonStyled>
-          <ButtonStyled onClick={onViewClick} variant='contained' color='primary'>Ver articulo</ButtonStyled>
+          <ButtonStyled onClick={onViewClick} variant='contained' color='primary'>Ver artículo</ButtonStyled>
         </ButtonContainer>
       </Content>
     </FlexFullWidth>

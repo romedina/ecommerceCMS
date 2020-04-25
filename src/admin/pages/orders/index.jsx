@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchItems } from '../../../flux/orders'
 import transformer from '../../../helpers/transformer'
+import Admin from '../../hoc/admin'
 import View from './view'
 
 const Orders = props => {
@@ -27,4 +28,4 @@ const Orders = props => {
   )
 }
 
-export default Orders
+export default Admin(Orders)

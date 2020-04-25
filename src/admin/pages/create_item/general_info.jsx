@@ -33,7 +33,7 @@ const GeneralInfo = (props) => {
         />
       </GroupForm>
       <GroupForm>
-        <Label>¿Cual es el precio de tu producto?</Label>
+        <Label>¿Cuál es el precio de tu producto?</Label>
         <TitleInput
           value={props.price ? currencyParser.toCurrency(props.price) : ''}
           onChange={({ name, value }) => props.handleChange({ name, value: currencyParser.toNumber(value) })}
@@ -43,7 +43,7 @@ const GeneralInfo = (props) => {
         />
       </GroupForm>
       <GroupForm>
-        <Label>Descripcion del producto</Label>
+        <Label>Descripción del producto</Label>
         <TitleInput
           type='textarea'
           name='description'

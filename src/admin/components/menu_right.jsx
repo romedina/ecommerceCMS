@@ -20,7 +20,7 @@ const MenuRight = props => {
     <Container>
       <Logo>Put yout logo here</Logo>
       <div>
-        <MenuItem active={pathname === '/my-articles'} to='/my-articles'> Mis productos </MenuItem>
+        <MenuItem active={pathname === '/my-articles'} to='/my-articles'> Mis Productos </MenuItem>
         <MenuItem active={pathname === '/create-item'} to='/create-item'> Subir Producto </MenuItem>
         <MenuItem active={pathname === '/orders'} to='/orders'>
           Pedidos

@@ -75,7 +75,7 @@ const MyArticles = () => {
 
   return (
     <LayoutAdmin>
-      <PageTitle>Mis articulos</PageTitle>
+      <PageTitle>Mis Productos</PageTitle>
       {loading && items.length === 0 && (
         <Skeleton />
       )}

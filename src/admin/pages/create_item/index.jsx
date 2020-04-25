@@ -11,7 +11,7 @@ import { Prompt } from 'react-router-dom'
 const CreateItem = (props) => {
   const dispatch = useDispatch()
   var preloadedState = props.location.state || {}
-  const steps = ['Informacion general', 'Multimedia', 'Resumen']
+  const steps = ['información general', 'Multimedia', 'Resumen']
   const [currentStep, setCurrentStep] = useState(0)
   const [data, setData] = useState(preloadedState || {})
   const [errors, setErrors] = useState([])

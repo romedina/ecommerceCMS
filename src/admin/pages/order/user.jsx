@@ -16,15 +16,15 @@ const User = props => {
         <Value>{props.user.email}</Value>
       </Row>
       <Row>
-        <Describe>Numero de contacto:</Describe>
+        <Describe>Número de contacto:</Describe>
         <Value>{props.user.number}</Value>
       </Row>
       <Row>
-        <Describe>Metodo de pago:</Describe>
+        <Describe>Método de pago:</Describe>
         <Value>{props.methodPay}</Value>
       </Row>
       <DividerStyled />
-      <SubTitle>Datos de envio</SubTitle>
+      <SubTitle>Datos de Envío</SubTitle>
       <Row>
         <Describe>Estado:</Describe>
         <Value>{props.shipTo.state}</Value>
@@ -38,11 +38,11 @@ const User = props => {
         <Value>{props.shipTo.suburb}</Value>
       </Row>
       <Row>
-        <Describe>Codigo postal:</Describe>
+        <Describe>Código postal:</Describe>
         <Value>{props.shipTo.postal_code}</Value>
       </Row>
       <Row>
-        <Describe>Calle y numero:</Describe>
+        <Describe>Calle y número:</Describe>
         <Value>{props.shipTo.street_number}</Value>
       </Row>
       <DividerStyled />
