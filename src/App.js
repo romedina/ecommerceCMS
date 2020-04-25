@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import { ThemeProvider } from '@material-ui/core'
 import Alert from './components/alert'
@@ -21,6 +21,7 @@ import MyCart from './user/pages/my_cart'
 import Checkout from './user/pages/checkout'
 import About from './user/pages/about'
 import Contact from './user/pages/contact'
+import admin from './admin/hoc/admin'
 
 function App () {
   return (
@@ -41,6 +42,7 @@ function App () {
           <Route exact path='/messages' component={Messages} />
           <Route exact path='/orders' component={Orders} />
           <Route exact path='/order/:period/:id' component={Order} />
+          <Route exact path='/admin' component={admin(any => (<Redirect to='/my-articles' />))} />
         </Switch>
       </Background>
     </ThemeProvider>

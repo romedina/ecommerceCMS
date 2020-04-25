@@ -21,4 +21,6 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(ReduxThunk, logger, syncCart))
 )
 
+export const dispatch = store.dispatch
+
 export default store

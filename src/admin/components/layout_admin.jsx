@@ -2,11 +2,13 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import propsTypes from 'prop-types'
 import MenuRight from './menu_right'
+import HeaderMobile from './header_mobile'
 import { setCounter } from '../../flux/messages'
 import { useDispatch } from 'react-redux'
 import { onCounterCHange } from '../../modules/message'
 import { onCounterChange } from '../../modules/orders'
 import { setCounter as setCounterOrder } from '../../flux/orders'
+import Responsive from '../../components/responsive'
 
 const ContainerComponent = (props) => {
   const dispatch = useDispatch()
@@ -26,18 +28,23 @@ const ContainerComponent = (props) => {
   }, [])
 
   return (
-    <Container id='container_admin'>
-      <MenuContainer>
-        <Fixed>
-          <MenuContainer>
-            <MenuRight />
-          </MenuContainer>
-        </Fixed>
-      </MenuContainer>
-      <Body>
-        {props.children}
-      </Body>
-    </Container>
+    <>
+      <Responsive rule='max-width:600px'>
+        <HeaderMobile {...props} />
+      </Responsive>
+      <Container id='container_admin'>
+        <MenuContainer>
+          <Fixed>
+            <MenuContainer>
+              <MenuRight />
+            </MenuContainer>
+          </Fixed>
+        </MenuContainer>
+        <Body>
+          {props.children}
+        </Body>
+      </Container>
+    </>
   )
 }
 

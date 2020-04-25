@@ -17,7 +17,7 @@ const View = (props) => {
   }
 
   return (
-    <Container>
+    <Container title='Nuevo Producto'>
       <Content>
         {props.currentView === 'form' && (
           <>
