@@ -5,6 +5,7 @@ import { ThemeProvider } from '@material-ui/core'
 import Alert from './components/alert'
 import Notification from './components/notification'
 import mytheme from './theme'
+import DefineListeners from './components/define_listeners'
 import './index.css'
 
 // pages
@@ -26,25 +27,27 @@ import admin from './admin/hoc/admin'
 function App () {
   return (
     <ThemeProvider theme={mytheme}>
-      <Background>
-        <Notification />
-        <Alert />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/create-item' component={CreateItem} />
-          <Route exact path='/my-articles' component={MyArticles} />
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/item/:id' component={Item} />
-          <Route exact path='/my-cart' component={MyCart} />
-          <Route exact path='/checkout' component={Checkout} />
-          <Route exact path='/about' component={About} />
-          <Route exact path='/contact' component={Contact} />
-          <Route exact path='/messages' component={Messages} />
-          <Route exact path='/orders' component={Orders} />
-          <Route exact path='/order/:period/:id' component={Order} />
-          <Route exact path='/admin' component={admin(any => (<Redirect to='/my-articles' />))} />
-        </Switch>
-      </Background>
+      <DefineListeners>
+        <Background>
+          <Notification />
+          <Alert />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/create-item' component={CreateItem} />
+            <Route exact path='/my-articles' component={MyArticles} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/item/:id' component={Item} />
+            <Route exact path='/my-cart' component={MyCart} />
+            <Route exact path='/checkout' component={Checkout} />
+            <Route exact path='/about' component={About} />
+            <Route exact path='/contact' component={Contact} />
+            <Route exact path='/messages' component={Messages} />
+            <Route exact path='/orders' component={Orders} />
+            <Route exact path='/order/:period/:id' component={Order} />
+            <Route exact path='/admin' component={admin(any => (<Redirect to='/my-articles' />))} />
+          </Switch>
+        </Background>
+      </DefineListeners>
     </ThemeProvider>
   )
 }

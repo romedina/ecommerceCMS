@@ -1,32 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import propsTypes from 'prop-types'
 import MenuRight from './menu_right'
 import HeaderMobile from './header_mobile'
-import { setCounter } from '../../flux/messages'
-import { useDispatch } from 'react-redux'
-import { onCounterCHange } from '../../modules/message'
-import { onCounterChange } from '../../modules/orders'
-import { setCounter as setCounterOrder } from '../../flux/orders'
 import Responsive from '../../components/responsive'
 
 const ContainerComponent = (props) => {
-  const dispatch = useDispatch()
-
-  // subscribe on counter messages
-  useEffect(any => {
-    return onCounterCHange(counter => {
-      dispatch(setCounter(counter))
-    })
-  }, [])
-
-  // subscribe on counter messages
-  useEffect(any => {
-    return onCounterChange(counter => {
-      dispatch(setCounterOrder(counter))
-    })
-  }, [])
-
   return (
     <>
       <Responsive rule='max-width:600px'>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import styled from 'styled-components'
 import Container from '../components/container'
 import { Search, Menu, ShoppingCart, Apple } from '@material-ui/icons'
@@ -9,9 +9,6 @@ import { useSelector } from 'react-redux'
 const HeaderMobile = props => {
   const [menuActive, setMenuActive] = useState(false)
   const itemsOnTheCart = useSelector(state => state.cart)
-
-  console.log(itemsOnTheCart)
-
   return (
     <header>
       <MenuLeft
@@ -73,4 +70,7 @@ const Counter = styled.div`
   right: -5px;
   position: absolute;
 `
-export default HeaderMobile
+export default memo(
+  HeaderMobile,
+  (prev, next) => true
+)
