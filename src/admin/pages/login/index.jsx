@@ -1,24 +1,25 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import LayoutAdmin from '../../components/layout_admin'
-import CreateInput from '../../components/input'
-import { Button, CircularProgress, Fade } from '@material-ui/core'
+import { Button, CircularProgress, Fade, OutlinedInput } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { useDispatch, useSelector } from 'react-redux'
 import { start } from '../../../flux/session'
+import { Visibility, VisibilityOff } from '@material-ui/icons'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPasword, setShowPasword] = useState(false)
   const { loading, error } = useSelector(state => state.session)
   const dispatch = useDispatch()
 
-  const handleEmailChange = ({ value }) => {
-    setEmail(value)
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value)
   }
 
-  const handlePasswordChange = ({ value }) => {
-    setPassword(value)
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value)
   }
 
   const handleClick = () => {
@@ -38,7 +39,7 @@ const Login = () => {
             </Fade>
             <InputGroup>
               <Label>Ingresa tu correo Electronico</Label>
-              <CreateInputStyled
+              <OutlinedInputStyled
                 placeholder='nombre@mail.com'
                 type='text'
                 fullWidth
@@ -48,12 +49,13 @@ const Login = () => {
             </InputGroup>
             <InputGroup>
               <Label>Contraseña</Label>
-              <CreateInputStyled
+              <OutlinedInputStyled
                 placeholder='contraseña'
-                type='password'
+                type={showPasword ? 'text' : 'password'}
                 fullWidth
                 value={password}
                 onChange={handlePasswordChange}
+                endAdornment={showPasword ? <Visibility onClick={e => setShowPasword(false)} /> : <VisibilityOff onClick={e => setShowPasword(true)} />}
               />
             </InputGroup>
             <InputGroup>
@@ -72,25 +74,29 @@ const Content = styled('div')`
   justify-content: center;
   align-items: center;
 `
-
-const CreateInputStyled = styled(CreateInput)`
-  margin-bottom: 20px;
-`
 const InputGroup = styled('div')`
-  
+  margin-bottom: 15px;
 `
 const Label = styled('div')`
   color: var(--main-blue-dark);
   font-weight: bold;
   margin-bottom: 10px;
 `
-
-// const Title = styled('h4')`
-//   color: var(--main-blue-dark);
-//   padding: 0px;
-//   margin: 0px;
-// `
-
+const OutlinedInputStyled = styled(OutlinedInput)`
+  .MuiOutlinedInput-notchedOutline {
+    border: 1px solid;
+    ${props => !props.error ? 'border-color: var(--main-blue)!important' : ''}
+  }
+  .MuiInputBase-root {
+    border-color: var(--main-blue)!important
+  }
+  .MuiOutlinedInput-root:hover{
+    border-color: var(--main-blue)!important
+  }
+  .MuiOutlinedInput-input{
+    color: var(--main-blue)
+  }
+`
 const Box = styled('div')`
   width: 40%;
   font-size: 1.2em;

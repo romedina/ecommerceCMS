@@ -19,6 +19,7 @@ const CreateInput = (props) => {
 
   if (props.type === 'text') return (
     <TextFiledStyled
+      autocomplete="off"
       placeholder={props.placeholder || null}
       className={props.className}
       onChange={onChange}
@@ -35,6 +36,7 @@ const CreateInput = (props) => {
 
   if (props.type === 'password') return (
     <TextFiledStyled
+      autocomplete="off"
       placeholder={props.placeholder || null }
       className={props.className}
       onChange={onChange}
@@ -51,6 +53,7 @@ const CreateInput = (props) => {
 
   if (props.type === 'number') return (
     <TextFiledStyled
+      autocomplete="off"
       placeholder={props.placeholder || null }
       className={props.className}
       onChange={onChange}
@@ -85,7 +88,7 @@ const CreateInput = (props) => {
   return null
 }
 
-const TextFiledStyled = styled(TextField)`
+export const TextFiledStyled = styled(TextField)`
   .MuiOutlinedInput-notchedOutline {
     border: 1px solid;
     ${props => !props.error ? 'border-color: var(--main-blue)!important' : ''}
