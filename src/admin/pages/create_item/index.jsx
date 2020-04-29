@@ -125,10 +125,10 @@ const CreateItem = (props) => {
     var validate = []; var errors = false
     if (currentStep === 0) {
       validate = ['title', 'price']
-      errors = validateForm(data, validate)
+      errors = validateForm.requires(data, validate)
     } else if (currentStep === 1) {
       validate = ['picture']
-      errors = validateForm({ picture }, validate)
+      errors = validateForm.requires({ picture }, validate)
     }
 
     if (!errors) {

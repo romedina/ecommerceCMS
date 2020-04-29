@@ -2,7 +2,6 @@ import createFlux from '../createFlux'
 import transformer from '../helpers/transformer'
 import orders from '../modules/orders'
 
-
 const flux = createFlux('ORDERS')
 const initialSTate = {
   items: {},

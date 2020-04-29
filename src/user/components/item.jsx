@@ -2,6 +2,7 @@ import React from 'react'
 import propTypes from 'prop-types'
 import styled from 'styled-components'
 import Link from '../../components/link'
+import currency from '../../helpers/currency'
 
 const Item = (props) => {
   return (
@@ -10,7 +11,7 @@ const Item = (props) => {
         <Picture src={props.picture} />
         <Data>
           <Title>{props.title}</Title>
-          <Price> $ {props.price}</Price>
+          <Price> $ {currency.formatMoney(props.price)}</Price>
         </Data>
       </ItemBody>
     </WrapperItem>

@@ -3,6 +3,7 @@ import propTypes from 'prop-types'
 import styled from 'styled-components'
 import shortText from '../../helpers/short_text'
 import { Button } from '@material-ui/core'
+import currency from '../../helpers/currency'
 
 const Article = (props) => {
   return (
@@ -11,7 +12,7 @@ const Article = (props) => {
         {!props.isActive && (<Shadow />)}
         <Picture src={props.picture} />
         <Actions>
-          <Price>{props.price}</Price>
+          <Price> $ {currency.formatMoney(props.price)}</Price>
           <Title>{props.title}</Title>
           <Description>{shortText(props.description)}</Description>
         </Actions>

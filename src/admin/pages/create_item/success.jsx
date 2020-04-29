@@ -9,7 +9,7 @@ const Success = (props) => {
   const history = useHistory()
 
   const onViewClick = () => {
-    history.push(`/item/${props.idCreated}`)
+    history.push(`/item/${props.idEditing || props.idCreated}`)
   }
 
   return (
@@ -27,7 +27,8 @@ const Success = (props) => {
 }
 Success.propTypes = {
   idCreated: propTypes.string,
-  onReset: propTypes.func
+  onReset: propTypes.func,
+  idEditing: propTypes.string
 }
 
 const ButtonStyled = styled(Button)`

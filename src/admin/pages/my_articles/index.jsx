@@ -12,9 +12,11 @@ import Admin from '../../hoc/admin'
 import lastPosition from '../../../helpers/last_position'
 import { CircularProgress } from '@material-ui/core'
 import { setNotification } from '../../../flux/notification'
+import { toArray } from '../../../helpers/transformer'
 
 const MyArticles = () => {
-  const { loading, items, isfinally } = useSelector(state => state.items)
+  var { loading, items, isfinally } = useSelector(state => state.items)
+  items = toArray(items)
   const history = useHistory()
   const dispatch = useDispatch()
 
@@ -22,7 +24,7 @@ const MyArticles = () => {
     if (items.length === 0) {
       dispatch(fetchItems())
     }
-  }, [dispatch, items])
+  }, [dispatch])
 
   const handleEdit = (data) => {
     history.push('/create-item', JSON.parse(JSON.stringify(data)))
@@ -45,7 +47,7 @@ const MyArticles = () => {
         action: dispatch => {
           dispatch(disable(data.id))
           dispatch(setNotification({
-            message: 'El articulo de ha desactivado',
+            message: 'El articulo se ha desactivado',
             type: 'warning'
           }))
         },
@@ -55,7 +57,7 @@ const MyArticles = () => {
       dispatch(dispatch => {
         dispatch(enable(data.id))
         dispatch(setNotification({
-          message: 'El articulo de ha habilitado',
+          message: 'El articulo se ha habilitado',
           type: 'info'
         }))
       })

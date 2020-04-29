@@ -11,10 +11,13 @@ import { fetchItems } from '../../../flux/items'
 import lastPosition from '../../../helpers/last_position'
 import { CircularProgress } from '@material-ui/core'
 import styled from 'styled-components'
+import { toArray } from '../../../helpers/transformer'
 
 const Home = () => {
   const dispatch = useDispatch()
-  const { loading, items, limit, isfinally} = useSelector(state => state.items)
+  var { loading, items, limit, isfinally } = useSelector(state => state.items)
+  items = toArray(items)
+
   const itemsFiltered = items.filter(item => item.isActive)
 
   // fetch items if not exist

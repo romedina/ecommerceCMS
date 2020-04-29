@@ -9,7 +9,7 @@ const Summary = (props) => {
   return (
     <Container>
       <Title>{props.title}</Title>
-      <Picture src={props.picture === 'string' ? props.picture : props.picture.preview} />
+      <Picture src={typeof props.picture === 'string' ? props.picture : props.picture.preview} />
       <Price>$ {currency.formatMoney(props.price)} MN</Price>
       <Description>{props.description}</Description>
     </Container>

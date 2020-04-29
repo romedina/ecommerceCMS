@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import LayoutUser from '../../components/layout_user'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { fetchSpecificItem, setInitialState } from '../../../flux/items'
+import { fetchSpecificItem } from '../../../flux/items'
 import { addItem } from '../../../flux/cart'
 import { setNotification } from '../../../flux/notification'
 import Container from '../../components/container'
@@ -12,16 +12,13 @@ import Skeleton from './skeleton'
 const Item = props => {
   const { id } = useParams()
   const dispatch = useDispatch()
-  const { items, loading } = useSelector(state => state.items)
-  const itemSelected = items.filter(item => item.id === id)[0] || null
+  var { items, loading } = useSelector(state => state.items)
+  const itemSelected = items[id] || null
   const [quantity, setQuantity] = useState(1)
 
   // fetch data
   useEffect(() => {
-    if (!itemSelected) {
-      dispatch(fetchSpecificItem(id))
-      return () => dispatch(setInitialState())
-    }
+    if (!itemSelected) dispatch(fetchSpecificItem(id))
   }, [])
 
   const AddToCart = event => {

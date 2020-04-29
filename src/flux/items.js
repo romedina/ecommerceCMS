@@ -1,9 +1,10 @@
 import createFlux from '../createFlux'
 import article from '../modules/article'
+import { toObject, toArray } from '../helpers/transformer'
 
 const flux = createFlux('ITEMS')
 const initialState = {
-  items: [],
+  items: {},
   loading: true,
   last: null,
   isfinally: false,
@@ -50,27 +51,26 @@ export const deleteItems = (id) => async (dispatch) => {
 
 // actions
 export const setStatus = flux.createAction('SET_DISABLE', (state, payload) => {
+  const { id, status } = payload
+  const itemsDisable = { ...state.items[id], isActive: status }
+  const itemsCollection = { ...state.items, [id]: itemsDisable }
   return {
     ...state,
-    items: state.items.map(item => {
-      const newItem = { ...item }
-      if (payload.id === newItem.id) { newItem.isActive = payload.status }
-      return newItem
-    })
+    items: itemsCollection
   }
 })
 
 export const addItems = flux.createAction('ADD_ITEMS', (state, payload) => {
   return {
     ...state,
-    items: [...state.items, ...payload]
+    items: { ...state.items, ...toObject(payload) }
   }
 })
 
-export const deleteItem = flux.createAction('SET_ITEMS', (state, payload) => {
+export const deleteItem = flux.createAction('DELETE_ITEM', (state, payload) => {
   return {
     ...state,
-    items: state.items.filter(item => item.id !== payload)
+    items: toObject(toArray(state.items).filter(item => item.id !== payload))
   }
 })
 
