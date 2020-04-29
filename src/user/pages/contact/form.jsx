@@ -10,9 +10,9 @@ import { Alert as AlertBase } from '@material-ui/lab'
 const Form = props => {
   return (
     <Content container>
-      {props.errors.length > 0 && (
+      {props.errorMessage && (
         <Grid item xs={12}>
-          <Alert severity='error'>Todos los campos son requeridos</Alert>
+          <Alert severity='error'>{props.errorMessage}</Alert>
         </Grid>
       )}
       <Grid item xs={12}>
@@ -85,7 +85,8 @@ Form.propTypes = {
   handleChange: propTypes.func,
   handleSend: propTypes.func,
   errors: propTypes.array,
-  handleRemoveErrors: propTypes.func
+  handleRemoveErrors: propTypes.func,
+  errorMessage: propTypes.string
 }
 
 const Content = styled(Grid)`

@@ -9,6 +9,7 @@ export const add = async data => {
   try {
     const { id } = await db.collection('contact/messages/items').add({
       ...data,
+      isActive: true,
       date: new Date()
     })
     await db.doc(`contact/messages/items/${id}`).update({ id })

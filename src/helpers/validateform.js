@@ -1,4 +1,5 @@
-const validateForm = (objectToValidate, keys) => {
+/* eslint-disable no-useless-escape */
+export const requires = (objectToValidate, keys) => {
   const errors = keys.filter(uniquekey => {
     if (!objectToValidate[uniquekey]) return true
     return false
@@ -7,4 +8,12 @@ const validateForm = (objectToValidate, keys) => {
   return false
 }
 
-export default validateForm
+export const validateEmail = email => {
+  var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+  return !!regex.test(email)
+}
+
+export default {
+  requires,
+  validateEmail
+}

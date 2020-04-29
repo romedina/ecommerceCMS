@@ -12,27 +12,30 @@ import message from '../../../modules/message'
 const Contact = props => {
   const [currentView, setCurrentView] = useState('form') // form || loading || sucess
   const [data, setData] = useObjectState({})
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState({ errors: [], message: null })
 
   const handleChange = ({ name, value }) => {
     setData({ [name]: value })
   }
 
   const handleSend = async event => {
-    const errors = validateForm(data, ['name', 'email', 'number', 'city_or_state', 'content'])
-    if (errors) setErrors(errors)
-    else {
+    const inputsWithErrors = validateForm.requires(data, ['name', 'email', 'number', 'city_or_state', 'content'])
+    if (inputsWithErrors) setErrors({ errors: inputsWithErrors, message: 'Todos los campos son requeridos' })
+    else if (!validateForm.validateEmail(data.email)) {
+      setErrors({ errors: ['email'], message: 'El correo no es válido' })
+    } else {
       setCurrentView('loading')
-      await message.add({
-        ...data,
-        isActive: true
-      })
+      await message.add(data)
       setCurrentView('success')
     }
   }
 
   const handleRemoveErrors = params => {
-    setErrors(errors.filter(error => error !== params.name))
+    const NewErrors = errors.errors.filter(error => error !== params.name)
+    setErrors({
+      errors: NewErrors,
+      message: NewErrors.length > 0 ? errors.message : null
+    })
   }
 
   return (
@@ -43,7 +46,8 @@ const Contact = props => {
             data={data}
             handleChange={handleChange}
             handleSend={handleSend}
-            errors={errors}
+            errors={errors.errors}
+            errorMessage={errors.message}
             handleRemoveErrors={handleRemoveErrors}
           />
         )}

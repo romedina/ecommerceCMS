@@ -10,31 +10,31 @@ const UserInfo = props => {
   return (
     <Section {...props}>
       {props.errors.length > 0 && (
-        <Alert style={{ marginBottom: '10px' }} severity='error'>Todos los campos son requeridos</Alert>
+        <Alert style={{ marginBottom: '10px' }} severity='error'>{props.errorMessage}</Alert>
       )}
       <Box>
         <Describe>Información de contacto</Describe>
-        <Input {...props} name='email' placeholder='Correo electrónico' />
+        <Input {...props} name='email' placeholder='Correo electrónico' maxLength={70} />
       </Box>
       <Box>
         <Describe>Dirección de envío</Describe>
         <Grid container>
           <Grid item xs={6} style={{ paddingRight: '10px' }}>
-            <Input {...props} name='name' placeholder='Nombre' />
+            <Input {...props} name='name' placeholder='Nombre' maxLength={50} />
           </Grid>
           <Grid item xs={6}>
-            <Input {...props} name='lastname' placeholder='Apellidos' />
+            <Input {...props} name='lastname' placeholder='Apellidos' maxLength={50} />
           </Grid>
-          <Input {...props} name='street_number' placeholder='Calle y número' />
-          <Input {...props} name='suburb' placeholder='Colonia' />
-          <Input {...props} name='city' placeholder='Ciudad' />
+          <Input {...props} name='street_number' placeholder='Calle y número' maxLength={100} />
+          <Input {...props} name='suburb' placeholder='Colonia' maxLength={50} />
+          <Input {...props} name='city' placeholder='Ciudad' maxLength={50} />
           <Grid item xs={6} style={{ paddingRight: '10px' }}>
-            <Input {...props} name='state' placeholder='Estado' />
+            <Input {...props} name='state' placeholder='Estado' maxLength={50} />
           </Grid>
           <Grid item xs={6}>
-            <Input {...props} name='postal_code' placeholder='Código Postal' />
+            <Input {...props} name='postal_code' placeholder='Código Postal' filter='number' maxLength={10} />
           </Grid>
-          <Input {...props} name='number' placeholder='Tel./cel.' />
+          <Input {...props} name='number' placeholder='Tel./cel.' filter='number' maxLength={10} />
         </Grid>
         <Leggend> En caso de que tengamos que contactarte sobre tu pedido</Leggend>
       </Box>
@@ -43,7 +43,8 @@ const UserInfo = props => {
 }
 
 UserInfo.propTypes = {
-  errors: propTypes.array
+  errors: propTypes.array,
+  errorMessage: propTypes.string
 }
 
 const Box = styled.div`
