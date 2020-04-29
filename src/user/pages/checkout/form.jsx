@@ -60,12 +60,12 @@ const Form = props => {
       )}
       {(steps[currentStep] === 'Envío' || steps[currentStep] === 'Método de Pago') && (
         <Shipping
+          {...props}
           errors={errors}
           steps={steps}
           currentStep={currentStep}
           handleNext={handleNext}
           goToStep={goToStep}
-          {...props}
           setCurrenStep={setCurrenStep}
           handleRemoveErrors={handleRemoveErrors}
           handleChangeDirections={handleChangeDirections}
@@ -73,12 +73,12 @@ const Form = props => {
       )}
       {steps[currentStep] === 'Confirmación' && (
         <Confirm
+          {...props}
           errors={errors}
           steps={steps}
           currentStep={currentStep}
           handleNext={handleNext}
           goToStep={goToStep}
-          {...props}
           setCurrenStep={setCurrenStep}
           handleRemoveErrors={handleRemoveErrors}
           handleChangeDirections={handleChangeDirections}

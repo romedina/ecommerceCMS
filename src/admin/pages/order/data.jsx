@@ -1,20 +1,28 @@
 import React from 'react'
 import styled from 'styled-components'
+import currency from '../../../helpers/currency'
+import { number } from 'prop-types'
 
 const Data = props => {
   return (
     <Content>
       <div className='rows'>
         <span>Subtotal:</span>
-        $ 750.00
+        $ {currency.formatMoney(props.subTotal)}
       </div>
       <div className='rows'>
-        <span>Envio:</span>
-        $ 50.00
+        <span>Envío:</span>
+        $ {currency.formatMoney(props.shipping)}
       </div>
-      <Button>Total $ 800.00</Button>
+      <Button>Total $ {currency.formatMoney(props.totalPrice)}</Button>
     </Content>
   )
+}
+
+Data.propTypes = {
+  totalPrice: number,
+  subTotal: number,
+  shipping: number
 }
 
 const Content = styled.div`

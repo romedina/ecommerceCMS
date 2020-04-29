@@ -13,7 +13,6 @@ import propTypes from 'prop-types'
 const Summary = props => {
   const dispatch = useDispatch()
   const items = useSelector(state => state.cart)
-  const subTotal = items.reduce((acumulator, currentItem) => { return acumulator + (currentItem.price * currentItem.quantity) }, 0)
 
   const handleRemoveItem = item => {
     dispatch(setAlert({
@@ -26,29 +25,18 @@ const Summary = props => {
   return (
     <Content>
       {items.map(item => (
-        <ItemOnCart
-          key={item.id}
-          {...item}
-          handleRemoveItem={handleRemoveItem}
-        />
+        <ItemOnCart key={item.id} {...item} handleRemoveItem={handleRemoveItem} />
       ))}
       <Divider />
       <Group>
-        <FlexBetween>
-          <span>Subtotal:</span>
-          $ {Currency.formatMoney(subTotal)}
+        <FlexBetween> <span>Subtotal:</span> $ {Currency.formatMoney(props.subTotal)}
         </FlexBetween>
-        <FlexBetween>
-          <span>Envío:</span>
-          $ {Currency.formatMoney(props.shipping)}
+        <FlexBetween> <span>Envío:</span> $ {Currency.formatMoney(props.shipping)}
         </FlexBetween>
       </Group>
       <Divider />
       <Group>
-        <FlexBetween>
-          <span>Total:</span>
-          $ {Currency.formatMoney(props.totalPrice)}
-        </FlexBetween>
+        <FlexBetween> <span>Total:</span> $ {Currency.formatMoney(props.totalPrice)} </FlexBetween>
       </Group>
       <FlexBetween style={{ fontSize: '1rem' }}>
         {props.steps[props.currentStep] === 'Información' && (
@@ -59,6 +47,9 @@ const Summary = props => {
         )}
         {props.steps[props.currentStep] === 'Método de Pago' && (
           <Button handleClick={event => props.goToStep('Envío')} variant='outlined'>Volver a envío</Button>
+        )}
+        {props.steps[props.currentStep] === 'Confirmación' && (
+          <Button handleClick={event => props.goToStep('Envío')} variant='outlined'>Volver a método de pago</Button>
         )}
         {props.currentStep < 3 && (
           <Button handleClick={props.handleNext} variant='contained'>Continuar</Button>
@@ -76,7 +67,8 @@ Summary.propTypes = {
   steps: propTypes.array,
   handlePay: propTypes.func,
   shipping: propTypes.number,
-  totalPrice: propTypes.number
+  totalPrice: propTypes.number,
+  subTotal: propTypes.number
 }
 
 const Content = styled.div`

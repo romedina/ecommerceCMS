@@ -37,9 +37,24 @@ export const onCounterChange = handler => {
   return unsubscribe
 }
 
+export const save = async (data) => {
+  try {
+    const date = new Date()
+    const period = `${date.getMonth() + 1}-${date.getFullYear()}`
+    const result = await db.collection(`Ordenes/Pedidos/${period}`).add({ ...data, date })
+    await db.doc(`Ordenes/Pedidos/${period}/${result.id}`).update({ id: result.id })
+    await db.doc('Ordenes/Pedidos').update({ counter: firebase.firestore.FieldValue.increment(1) })
+    return result.id
+  } catch (error) {
+    console.error('error_description:', error)
+    return false
+  }
+}
+
 export default {
   getList,
   changeStatus,
   onCounterChange,
-  setViewed
+  setViewed,
+  save
 }

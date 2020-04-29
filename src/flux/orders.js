@@ -72,5 +72,4 @@ export const setViewed = flux.createAction('SET_VIEWED', (state, payload) => {
   }
 })
 
-
 export default flux.createReducer(initialSTate)

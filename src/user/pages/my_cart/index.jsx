@@ -8,12 +8,14 @@ import { updateQuantity, RemoveItem } from '../../../flux/cart'
 import { setAlert } from '../../../flux/alert'
 import Currency from '../../../helpers/currency'
 import Button from '../../components/button'
+import sumePrice from '../../../helpers/sumPrice'
 
 const MyCart = props => {
   const myCart = useSelector(state => state.cart)
   const dispatch = useDispatch()
-  const subtotal = myCart.reduce((memory, currentValue) => { return memory + (currentValue.price * currentValue.quantity) }, 0)
+  const subtotal = sumePrice(myCart)
   const shipping = 50
+  const total = subtotal + shipping
 
   const handleRemoveItem = data => {
     dispatch(
@@ -61,7 +63,7 @@ const MyCart = props => {
           <Total>
             <div>
               <span>Total:</span>
-              $ {Currency.formatMoney(subtotal)}
+              $ {Currency.formatMoney(total)}
             </div>
           </Total>
         </FlexEnd>

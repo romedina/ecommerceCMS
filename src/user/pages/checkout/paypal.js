@@ -10,10 +10,13 @@ const paypalConfig = props => {
       })
     },
     onApprove: (data, actions) => {
-      return actions.order.capture().then((details) => {
+      const status = actions.order.capture().then((details) => {
+        console.log('execute onAprove paypal')
         const { id, payer } = details
-        props.onApprove({ id, payer })
+        props.onApprove('payed', { id, payer })
       })
+      console.log(status)
+      return status
     }
   }
 }
