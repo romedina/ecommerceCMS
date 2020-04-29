@@ -13,26 +13,26 @@ const UserInfo = props => {
         <Alert style={{ marginBottom: '10px' }} severity='error'>Todos los campos son requeridos</Alert>
       )}
       <Box>
-        <Describe>Informacionde contacto</Describe>
-        <Input {...props} name='email' placeholder='Correo electronico' />
+        <Describe>Información de contacto</Describe>
+        <Input {...props} name='email' placeholder='Correo electrónico' />
       </Box>
       <Box>
-        <Describe>Direccion de envio</Describe>
+        <Describe>Dirección de envío</Describe>
         <Grid container>
           <Grid item xs={6} style={{ paddingRight: '10px' }}>
             <Input {...props} name='name' placeholder='Nombre' />
           </Grid>
           <Grid item xs={6}>
-            <Input {...props} name='lastname' placeholder='apellidos' />
+            <Input {...props} name='lastname' placeholder='Apellidos' />
           </Grid>
-          <Input {...props} name='street_number' placeholder='Calle y numero' />
+          <Input {...props} name='street_number' placeholder='Calle y número' />
           <Input {...props} name='suburb' placeholder='Colonia' />
           <Input {...props} name='city' placeholder='Ciudad' />
           <Grid item xs={6} style={{ paddingRight: '10px' }}>
             <Input {...props} name='state' placeholder='Estado' />
           </Grid>
           <Grid item xs={6}>
-            <Input {...props} name='postal_code' placeholder='Codigo postal' />
+            <Input {...props} name='postal_code' placeholder='Código Postal' />
           </Grid>
           <Input {...props} name='number' placeholder='Tel./cel.' />
         </Grid>

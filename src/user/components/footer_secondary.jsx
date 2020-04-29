@@ -15,11 +15,11 @@ const FooterSecondary = () => {
           </Section>
           <Section item xs={4}>
             <IconContainer><CreditCard /></IconContainer>
-            <Describe>Pagos con targeta o paypal</Describe>
+            <Describe>Pagos con tarjeta o paypal</Describe>
           </Section>
           <Section item xs={4}>
             <IconContainer><LocalShipping /></IconContainer>
-            <Describe>Envios a todo Mexico</Describe>
+            <Describe>Envíos a todo México</Describe>
           </Section>
         </ContainerSections>
       </ContainerBase>

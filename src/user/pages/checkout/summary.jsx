@@ -39,7 +39,7 @@ const Summary = props => {
           $ {Currency.formatMoney(subTotal)}
         </FlexBetween>
         <FlexBetween>
-          <span>Envio:</span>
+          <span>Envío:</span>
           $ {Currency.formatMoney(props.shipping)}
         </FlexBetween>
       </Group>
@@ -51,14 +51,14 @@ const Summary = props => {
         </FlexBetween>
       </Group>
       <FlexBetween style={{ fontSize: '1rem' }}>
-        {props.steps[props.currentStep] === 'Informacion' && (
+        {props.steps[props.currentStep] === 'Información' && (
           <Button to='/my-cart' variant='outlined'>Volver al carrito</Button>
         )}
-        {props.steps[props.currentStep] === 'Envio' && (
-          <Button handleClick={event => props.goToStep('Informacion')} variant='outlined'>Volver a Informacion</Button>
+        {props.steps[props.currentStep] === 'Envío' && (
+          <Button handleClick={event => props.goToStep('Información')} variant='outlined'>Volver a información</Button>
         )}
-        {props.steps[props.currentStep] === 'Metodo de pago' && (
-          <Button handleClick={event => props.goToStep('Envio')} variant='outlined'>Volver a Envio</Button>
+        {props.steps[props.currentStep] === 'Método de Pago' && (
+          <Button handleClick={event => props.goToStep('Envío')} variant='outlined'>Volver a envío</Button>
         )}
         {props.currentStep < 3 && (
           <Button handleClick={props.handleNext} variant='contained'>Continuar</Button>

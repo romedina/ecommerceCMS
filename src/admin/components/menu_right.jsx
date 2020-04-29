@@ -34,7 +34,7 @@ const MenuRight = props => {
             <Counter>{counter}</Counter>
           )}
         </MenuItem>
-        <MenuItem handleClick={handleCloseSession}> Cerra Sesión </MenuItem>
+        <MenuItem handleClick={handleCloseSession}> Cerrar Sesión </MenuItem>
       </div>
     </Container>
   )

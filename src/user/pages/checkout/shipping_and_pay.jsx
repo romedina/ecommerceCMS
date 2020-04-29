@@ -8,7 +8,7 @@ import { Alert as AlertBase } from '@material-ui/lab'
 const Shipping = props => {
   return (
     <Section {...props}>
-      {props.steps[props.currentStep] !== 'Metodo de pago' && (
+      {props.steps[props.currentStep] !== 'Método de Pago' && (
         <Group>
           <Row>
             <span>Contacto:</span>
@@ -28,11 +28,11 @@ const Shipping = props => {
           </ChangeOption>
         </Group>
       )}
-      {props.steps[props.currentStep] === 'Metodo de pago' && (
+      {props.steps[props.currentStep] === 'Método de Pago' && (
         <Group as={RadioGroup} onChange={event => props.handleChange(event.target)} value={props.data.methodPay || 'unselected'} name='methodPay'>
-          <Describe>Metodo de pago</Describe>
+          <Describe>Método de Pago</Describe>
           {props.errors.length > 0 && (
-            <Alert severity='error'>Porfavor selecciona un methodo de pago</Alert>
+            <Alert severity='error'>Porfavor selecciona un método de pago</Alert>
           )}
           <Row>
             <Radio value='PayPal' onClick={props.handleRemoveErrors} />

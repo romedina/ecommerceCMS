@@ -38,7 +38,7 @@ const Login = () => {
               <Alert severity='error'>Correo o contraseña incorrecta</Alert>
             </Fade>
             <InputGroup>
-              <Label>Ingresa tu correo Electronico</Label>
+              <Label>Ingresa tu correo electrónico</Label>
               <OutlinedInputStyled
                 placeholder='nombre@mail.com'
                 type='text'

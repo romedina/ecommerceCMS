@@ -8,18 +8,18 @@ import Confirm from './confirm'
 
 const Form = props => {
   const [currentStep, setCurrenStep] = useState(0)
-  const steps = ['Informacion', 'Envio', 'Metodo de pago', 'Confirmacion']
+  const steps = ['Información', 'Envío', 'Método de Pago', 'Confirmación']
   const [errors, setErrors] = useState([])
 
   const handleNext = event => {
-    if (steps[currentStep] === 'Informacion') {
+    if (steps[currentStep] === 'Información') {
       const requires = ['email', 'name', 'lastname', 'street_number', 'suburb', 'city', 'state', 'number', 'postal_code']
       const errors = validateForm(props.data, requires)
       if (errors) setErrors(errors)
       else setCurrenStep(currentStep + 1)
     }
-    if (steps[currentStep] === 'Envio') setCurrenStep(currentStep + 1)
-    if (steps[currentStep] === 'Metodo de pago') {
+    if (steps[currentStep] === 'Envío') setCurrenStep(currentStep + 1)
+    if (steps[currentStep] === 'Método de Pago') {
       const requires = ['methodPay']
       const errors = validateForm(props.data, requires)
       if (errors) setErrors(errors)
@@ -36,7 +36,7 @@ const Form = props => {
   }
 
   const handleChangeDirections = event => {
-    setCurrenStep(steps.indexOf('Informacion'))
+    setCurrenStep(steps.indexOf('Información'))
   }
 
   return (
@@ -45,7 +45,7 @@ const Form = props => {
         currentStep={currentStep}
         steps={steps}
       />
-      {steps[currentStep] === 'Informacion' && (
+      {steps[currentStep] === 'Información' && (
         <UserInfo
           errors={errors}
           steps={steps}
@@ -58,7 +58,7 @@ const Form = props => {
           handleChangeDirections={handleChangeDirections}
         />
       )}
-      {(steps[currentStep] === 'Envio' || steps[currentStep] === 'Metodo de pago') && (
+      {(steps[currentStep] === 'Envío' || steps[currentStep] === 'Método de Pago') && (
         <Shipping
           errors={errors}
           steps={steps}
@@ -71,7 +71,7 @@ const Form = props => {
           handleChangeDirections={handleChangeDirections}
         />
       )}
-      {steps[currentStep] === 'Confirmacion' && (
+      {steps[currentStep] === 'Confirmación' && (
         <Confirm
           errors={errors}
           steps={steps}

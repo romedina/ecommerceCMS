@@ -28,7 +28,7 @@ const View = (props) => {
             <Summary {...props} />
             <ButtonsContainer>
               <ButtonStyled disabled={props.currentStep === 0} onClick={props.handleBack} variant='outlined'>
-                Atras
+                atrás
               </ButtonStyled>
               {props.currentStep + 1 < props.steps.length && (
                 <ButtonStyled onClick={props.handleNext} variant='contained' color='primary'>

@@ -24,7 +24,7 @@ const Multimedia = (props) => {
           handleDrop={props.handleDropPicture}
         />
       )}
-      <Previews 
+      <Previews
         pictures={props.picture ? [props.picture] : []}
         handleDelete={props.handleDeletePicture}
       />

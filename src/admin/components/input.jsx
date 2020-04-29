@@ -19,7 +19,6 @@ const CreateInput = (props) => {
 
   if (props.type === 'text') return (
     <TextFiledStyled
-      autocomplete="off"
       placeholder={props.placeholder || null}
       className={props.className}
       onChange={onChange}
@@ -36,7 +35,6 @@ const CreateInput = (props) => {
 
   if (props.type === 'password') return (
     <TextFiledStyled
-      autocomplete="off"
       placeholder={props.placeholder || null }
       className={props.className}
       onChange={onChange}
@@ -53,7 +51,6 @@ const CreateInput = (props) => {
 
   if (props.type === 'number') return (
     <TextFiledStyled
-      autocomplete="off"
       placeholder={props.placeholder || null }
       className={props.className}
       onChange={onChange}

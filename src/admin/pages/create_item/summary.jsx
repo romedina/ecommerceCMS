@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import propTypes from 'prop-types'
+import currency from '../../../helpers/currency'
 
 const Summary = (props) => {
   if (props.currentStep !== 2) return null
@@ -9,7 +10,7 @@ const Summary = (props) => {
     <Container>
       <Title>{props.title}</Title>
       <Picture src={props.picture === 'string' ? props.picture : props.picture.preview} />
-      <Price>{props.price} MN</Price>
+      <Price>$ {currency.formatMoney(props.price)} MN</Price>
       <Description>{props.description}</Description>
     </Container>
   )

@@ -32,7 +32,7 @@ const Form = props => {
           maxLength={50}
           errors={props.errors}
           handleRemoveErrors={props.handleRemoveErrors}
-          placeholder='Correo electronico'
+          placeholder='Correo electrónico'
           data={props.data}
           handleChange={props.handleChange}
           name='email'
