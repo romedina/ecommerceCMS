@@ -36,7 +36,7 @@ const SearchContent = styled.div`
   background: #fff;
   display: flex;
   width: 100%;;
-  max-width: 600px;
+  max-width: 500px;
   height: 30px;
 `
 const Input = styled.input`
@@ -47,7 +47,7 @@ const Input = styled.input`
   padding: 0px 10px;
 `
 const Button = styled.div`
-  background: #008FFD;
+  background: var(--user-gray-light);
   display: flex;
   justify-content: center;
   align-items: center;

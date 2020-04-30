@@ -5,7 +5,7 @@ import propTypes from 'prop-types'
 
 const ListItems = (props) => {
   return (
-    <FlexContent>
+    <FlexContent className={props.className || ''}>
       {props.items.map(item => (
         <Item key={item.id} {...item} />
       ))}
@@ -13,7 +13,8 @@ const ListItems = (props) => {
   )
 }
 ListItems.propTypes = {
-  items: propTypes.array
+  items: propTypes.array,
+  className: propTypes.string
 }
 
 const FlexContent = styled.section`

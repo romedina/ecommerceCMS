@@ -8,6 +8,7 @@ import { setNotification } from '../../../flux/notification'
 import Container from '../../components/container'
 import Data from './data'
 import Skeleton from './skeleton'
+import Related from './related'
 
 const Item = props => {
   const { id } = useParams()
@@ -40,6 +41,11 @@ const Item = props => {
     setQuantity(newValue)
   }
 
+  // move to up
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [id])
+
   return (
     <LayoutUser>
       <Container>
@@ -53,6 +59,7 @@ const Item = props => {
             setQuantity={setQuantity}
           />
         )}
+        <Related />
       </Container>
     </LayoutUser>
   )

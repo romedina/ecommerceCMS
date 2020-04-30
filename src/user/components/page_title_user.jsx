@@ -19,10 +19,10 @@ const Title = styled.h1`
   display: flex;
   align-items: center;
   color: var(--user-black);
-  font-size: 1.7em;
+  font-size: 1.5em;
 `
 const Line = styled.hr`
-  width: 100%;
+  flex: 1 1 auto;
   margin-left: 20px;
   color: var(--user-gray-light);
   border: 2px solid;

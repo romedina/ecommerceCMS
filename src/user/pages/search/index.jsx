@@ -25,8 +25,6 @@ const Search = props => {
     }
   }, [!!query, isfinally])
 
-  console.log(items)
-
   return (
     <Layout>
       <Container>

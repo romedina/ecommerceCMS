@@ -108,10 +108,10 @@ const Header = styled.div`
 `
 const Title = styled.h1`
   margin-right: 20px;
-
+  font-size: 1.3em;
 `
 const Price = styled.h1`
-  
+  font-size: 1.3em;
 `
 const Description = styled.div`
   font-size: 1.2em;
@@ -126,7 +126,7 @@ const Cuantity = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1.7em;
+  font-size: 1.5em;
   font-weight: bold;
   padding: 10px 0px;
 `
