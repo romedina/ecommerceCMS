@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import LayoutAdmin from '../../components/layout_admin'
-import { fetchItems, deleteItems, disable, enable } from '../../../flux/items'
+import { fetchItems, deleteItems, disable, enable, fetchAll } from '../../../flux/items'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Skeleton from './skeleton'
@@ -13,12 +13,16 @@ import lastPosition from '../../../helpers/last_position'
 import { CircularProgress } from '@material-ui/core'
 import { setNotification } from '../../../flux/notification'
 import { toArray } from '../../../helpers/transformer'
+import Search from './search'
+import NotFound from './notFound'
 
 const MyArticles = () => {
   var { loading, items, isfinally } = useSelector(state => state.items)
   items = toArray(items)
   const history = useHistory()
   const dispatch = useDispatch()
+  const [query, setQuery] = useState('')
+  items = items.filter(item => item.title.toLowerCase().includes(query.toLowerCase()))
 
   useEffect(() => {
     if (items.length === 0) {
@@ -75,9 +79,19 @@ const MyArticles = () => {
     return event => window.removeEventListener('scroll', handleScroll)
   }, [loading, isfinally, dispatch])
 
+  const onQueryChange = event => {
+    if (!isfinally && !loading) {
+      dispatch(fetchAll())
+    }
+    setQuery(event.target.value)
+  }
+
   return (
     <LayoutAdmin>
-      <PageTitle>Mis Productos</PageTitle>
+      <Header>
+        <PageTitle>Mis Productos</PageTitle>
+        <Search query={query} onQueryChange={onQueryChange} />
+      </Header>
       {loading && items.length === 0 && (
         <Skeleton />
       )}
@@ -99,6 +113,16 @@ const MyArticles = () => {
           <CircularProgress />
         </CircularProgressContet>
       )}
+      {!items.length && !!query && !loading && (
+        <NotFound
+          message={`Sin resultados de busqueda para: "${query}"`}
+        />
+      )}
+      {!items.length && !query && !loading && (
+        <NotFound
+          message='Aun no tienes articulos publicados'
+        />
+      )}
     </LayoutAdmin>
   )
 }
@@ -113,5 +137,12 @@ const CircularProgressContet = styled.div`
   display: flex;
   justify-content: center;
   padding: 50px 0px;
+`
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
 `
 export default Admin(MyArticles)
