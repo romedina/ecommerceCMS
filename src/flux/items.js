@@ -22,6 +22,15 @@ export const fetchItems = () => async (dispatch, getState) => {
   if (response.items.length < state.items.limit) dispatch(setFinally(true))
 }
 
+export const fetchAll = () => async dispatch => {
+  dispatch(setLoading(true))
+  const response = await article.getList()
+  dispatch(setLast(response.last))
+  dispatch(addItems(response.items))
+  dispatch(setLoading(false))
+  dispatch(setFinally(true))
+}
+
 export const fetchSpecificItem = (id) => async (dispatch) => {
   dispatch(setLoading(true))
   const response = await article.get(id)

@@ -8,6 +8,7 @@ import cart from './cart'
 import notification from './notification'
 import messages from './messages'
 import orders from './orders'
+import search from './search'
 
 const reducer = combineReducers({
   session,
@@ -16,7 +17,8 @@ const reducer = combineReducers({
   cart,
   notification,
   messages,
-  orders
+  orders,
+  search
 })
 
 export default reducer

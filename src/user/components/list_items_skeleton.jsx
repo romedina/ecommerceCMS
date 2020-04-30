@@ -26,6 +26,26 @@ const ListItemsSheleton = () => {
         <Skeleton variant='rect' height={20} />
         <Skeleton variant='rect' height={20} />
       </Grid>
+      <Grid item xs={12} sm={6} md={3}>
+        <Skeleton variant='rect' height={200} />
+        <Skeleton variant='rect' height={20} />
+        <Skeleton variant='rect' height={20} />
+      </Grid>
+      <Grid item xs={12} sm={6} md={3}>
+        <Skeleton variant='rect' height={200} />
+        <Skeleton variant='rect' height={20} />
+        <Skeleton variant='rect' height={20} />
+      </Grid>
+      <Grid item xs={12} sm={6} md={3}>
+        <Skeleton variant='rect' height={200} />
+        <Skeleton variant='rect' height={20} />
+        <Skeleton variant='rect' height={20} />
+      </Grid>
+      <Grid item xs={12} sm={6} md={3}>
+        <Skeleton variant='rect' height={200} />
+        <Skeleton variant='rect' height={20} />
+        <Skeleton variant='rect' height={20} />
+      </Grid>
     </Grid>
   )
 }

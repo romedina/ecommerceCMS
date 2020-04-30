@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-handler-names */
 import React from 'react'
 import ContainerBase from '../container'
 import styled from 'styled-components'
@@ -5,9 +6,15 @@ import { Link } from 'react-router-dom'
 import ButtonBase from '../../../components/link'
 import { ShoppingCart, Search } from '@material-ui/icons'
 import { useSelector } from 'react-redux'
+import SearchBar from './search'
+import { dispatch } from '../../../store'
+import { setActive } from '../../../flux/search'
 
 const HeaderDesktop = (props) => {
   const cartCounter = useSelector(state => state.cart).length
+  const isMenuActive = useSelector(state => state.search.isActive)
+
+  const onSearchClick = event => dispatch(setActive(true))
 
   return (
     <FullWidth>
@@ -15,23 +22,30 @@ const HeaderDesktop = (props) => {
         <LogoContainer>
           Put your logo here
         </LogoContainer>
-        <ActionContainer>
-          <MenuContainer>
-            <ButtonBaseStyled><LinkStyled to='/'>Home</LinkStyled></ButtonBaseStyled>
-            <ButtonBaseStyled><LinkStyled to='/'>Productos</LinkStyled></ButtonBaseStyled>
-            <ButtonBaseStyled><LinkStyled to='/about'>Nosotros</LinkStyled></ButtonBaseStyled>
-            <ButtonBaseStyled><LinkStyled to='/contact'>Contacto</LinkStyled></ButtonBaseStyled>
-          </MenuContainer>
-          <ActionsPrimary>
-            <ActionsItem to='/my-cart'>
-              {cartCounter > 0 && (
-                <CounterItems>{cartCounter}</CounterItems>
-              )}
-              <ShoppingCart />
-            </ActionsItem>
-            <ActionsItem to='/search'><Search /></ActionsItem>
-          </ActionsPrimary>
-        </ActionContainer>
+        {!isMenuActive && (
+          <ActionContainer>
+            <MenuContainer>
+              <ButtonBaseStyled><LinkStyled to='/'>Home</LinkStyled></ButtonBaseStyled>
+              <ButtonBaseStyled><LinkStyled to='/'>Productos</LinkStyled></ButtonBaseStyled>
+              <ButtonBaseStyled><LinkStyled to='/about'>Nosotros</LinkStyled></ButtonBaseStyled>
+              <ButtonBaseStyled><LinkStyled to='/contact'>Contacto</LinkStyled></ButtonBaseStyled>
+            </MenuContainer>
+            <ActionsPrimary>
+              <ActionsItem to='/my-cart'>
+                {cartCounter > 0 && (
+                  <CounterItems>{cartCounter}</CounterItems>
+                )}
+                <ShoppingCart />
+              </ActionsItem>
+              <ActionsItem handleClick={onSearchClick}>
+                <Search />
+              </ActionsItem>
+            </ActionsPrimary>
+          </ActionContainer>
+        )}
+        {isMenuActive && (
+          <SearchBar />
+        )}
       </Container>
     </FullWidth>
   )
@@ -45,7 +59,6 @@ const CounterItems = styled.div`
   border-radius: 50%;
   top: -5px;
   right: -5px;
-  
 `
 
 const Container = styled(ContainerBase)`
@@ -86,7 +99,6 @@ const LinkStyled = styled(Link)`
 const ActionsPrimary = styled('div')`
 
 `
-
 const ActionsItem = styled(ButtonBase)`
   position: relative;
   margin-right: 15px;

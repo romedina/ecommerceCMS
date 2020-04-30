@@ -23,6 +23,7 @@ import Checkout from './user/pages/checkout'
 import About from './user/pages/about'
 import Contact from './user/pages/contact'
 import admin from './admin/hoc/admin'
+import Search from './user/pages/search'
 
 function App () {
   return (
@@ -44,7 +45,8 @@ function App () {
             <Route exact path='/messages' component={Messages} />
             <Route exact path='/orders' component={Orders} />
             <Route exact path='/order/:period/:id' component={Order} />
-            <Route exact path='/admin' component={admin(any => (<Redirect to='/my-articles' />))} />
+            <Route exact path='/admin' component={admin(props => (<Redirect to='/my-articles' />))} />
+            <Route exact path='/search' component={Search} />
           </Switch>
         </Background>
       </DefineListeners>
