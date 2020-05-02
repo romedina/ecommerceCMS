@@ -1,8 +1,9 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import styled from 'styled-components'
-import Link from '../../components/link'
+import { Link } from 'react-router-dom'
 import currency from '../../helpers/currency'
+import { ButtonBase } from '@material-ui/core'
 
 const Item = (props) => {
   return (
@@ -26,10 +27,14 @@ Item.propTypes = {
 }
 
 const WrapperItem = styled(Link)`
-  width: 20%;
-  padding: 7px;
+  width: 25%;
+  display: block;
+  padding: 10px;
+  color: inherit;
+  text-decoration: none;
+  box-sizing: border-box;
   @media screen and (max-width:1200px) {
-    width: 25%;
+    padding: 7px;
   }
   @media screen and (max-width:850px) {
     width: 33.3%;
@@ -42,19 +47,38 @@ const WrapperItem = styled(Link)`
   }
 `
 
-const ItemBody = styled.div`
+const ItemBody = styled(ButtonBase)`
   background: #fff;
-  min-height: 150px;
+  width: 100%;
+  height: 100%;
   border-radius: 5px;
   overflow: hidden;
   height: 100%;
-  border: 1px solid var(--user-gray-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: all 300ms;
+  border: 1px solid #cdcdcd;
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 2px 2px 10px gray;
+  }
 `
 const Picture = styled.img`
   width: 100%;
   display: block;
-  height: 180px;
+  height: 250px;
   object-fit: cover;
+  border-bottom: 1px solid #cdcdcd;
+  @media screen and (max-width:960px){
+    height: 200px;
+  }
+  @media screen and (max-width:500px){
+    height: 150px;
+  }
+  @media screen and (max-width:400px){
+    height: 250px;
+  }
 `
 const Title = styled.h2`
   color: var(--user-black);
@@ -71,6 +95,7 @@ const Price = styled.div`
   font-size: bold;
 `
 const Data = styled.div`
-  padding: 10px;
+  padding: 15px;
+  width: 100%;
 `
 export default Item

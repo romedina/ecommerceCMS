@@ -59,12 +59,24 @@ PeriodSelector.propTypes = {
 
 const Content = styled.div`
   display: flex;
+  margin-bottom: 15px;
 `
 const SelectStyled = styled(Select)`
   margin-right: 20px;
   min-width: 150px;
+  & .MuiSelect-outlined.MuiSelect-outlined {
+    padding: 5px;
+    background: #008ffd;
+    color: #fff;
+  }
   &:last-of-type {
     margin-right: 0px;
+  }
+  & svg {
+    color: #fff;
+  }
+  & .MuiOutlinedInput-notchedOutline {
+    border: none; 
   }
 `
 

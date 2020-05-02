@@ -13,7 +13,7 @@ const Related = props => {
   var { items, isfinally } = useSelector(state => state.items)
   const { id } = useParams()
   items = suffle(toArray(items).filter(item => item.id !== id))
-  items = items.slice(0, 5)
+  items = items.slice(0, 4)
 
   // fetch data
   useEffect(() => {

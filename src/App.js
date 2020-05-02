@@ -57,7 +57,7 @@ function App () {
 export default App
 
 const Background = styled('div')`
-  background: #fff;
+  background: #f0f2f5;
   min-height: 100vh;
   width: 100vw;
   max-width: 100%;

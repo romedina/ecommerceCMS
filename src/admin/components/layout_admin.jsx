@@ -72,4 +72,6 @@ const Body = styled('section')`
   width: 100%;
   padding: 25px;
   box-sizing: border-box;
+  background: #fff;
+  min-height: 100vh;
 `
