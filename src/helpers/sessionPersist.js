@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const sessionPersist = {
   save (state) {
     localStorage.setItem('session', JSON.stringify(state))
