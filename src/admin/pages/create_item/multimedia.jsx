@@ -1,12 +1,13 @@
+/* eslint-disable react/jsx-handler-names */
 import React from 'react'
 import styled from 'styled-components'
 import { Box, Typography } from '@material-ui/core'
 import Dropzone from './Dropzone'
 import Previews from './previews'
 import { Alert } from '@material-ui/lab'
+import { array, func, oneOfType, string, object, number } from 'prop-types'
 
 const Multimedia = (props) => {
-
   if (props.currentStep !== 1) return null
 
   return (
@@ -33,17 +34,30 @@ const Multimedia = (props) => {
         <SubTitle>Agrega una foto principal a tu producto</SubTitle>
       </TextContainer>
       {props.pictures.length < 10 && (
-        <Dropzone 
+        <Dropzone
           handleDrop={props.handleDropPictures}
-          {...props} 
+          {...props}
         />
       )}
-      <Previews 
+      <Previews
         pictures={props.pictures || []}
         handleDelete={props.handleDeletePictures}
       />
     </Box>
   )
+}
+
+Multimedia.propTypes = {
+  errors: array,
+  handleDelete: func,
+  handleDrop: func,
+  handleDeletePictures: func,
+  handleDeletePicture: func,
+  picture: oneOfType([string, object]),
+  pictures: array,
+  handleDropPictures: func,
+  handleDropPicture: func,
+  currentStep: number
 }
 
 const TextContainer = styled('div')`

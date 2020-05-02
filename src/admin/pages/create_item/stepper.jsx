@@ -1,8 +1,9 @@
-import React from 'react';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
+import React from 'react'
+import Stepper from '@material-ui/core/Stepper'
+import Step from '@material-ui/core/Step'
+import StepLabel from '@material-ui/core/StepLabel'
 import styled from 'styled-components'
+import { string, array } from 'prop-types'
 
 const StepLabelStyled = styled(StepLabel)`
   @media screen and (max-width:600px){
@@ -12,7 +13,7 @@ const StepLabelStyled = styled(StepLabel)`
   }
 `
 
-export default function StepperComponent(props) {
+export default function StepperComponent (props) {
   return (
     <div>
       <Stepper activeStep={props.currentStep} alternativeLabel>
@@ -24,4 +25,8 @@ export default function StepperComponent(props) {
       </Stepper>
     </div>
   )
+}
+StepperComponent.propTypes = {
+  currentStep: string,
+  steps: array
 }

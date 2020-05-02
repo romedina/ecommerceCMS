@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import  { useDropzone }  from  'react-dropzone'
+import { useDropzone } from 'react-dropzone'
+import { func, bool } from 'prop-types'
 
-function DropZone(props) {
+function DropZone (props) {
   const onDrop = (acceptedFiles, rejectedFiles) => {
     const files = acceptedFiles.map(file => {
       file.preview = URL.createObjectURL(file)
@@ -11,8 +12,8 @@ function DropZone(props) {
     props.handleDrop(files)
   }
 
-  const {getRootProps, getInputProps, isDragActive} = useDropzone({
-    accept: "image/jpeg, image/png, image/jpg",
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: 'image/jpeg, image/png, image/jpg',
     onDrop,
     multiple: props.multiple
   })
@@ -32,6 +33,11 @@ function DropZone(props) {
       )}
     </Drop>
   )
+}
+
+DropZone.propTypes = {
+  handleDrop: func,
+  multiple: bool
 }
 
 const Drop = styled('div')`

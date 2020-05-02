@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import Delete from '@material-ui/icons/Delete'
+import { func, array } from 'prop-types'
 
 const Previews = (props) => {
   return (
     <Container>
-      {props.pictures.map( (picture, index) =>
+      {props.pictures.map((picture, index) =>
         <ItemContent key={index}>
           <DeleteIcon onClick={() => props.handleDelete(picture)} />
           <Picture
@@ -15,6 +16,11 @@ const Previews = (props) => {
       )}
     </Container>
   )
+}
+
+Previews.propTypes = {
+  handleDelete: func,
+  pictures: array
 }
 
 export default Previews
