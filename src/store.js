@@ -10,6 +10,7 @@ const initialState = {}
 const session = sessionPersist.get()
 if (session) initialState.session = session
 
+// eslint-disable-next-line no-undef
 const cart = localStorage.getItem('cart')
 if (cart) initialState.cart = JSON.parse(cart)
 
