@@ -45,9 +45,6 @@
     "eslint": "eslint . --ext .jsx --ext .js",
     "eslint:fix": "eslint . --fix --ext .jsx --ext .js"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "yarn eslint"

@@ -11,11 +11,11 @@ const Shipping = props => {
       {props.steps[props.currentStep] !== 'Método de Pago' && (
         <Group>
           <Row>
-            <span>Contacto:</span>
+            <RowText>Contacto:</RowText>
             {props.data.email}
           </Row>
           <Row>
-            <span>Enviar a:</span>
+            <RowText>Enviar a:</RowText>
             {`${props.data.name} 
             ${props.data.lastname}, 
             ${props.data.street_number}, 
@@ -36,11 +36,19 @@ const Shipping = props => {
           )}
           <Row>
             <Radio value='PayPal' onClick={props.handleRemoveErrors} />
-            PayPal
+            <RowText>PayPal</RowText>
           </Row>
           <Row>
-            <Radio value='Konecta' onClick={props.handleRemoveErrors} />
-            Connecta
+            <Radio value='card' onClick={props.handleRemoveErrors} />
+            <RowText>Tarjeta de crédito o débito</RowText>
+          </Row>
+          <Row>
+            <Radio value='cash' onClick={props.handleRemoveErrors} />
+            <RowText>Pago en efectivo</RowText>
+          </Row>
+          <Row>
+            <Radio value='Spei' onClick={props.handleRemoveErrors} />
+            <RowText>SPEI</RowText>
           </Row>
         </Group>
       )}
@@ -66,10 +74,6 @@ const Row = styled.div`
   font-weight: bold;
   color: black;
   margin-bottom: 15px;
-  & span {
-    color: var(--user-gray);
-    margin-right: 15px;
-  }
 `
 const ChangeOption = styled.div`
   color: var(--user-gray);
@@ -86,5 +90,9 @@ const Describe = styled.h2`
 `
 const Alert = styled(AlertBase)`
   margin-bottom: 15px;
+`
+const RowText = styled.span`
+  color: var(--user-gray);
+  margin-right: 15px;
 `
 export default Shipping

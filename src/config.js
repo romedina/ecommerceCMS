@@ -6,6 +6,11 @@ const specificData = [
   { type: 'checkbox', keyname: 'keynameCheck', label: 'checkbox', options: [] }
 ]
 
+// openpay config
+window.OpenPay.setApiKey('pk_8c0a967b0d1746718bac594f45a9ddf4')
+window.OpenPay.setId('ms8ca8dnyp19kybqg0ay')
+window.OpenPay.setSandboxMode(true) // true || false
+
 // firebase config
 const firebase = {
   apiKey: 'AIzaSyDGmuP3Cp8D3LgMAr89IcZBfq4y1g9fzj4',

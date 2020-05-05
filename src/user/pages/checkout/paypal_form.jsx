@@ -1,3 +1,7 @@
+import React, { useEffect } from 'react'
+import styled from 'styled-components'
+
+// paypal config
 const paypalConfig = props => {
   return {
     createOrder: function (data, actions) {
@@ -21,4 +25,26 @@ const paypalConfig = props => {
   }
 }
 
-export default paypalConfig
+const PaypalForm = props => {
+  // render button paypal
+  useEffect(any => {
+    window.paypal.Buttons(paypalConfig({ ...props })).render('#render_button')
+  }, [])
+
+  return (
+    <ContentPaypal>
+      <div id='render_button' />
+    </ContentPaypal>
+  )
+}
+
+const ContentPaypal = styled.div`
+  display: flex;
+  min-height: 250px;
+  align-items: center;
+  & div {
+    width: 100%;
+  }
+`
+
+export default PaypalForm

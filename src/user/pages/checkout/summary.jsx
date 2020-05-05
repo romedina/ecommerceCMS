@@ -49,7 +49,7 @@ const Summary = props => {
           <Button handleClick={event => props.goToStep('Envío')} variant='outlined'>Volver a envío</Button>
         )}
         {props.steps[props.currentStep] === 'Confirmación' && (
-          <Button handleClick={event => props.goToStep('Envío')} variant='outlined'>Volver a método de pago</Button>
+          <Button handleClick={event => props.goToStep('Método de Pago')} variant='outlined'>Volver a método de pago</Button>
         )}
         {props.currentStep < 3 && (
           <Button handleClick={props.handleNext} variant='contained'>Continuar</Button>

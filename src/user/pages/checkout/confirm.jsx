@@ -1,34 +1,21 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Section from './Sections'
-import paypalOption from './paypal'
 import { object } from 'prop-types'
-import styled from 'styled-components'
+import Paypal from './paypal_form'
+import CreditCard from './creditCard'
 
 const Confirm = props => {
-  // render button paypal
-  useEffect(any => {
-    if (props.data.methodPay === 'PayPal') {
-      window.paypal.Buttons(paypalOption({ ...props })).render('#render_button')
-    }
-  }, [])
-
   return (
     <Section {...props}>
-      <ContentPaypal>
-        <div id='render_button' />
-      </ContentPaypal>
+      {props.data.methodPay === 'PayPal' && (
+        <Paypal {...props} />
+      )}
+      {props.data.methodPay === 'card' && (
+        <CreditCard {...props} />
+      )}
     </Section>
   )
 }
-
-const ContentPaypal = styled.div`
-  display: flex;
-  min-height: 250px;
-  align-items: center;
-  & div {
-    width: 100%;
-  }
-`
 
 Confirm.propTypes = {
   data: object

@@ -5,11 +5,12 @@ import Form from './form'
 import propTypes from 'prop-types'
 import Loading from './loading'
 import SuccessPaypal from './success'
+import styled from 'styled-components'
 
 const View = props => {
   return (
     <Layout>
-      <ContainerBase>
+      <Container>
         {props.currentView === 'form' && (
           <Form {...props} />
         )}
@@ -19,10 +20,14 @@ const View = props => {
         {props.currentView === 'SuccessPaypal' && (
           <SuccessPaypal />
         )}
-      </ContainerBase>
+      </Container>
     </Layout>
   )
 }
+
+const Container = styled(ContainerBase)`
+  background: #fff;
+`
 
 View.propTypes = {
   currentView: propTypes.string

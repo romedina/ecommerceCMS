@@ -42,10 +42,6 @@ const Checkout = props => {
     dispatch(setInitialState())
   }
 
-  const handlePay = event => {
-    window.alert('paying...')
-  }
-
   return (
     <View
       currentView={currentView}
@@ -53,7 +49,6 @@ const Checkout = props => {
       data={data}
       handleChange={handleChange}
       onApprove={onApprove}
-      handlePay={handlePay}
       shipping={shipping}
       totalPrice={totalPrice}
       subTotal={subTotal}
