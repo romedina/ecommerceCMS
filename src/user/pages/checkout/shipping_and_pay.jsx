@@ -47,7 +47,7 @@ const Shipping = props => {
             <RowText>Pago en efectivo</RowText>
           </Row>
           <Row>
-            <Radio value='Spei' onClick={props.handleRemoveErrors} />
+            <Radio value='spei' onClick={props.handleRemoveErrors} />
             <RowText>SPEI</RowText>
           </Row>
         </Group>

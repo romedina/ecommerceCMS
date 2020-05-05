@@ -34,3 +34,6 @@ code {
 * {
   box-sizing: border-box;
 }
+.paypal-button {
+  display: none;
+}

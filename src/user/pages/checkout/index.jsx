@@ -11,7 +11,7 @@ import { dispatch } from '../../../store'
 
 const Checkout = props => {
   const itemsOncart = useSelector(state => state.cart)
-  const [currentView, setCurrentView] = useState('form') // form || payedSuccess || tiketSuccess || speiSuccess
+  const [currentView, setCurrentView] = useState('form') // form || payedSuccess || successCash || successSpei
   const [data, setData] = useObjectState({})
 
   const shipping = 50
@@ -39,8 +39,16 @@ const Checkout = props => {
       methodPay,
       items
     })
+    if (data.methodPay === 'PayPal' || data.methodPay === 'card') {
+      setCurrentView('payedSuccess')
+    }
+    if (data.methodPay === 'cash') {
+      setCurrentView('successCash')
+    }
+    if (data.methodPay === 'spei') {
+      setCurrentView('successSpei')
+    }
     endProcess()
-    if (status === 'payed') setCurrentView('payedSuccess')
     dispatch(setInitialState())
   }
 

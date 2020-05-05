@@ -186,6 +186,7 @@ const CreditCard = props => {
           <Button onClick={onPayClick} variant='contained'>Pagar</Button>
         </Row>
       </Form>
+      <Button onClick={event => props.goToStep('Método de Pago')} variant='outlined'>Cambiar Método de pago</Button>
     </>
   )
 }
@@ -193,7 +194,8 @@ const CreditCard = props => {
 CreditCard.propTypes = {
   saveOperation: func,
   startProcess: func,
-  endProcess: func
+  endProcess: func,
+  goToStep: func
 }
 const Button = styled(ButtonBase)`
   width: 100%;
@@ -208,6 +210,7 @@ const Form = styled.div`
   padding: 20px;
   background-color: var(--user-gray-light);
   border-radius: 5px;
+  margin-bottom: 20px;
 `
 const Input = styled(InputBase)`
 

@@ -61,6 +61,7 @@ export const payWithSpei = error => new Promise(resolve => {
 export default {
   payouts: {
     card: payWidthCard,
-    store: payWithStore
+    store: payWithStore,
+    spei: payWithSpei
   }
 }

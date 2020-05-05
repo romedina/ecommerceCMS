@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import ButtonBase from '../../../components/inputs/Button'
+import { func } from 'prop-types'
 
 // paypal config
 const paypalConfig = props => {
@@ -31,12 +33,21 @@ const PaypalForm = props => {
   return (
     <ContentPaypal>
       <div id='render_button' />
+      <Button onClick={event => props.goToStep('Método de Pago')}>Cambiar método de pago</Button>
     </ContentPaypal>
   )
 }
 
+PaypalForm.propTypes = {
+  goToStep: func
+}
+const Button = styled(ButtonBase)`
+  width: 100%
+`
+
 const ContentPaypal = styled.div`
   display: flex;
+  flex-direction: column;
   min-height: 250px;
   align-items: center;
   & div {

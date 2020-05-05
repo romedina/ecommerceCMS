@@ -14,7 +14,7 @@ const Confirm = props => {
       {props.data.methodPay === 'card' && (
         <CreditCard {...props} />
       )}
-      {props.data.methodPay === 'cash' && (
+      {(props.data.methodPay === 'cash' || props.data.methodPay === 'spei') && (
         <Store {...props} />
       )}
     </Section>
