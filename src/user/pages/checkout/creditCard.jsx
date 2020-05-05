@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import InputBase from '../../../components/inputs/GroupInput'
 import useObjectState from '../../../hooks/useObjectState'
-import Button from '../../../components/inputs/Button'
+import ButtonBase from '../../../components/inputs/Button'
 import { Alert } from '@material-ui/lab'
 import { requires } from '../../../helpers/validateform'
 import { Fade } from '@material-ui/core'
@@ -183,7 +183,7 @@ const CreditCard = props => {
           </Flex>
         </Row>
         <Row>
-          <Button onClick={onPayClick} variant='contained' fullWidth>Pagar</Button>
+          <Button onClick={onPayClick} variant='contained'>Pagar</Button>
         </Row>
       </Form>
     </>
@@ -195,7 +195,9 @@ CreditCard.propTypes = {
   startProcess: func,
   endProcess: func
 }
-
+const Button = styled(ButtonBase)`
+  width: 100%;
+`
 const SelectStyled = styled(InputBase)`
   margin-right: 10px;
 `
