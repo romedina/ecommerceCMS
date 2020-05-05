@@ -6,7 +6,10 @@ import Button from '../../../components/inputs/Button'
 import { Alert } from '@material-ui/lab'
 import { requires } from '../../../helpers/validateform'
 import { Fade } from '@material-ui/core'
+import { func } from 'prop-types'
+import api from '../../../api'
 const { validateCardNumber, validateCVC, validateExpiry } = window.OpenPay.card
+
 var months = [
   { Enero: '01' },
   { Febrero: '02' },
@@ -93,20 +96,25 @@ const CreditCard = props => {
   }
 
   const handleProccessPayout = () => {
-    window.OpenPay.token.create(
-      {
-        card_number: state.number,
-        holder_name: state.name,
-        expiration_year: state.year,
-        expiration_month: state.month,
-        cvv2: state.cvv
-      },
-      response => {
-        const token = response.data.id
-        console.log(token)
-        window.alert('created token', token)
-      },
-      response => setFormState({ message: 'Pago incorrecto, intentelo de nuevo' })
+    props.startProcess()
+    window.OpenPay.token.create({
+      card_number: state.number,
+      holder_name: state.name,
+      expiration_year: state.year,
+      expiration_month: state.month,
+      cvv2: state.cvv
+    },
+    async response => {
+      // const token = response.data.id
+      const payStatus = await api.payouts.card(false) // true || false - for error
+      if (payStatus.error) {
+        setFormState({ message: 'No se pudo realizar el pago, intentalo nuevamente con otro metodo de pago' })
+        props.endProcess()
+      } else {
+        props.saveOperation('payed', response)
+      }
+    },
+    () => setFormState({ message: 'Pago incorrecto, intentelo de nuevo' })
     )
   }
 
@@ -181,6 +189,13 @@ const CreditCard = props => {
     </>
   )
 }
+
+CreditCard.propTypes = {
+  saveOperation: func,
+  startProcess: func,
+  endProcess: func
+}
+
 const SelectStyled = styled(InputBase)`
   margin-right: 10px;
 `

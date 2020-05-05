@@ -24,12 +24,14 @@ import About from './user/pages/about'
 import Contact from './user/pages/contact'
 import admin from './admin/hoc/admin'
 import Search from './user/pages/search'
+import Loading from './components/loading'
 
 function App () {
   return (
     <ThemeProvider theme={mytheme}>
       <DefineListeners>
         <Background>
+          <Loading />
           <Notification />
           <Alert />
           <Switch>

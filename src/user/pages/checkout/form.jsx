@@ -7,7 +7,7 @@ import validateForm from '../../../helpers/validateform'
 import Confirm from './confirm'
 
 const Form = props => {
-  const [currentStep, setCurrenStep] = useState(2)
+  const [currentStep, setCurrenStep] = useState(0)
   const steps = ['Información', 'Envío', 'Método de Pago', 'Confirmación']
   const [errors, setErrors] = useState({ errors: [], message: null })
 

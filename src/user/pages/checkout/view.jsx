@@ -17,7 +17,7 @@ const View = props => {
         {props.currentView === 'loading' && (
           <Loading />
         )}
-        {props.currentView === 'SuccessPaypal' && (
+        {props.currentView === 'payedSuccess' && (
           <SuccessPaypal />
         )}
       </Container>
