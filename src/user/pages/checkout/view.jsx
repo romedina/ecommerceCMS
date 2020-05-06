@@ -7,6 +7,7 @@ import Loading from './loading'
 import SuccessPaypal from './success'
 import styled from 'styled-components'
 import SuccessCash from './successCash'
+import SuccessSPei from './components/success_spei'
 
 const View = props => {
   return (
@@ -23,6 +24,9 @@ const View = props => {
         )}
         {props.currentView === 'successCash' && (
           <SuccessCash {...props} />
+        )}
+        {props.currentView === 'successSpei' && (
+          <SuccessSPei {...props} />
         )}
       </Container>
     </Layout>

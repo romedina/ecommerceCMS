@@ -62,6 +62,8 @@ const message = {
   copyright: '2020 derechos reservados'
 }
 
+export const companyName = 'somos csm'
+
 export default {
   firebase,
   specificData,
