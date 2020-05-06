@@ -71,6 +71,9 @@ Summary.propTypes = {
 const Content = styled.div`
   max-width: 450px;
   margin: auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
 `
 const Group = styled.div`
   padding: 20px 0px;

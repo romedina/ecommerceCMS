@@ -1,11 +1,12 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import styled from 'styled-components'
+import styled, { ThemeProvider as ThemeProviderStyled } from 'styled-components'
 import { ThemeProvider } from '@material-ui/core'
 import Alert from './components/alert'
 import Notification from './components/notification'
-import mytheme from './theme'
+import mytheme from './themeMaterial'
 import DefineListeners from './components/define_listeners'
+import theme from './theme'
 import './index.css'
 
 // pages
@@ -29,29 +30,31 @@ import Loading from './components/loading'
 function App () {
   return (
     <ThemeProvider theme={mytheme}>
-      <DefineListeners>
-        <Background>
-          <Loading />
-          <Notification />
-          <Alert />
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/create-item' component={CreateItem} />
-            <Route exact path='/my-articles' component={MyArticles} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/item/:id' component={Item} />
-            <Route exact path='/my-cart' component={MyCart} />
-            <Route exact path='/checkout' component={Checkout} />
-            <Route exact path='/about' component={About} />
-            <Route exact path='/contact' component={Contact} />
-            <Route exact path='/messages' component={Messages} />
-            <Route exact path='/orders' component={Orders} />
-            <Route exact path='/order/:period/:id' component={Order} />
-            <Route exact path='/admin' component={admin(props => (<Redirect to='/my-articles' />))} />
-            <Route exact path='/search' component={Search} />
-          </Switch>
-        </Background>
-      </DefineListeners>
+      <ThemeProviderStyled theme={theme}>
+        <DefineListeners>
+          <Background>
+            <Loading />
+            <Notification />
+            <Alert />
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/create-item' component={CreateItem} />
+              <Route exact path='/my-articles' component={MyArticles} />
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/item/:id' component={Item} />
+              <Route exact path='/my-cart' component={MyCart} />
+              <Route exact path='/checkout' component={Checkout} />
+              <Route exact path='/about' component={About} />
+              <Route exact path='/contact' component={Contact} />
+              <Route exact path='/messages' component={Messages} />
+              <Route exact path='/orders' component={Orders} />
+              <Route exact path='/order/:period/:id' component={Order} />
+              <Route exact path='/admin' component={admin(props => (<Redirect to='/my-articles' />))} />
+              <Route exact path='/search' component={Search} />
+            </Switch>
+          </Background>
+        </DefineListeners>
+      </ThemeProviderStyled>
     </ThemeProvider>
   )
 }

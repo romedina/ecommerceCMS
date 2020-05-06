@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import SearchBar from './search'
 import { dispatch } from '../../../store'
 import { setActive } from '../../../flux/search'
+import Logourl from '../../../assets/logo.png'
 
 const HeaderDesktop = (props) => {
   const cartCounter = useSelector(state => state.cart).length
@@ -20,7 +21,7 @@ const HeaderDesktop = (props) => {
     <FullWidth>
       <Container>
         <LogoContainer>
-          Put your logo here
+          <Logo src={Logourl} />
         </LogoContainer>
         {!isMenuActive && (
           <ActionContainer>
@@ -60,20 +61,28 @@ const CounterItems = styled.div`
   top: -5px;
   right: -5px;
 `
+const Logo = styled.img`
+  display: block;
+`
 
 const Container = styled(ContainerBase)`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 1.2em;
-  padding-bottom: 20px;
-  padding-top: 20px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  height: 60px;
+  overflow: hidden;
 `
 
 const FullWidth = styled('div')`
+  background-color: var(--header-secondary);
   border-bottom: 1px solid var(--user-secondary);
 `
 const LogoContainer = styled('div')`
   font-size: 1.2em;
+  width: 200px;
 `
 
 const ActionContainer = styled('div')`
@@ -91,15 +100,15 @@ const ButtonBaseStyled = styled(ButtonBase)`
 `
 
 const LinkStyled = styled(Link)`
+  color: var(--header-secondary-color);
   text-decoration: none;
   font-size: initial;
-  color: inherit;
   font-weight: bold;
 `
 const ActionsPrimary = styled('div')`
-
 `
 const ActionsItem = styled(ButtonBase)`
+  color: var(--header-secondary-color);
   position: relative;
   margin-right: 15px;
   &:last-of-type {

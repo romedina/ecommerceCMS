@@ -7,7 +7,7 @@ const Button = styled(ButtonBase)`
   border-radius: 5px;
   color: ${props => props.variant === 'contained' ? '#fff' : 'initial'};
   border: ${props => props.variant === 'contained' ? '' : '1px solid var(--user-gray-light)'};
-  background: ${props => props.variant === 'contained' ? 'var(--user-black)' : 'none'};
+  background: ${props => props.variant === 'contained' ? 'var(--user-black)' : '#fff'};
 `
 
 export default Button

@@ -38,7 +38,8 @@ const ContactItem = styled('div')`
 `
 
 const FullWidth = styled('header')`
-  background: var(--user-secondary);
+  background: var(--header-primary);
+  color: var(--header-primary-text);
 `
 
 const Container = styled(ContainerBase)`

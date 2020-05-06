@@ -36,6 +36,7 @@ const Flex = styled.div`
       width: 100%;
       margin: auto!important;
       max-width: 500px;
+      margin-bottom: 20px!important;
     }
   }
 `

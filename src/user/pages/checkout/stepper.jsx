@@ -7,7 +7,7 @@ import propTypes from 'prop-types'
 
 const StepperComponent = props => {
   return (
-    <div>
+    <Content>
       <Stepper activeStep={props.currentStep} alternativeLabel>
         {props.steps.map((label) => (
           <Step key={label}>
@@ -15,7 +15,7 @@ const StepperComponent = props => {
           </Step>
         ))}
       </Stepper>
-    </div>
+    </Content>
   )
 }
 
@@ -23,6 +23,13 @@ StepperComponent.propTypes = {
   currentStep: propTypes.number,
   steps: propTypes.array
 }
+
+const Content = styled.div`
+  & .MuiPaper-root {
+    background-color: initial!important;
+  }
+  margin-bottom: 25px;
+`
 
 const StepLabelStyled = styled(StepLabel)`
   @media screen and (max-width:600px){

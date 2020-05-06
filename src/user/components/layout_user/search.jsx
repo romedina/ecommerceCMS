@@ -41,13 +41,13 @@ const SearchContent = styled.div`
 `
 const Input = styled.input`
   width: 100%;
-  border: 1px solid #cdcdcd;
+  border: 1px solid var(--search-color);
   outline: 0px;
   border-radius: 5px 0px 0px 5px;
   padding: 0px 10px;
 `
 const Button = styled.div`
-  background: var(--user-gray-light);
+  background: var(--search-color);
   display: flex;
   justify-content: center;
   align-items: center;

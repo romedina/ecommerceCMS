@@ -6,6 +6,7 @@ import propTypes from 'prop-types'
 import Loading from './loading'
 import SuccessPaypal from './success'
 import styled from 'styled-components'
+import SuccessCash from './successCash'
 
 const View = props => {
   return (
@@ -20,13 +21,15 @@ const View = props => {
         {props.currentView === 'payedSuccess' && (
           <SuccessPaypal />
         )}
+        {props.currentView === 'successCash' && (
+          <SuccessCash {...props} />
+        )}
       </Container>
     </Layout>
   )
 }
 
 const Container = styled(ContainerBase)`
-  background: #fff;
 `
 
 View.propTypes = {

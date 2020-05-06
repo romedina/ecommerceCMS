@@ -17,6 +17,9 @@ input[type=number]::-webkit-outer-spin-button {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+img {
+  max-width: 100%;
+}
 
 :root {
   --main-blue-dark: #0E3F67;
@@ -30,6 +33,24 @@ code {
   --user-black-light: #504f4f;
   --user-gray: gray;
   --user-gray-light: gainsboro;
+
+  /* headers */
+  --header-primary:gray;
+  --header-primary-text: white;
+  --header-secondary:white;
+  --header-secondary-color: #000;
+  
+  /* search bar */
+  --search-color: gray;
+
+  /* backgrounds */
+  --background-secondary: white;
+
+  /* text */
+  --page-title: black;
+  --primary: black;
+  --paragraph: black;
+
 }
 * {
   box-sizing: border-box;

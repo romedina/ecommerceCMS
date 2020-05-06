@@ -9,6 +9,7 @@ import Container from '../../components/container'
 import Data from './data'
 import Skeleton from './skeleton'
 import Related from './related'
+import styled from 'styled-components'
 
 const Item = props => {
   const { id } = useParams()
@@ -48,9 +49,13 @@ const Item = props => {
 
   return (
     <LayoutUser>
-      <Container>
-        {loading && (<Skeleton />)}
-        {!loading && (
+      {loading && (
+        <Container>
+          <Skeleton />
+        </Container>
+      )}
+      {!loading && (
+        <ContainerOnlyDesk>
           <Data
             AddToCart={AddToCart}
             {...itemSelected}
@@ -58,11 +63,19 @@ const Item = props => {
             quantity={quantity}
             setQuantity={setQuantity}
           />
-        )}
+        </ContainerOnlyDesk>
+      )}
+      <Container>
         <Related />
       </Container>
     </LayoutUser>
   )
 }
+
+const ContainerOnlyDesk = styled(Container)`
+  @media screen and (max-width:700px){
+    padding: 0px;
+  }
+`
 
 export default Item

@@ -12,6 +12,7 @@ const Form = props => {
   const [errors, setErrors] = useState({ errors: [], message: null })
 
   const handleNext = event => {
+    window.scrollTo(0, 0)
     if (steps[currentStep] === 'Información') {
       const requires = ['email', 'name', 'lastname', 'street_number', 'suburb', 'city', 'state', 'number', 'postal_code']
       const inputWidthErrors = validateForm.requires(props.data, requires)

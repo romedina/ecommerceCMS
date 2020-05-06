@@ -9,7 +9,7 @@ import Currency from '../../../helpers/currency'
 
 const Data = props => {
   return (
-    <Flex>
+    <ItemContent>
       <PictureBox>
         <Picture
           pictures={[props.picture, ...props.pictures]}
@@ -39,7 +39,7 @@ const Data = props => {
           <Button handleClick={props.AddToCart} variant='contained'>Agregar al carrito</Button>
         </ButtonContainer>
       </DataBox>
-    </Flex>
+    </ItemContent>
   )
 }
 
@@ -73,12 +73,18 @@ const Button = styled(ButtonBase)`
   }
 `
 
-const Flex = styled.div`
+const ItemContent = styled.div`
+  background-color: var(--background-secondary);
+  border-radius: 5px;
+  border: 1px solid #cdcdcd;
+  padding: 50px 20px;
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   @media screen and (max-width:700px) {
     max-width: 550px;
     margin: auto;
+    padding: 0px;
   }
 `
 const PictureBox = styled.div`
@@ -88,7 +94,8 @@ const PictureBox = styled.div`
     width: 50%
   }
   @media screen and (max-width:700px) {
-    width: 100%
+    width: 100%;
+    padding: 0px;
   }
 `
 const DataBox = styled.div`
@@ -98,7 +105,8 @@ const DataBox = styled.div`
     width: 50%
   }
   @media screen and (max-width:700px) {
-    width: 100%
+    width: 100%;
+    padding: 20px;
   }
 `
 const Header = styled.div`

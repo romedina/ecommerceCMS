@@ -108,9 +108,10 @@ const CreditCard = props => {
       // const token = response.data.id
       const payStatus = await api.payouts.card(false) // true || false - for error
       if (payStatus.error) {
-        setFormState({ message: 'No se pudo realizar el pago, intentalo nuevamente con otro metodo de pago' })
+        setFormState({ message: 'No se pudo realizar el pago, intentalo nuevamente con otro método de pago' })
         props.endProcess()
       } else {
+        props.setSuccessMetadata(payStatus)
         props.saveOperation('payed', response)
       }
     },
@@ -195,7 +196,8 @@ CreditCard.propTypes = {
   saveOperation: func,
   startProcess: func,
   endProcess: func,
-  goToStep: func
+  goToStep: func,
+  setSuccessMetadata: func
 }
 const Button = styled(ButtonBase)`
   width: 100%;

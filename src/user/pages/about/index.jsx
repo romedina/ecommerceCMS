@@ -26,12 +26,18 @@ const About = props => {
 }
 
 const Container = styled(ContainerBase)`
+  margin: 40px auto;
   display: flex;
   justify-content: center;
   align-items: center;
   max-width: 1000px;
+  border-radius: 5px;
+  background-color: var(--background-secondary);
+  border: 1px solid #cdcdcd;
   @media screen and (max-width:700px){
     flex-direction: column;
+    margin: 0px;
+    border: none;
   }
 `
 const Picture = styled.img`
@@ -53,10 +59,12 @@ const Description = styled.section`
     width: 100%
   }
 `
-const P = styled.p``
+const P = styled.p`
+  color: var(--paragraph);
+`
 
 const Title = styled.h1`
-
+  color: var(--primary)
 `
 
 export default About

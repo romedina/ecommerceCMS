@@ -15,6 +15,7 @@ const Store = props => {
     console.log('paying with store')
     props.startProcess()
     const response = await api.payouts.store(false)
+    props.setSuccessMetadata(response)
     props.saveOperation('pending', response)
     props.endProcess()
   }
@@ -23,6 +24,7 @@ const Store = props => {
     console.log('paying with spei')
     props.startProcess()
     const response = await api.payouts.spei(false)
+    props.setSuccessMetadata(response)
     props.saveOperation('pending', response)
     props.endProcess()
   }
@@ -39,7 +41,8 @@ Store.propTypes = {
   endProcess: func,
   saveOperation: func,
   goToStep: func,
-  data: object
+  data: object,
+  setSuccessMetadata: func
 }
 
 const Button = styled(ButtonBase)`

@@ -9,10 +9,32 @@ import sumPrice from '../../../helpers/sumPrice'
 import { activeLoading, hideLoading } from '../../../flux/loading'
 import { dispatch } from '../../../store'
 
+const successMeta = {
+  id: 't6utz9dywve6zipnppys',
+  description: 'Cargo con tienda',
+  error_message: null,
+  authorization: null,
+  amount: 100,
+  operation_type: 'in',
+  payment_method: {
+    type: 'store',
+    reference: '123456ABCDEFGHIJLKMNOPQRSTVW010000',
+    barcode_url: 'https://sandbox-api.openpay.mx/barcode/123456ABCDEFGHIJLKMNOPQRSTVW010000?width=1&height=45'
+  },
+  order_id: 'oid-00052',
+  transaction_type: 'charge',
+  creation_date: '2013-12-05T17:50:09-06:00',
+  currency: 'MXN',
+  status: 'in_progress',
+  method: 'store',
+  error: false
+}
+
 const Checkout = props => {
   const itemsOncart = useSelector(state => state.cart)
-  const [currentView, setCurrentView] = useState('form') // form || payedSuccess || successCash || successSpei
+  const [currentView, setCurrentView] = useState('successCash') // form || payedSuccess || successCash || successSpei
   const [data, setData] = useObjectState({})
+  const [successMetadata, setSuccessMetadata] = useState(successMeta)
 
   const shipping = 50
   const subTotal = sumPrice(itemsOncart)
@@ -67,6 +89,8 @@ const Checkout = props => {
       shipping={shipping}
       totalPrice={totalPrice}
       subTotal={subTotal}
+      successMetadata={successMetadata}
+      setSuccessMetadata={setSuccessMetadata}
     />
   )
 }
