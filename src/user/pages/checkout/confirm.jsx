@@ -2,7 +2,7 @@ import React from 'react'
 import Section from './Sections'
 import { object } from 'prop-types'
 import Paypal from './paypal_form'
-import CreditCard from './creditCard'
+import CreditCard from './components/credit_card_form'
 import Store from './store'
 
 const Confirm = props => {

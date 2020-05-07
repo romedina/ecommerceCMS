@@ -14,3 +14,9 @@ export const toNumber = (string, maxLength) => {
 export const limit = (string, limit) => {
   return string.toString().slice(0, limit)
 }
+
+export const limitLength = (value, length) => {
+  var string = value.toString()
+  string = string.slice(0, length)
+  return string
+}

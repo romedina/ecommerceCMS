@@ -50,6 +50,7 @@ img {
   --page-title: black;
   --primary: black;
   --paragraph: black;
+  --empty-messages: #cce9ff;
 
 }
 * {

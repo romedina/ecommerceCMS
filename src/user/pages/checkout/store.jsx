@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ButtonBase from '../../../components/inputs/Button'
 import api from '../../../api'
-import { func, object } from 'prop-types'
+import { func, object, number } from 'prop-types'
 
 const Store = props => {
   const onPayClick = async event => {
@@ -14,7 +14,19 @@ const Store = props => {
   const payWithStore = async () => {
     console.log('paying with store')
     props.startProcess()
-    const response = await api.payouts.store(false)
+    const response = await api.payouts.store({
+      iva: '10',
+      subtotal: props.totalPrice.toString(),
+      method: 'store',
+      deviceId: window.OpenPay.deviceData.setup(),
+      description: 'pago de compras',
+      name: props.data.name,
+      phone: props.data.number,
+      mail: props.data.email,
+      amount: props.totalPrice.toString()
+    })
+
+    console.log('response', response)
     props.setSuccessMetadata(response)
     props.saveOperation('pending', response)
     props.endProcess()
@@ -42,7 +54,8 @@ Store.propTypes = {
   saveOperation: func,
   goToStep: func,
   data: object,
-  setSuccessMetadata: func
+  setSuccessMetadata: func,
+  totalPrice: number
 }
 
 const Button = styled(ButtonBase)`

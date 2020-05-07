@@ -2,7 +2,7 @@ import React from 'react'
 import propTypes from 'prop-types'
 import HeaderContact from './header_contact'
 import Header from './header'
-import Footer from './footer'
+import Footer from '../footer'
 
 const LayoutUser = (props) => {
   return (

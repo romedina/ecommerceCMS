@@ -1,13 +1,11 @@
+import { Button, SelectStyled, Row, Form, Input, Flex, FlexItem } from './styled'
 import React from 'react'
-import styled from 'styled-components'
-import InputBase from '../../../components/inputs/GroupInput'
-import useObjectState from '../../../hooks/useObjectState'
-import ButtonBase from '../../../components/inputs/Button'
+import useObjectState from '../../../../../hooks/useObjectState'
 import { Alert } from '@material-ui/lab'
-import { requires } from '../../../helpers/validateform'
+import { requires } from '../../../../../helpers/validateform'
 import { Fade } from '@material-ui/core'
-import { func } from 'prop-types'
-import api from '../../../api'
+import { func, object, oneOfType, string, number } from 'prop-types'
+import api from '../../../../../api'
 const { validateCardNumber, validateCVC, validateExpiry } = window.OpenPay.card
 
 var months = [
@@ -96,6 +94,7 @@ const CreditCard = props => {
   }
 
   const handleProccessPayout = () => {
+    const deviceSessionId = window.OpenPay.deviceData.setup()
     props.startProcess()
     window.OpenPay.token.create({
       card_number: state.number,
@@ -105,8 +104,21 @@ const CreditCard = props => {
       cvv2: state.cvv
     },
     async response => {
-      // const token = response.data.id
-      const payStatus = await api.payouts.card(false) // true || false - for error
+      const token = response.data.id
+      const payStatus = await api.payouts.card({
+        iva: '10',
+        subtotal: props.totalPrice.toString(),
+        method: 'card',
+        deviceId: deviceSessionId,
+        description: 'pago de compras',
+        token,
+        name: state.name,
+        phone: props.data.number,
+        mail: props.data.email,
+        amount: props.totalPrice.toString()
+      })
+      console.log(payStatus)
+
       if (payStatus.error) {
         setFormState({ message: 'No se pudo realizar el pago, intentalo nuevamente con otro método de pago' })
         props.endProcess()
@@ -115,7 +127,10 @@ const CreditCard = props => {
         props.saveOperation('payed', response)
       }
     },
-    () => setFormState({ message: 'Pago incorrecto, intentelo de nuevo' })
+    () => {
+      setFormState({ message: 'Pago incorrecto, intentelo de nuevo' })
+      props.endProcess()
+    }
     )
   }
 
@@ -128,9 +143,10 @@ const CreditCard = props => {
           </div>
         </Fade>
       </Row>
-      <Form>
+      <Form id='credit_card_form'>
         <Row>
           <Input
+            maxlength={80}
             state={state}
             onChange={onAnyInputChange}
             errors={formState.errors}
@@ -140,6 +156,7 @@ const CreditCard = props => {
         </Row>
         <Row>
           <Input
+            maxlength={16}
             state={state}
             onChange={onAnyInputChange}
             errors={formState.errors}
@@ -174,6 +191,8 @@ const CreditCard = props => {
             </FlexItem>
             <FlexItem>
               <Input
+                filter='number'
+                maxlength={4}
                 state={state}
                 placeholder='CVV'
                 name='cvv'
@@ -186,6 +205,7 @@ const CreditCard = props => {
         <Row>
           <Button onClick={onPayClick} variant='contained'>Pagar</Button>
         </Row>
+        <input type='hidden' name='code' />
       </Form>
       <Button onClick={event => props.goToStep('Método de Pago')} variant='outlined'>Cambiar Método de pago</Button>
     </>
@@ -197,32 +217,9 @@ CreditCard.propTypes = {
   startProcess: func,
   endProcess: func,
   goToStep: func,
-  setSuccessMetadata: func
+  setSuccessMetadata: func,
+  data: object,
+  totalPrice: oneOfType([string, number])
 }
-const Button = styled(ButtonBase)`
-  width: 100%;
-`
-const SelectStyled = styled(InputBase)`
-  margin-right: 10px;
-`
-const Row = styled.div`
-  margin-bottom: 15px;
-`
-const Form = styled.div`
-  padding: 20px;
-  background-color: var(--user-gray-light);
-  border-radius: 5px;
-  margin-bottom: 20px;
-`
-const Input = styled(InputBase)`
-
-`
-const Flex = styled.div`
-  display: flex;
-  justify-content: center;
-`
-const FlexItem = styled.div`
-  width: 33%;
-`
 
 export default CreditCard

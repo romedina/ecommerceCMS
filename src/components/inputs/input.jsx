@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { func, string, oneOf, oneOfType, number, bool } from 'prop-types'
-import { toNumber } from '../../helpers/input_parser'
+import { toNumber, limitLength } from '../../helpers/input_parser'
 import { TextField } from '@material-ui/core'
 
 const Input = props => {
   const onChange = event => {
+    if (props.maxlength) event.target.value = limitLength(event.target.value, props.maxlength)
     if (props.filter === 'number') event.target.value = toNumber(event.target.value)
     props.onChange(event)
   }
@@ -36,7 +37,8 @@ Input.propTypes = {
   name: string,
   placeholder: string,
   error: bool,
-  onFocus: func
+  onFocus: func,
+  maxlength: number
 }
 
 const InputStyled = styled(TextField)`

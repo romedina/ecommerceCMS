@@ -7,9 +7,10 @@ const specificData = [
 ]
 
 // openpay config
-window.OpenPay.setApiKey('pk_8c0a967b0d1746718bac594f45a9ddf4')
-window.OpenPay.setId('ms8ca8dnyp19kybqg0ay')
+window.OpenPay.setApiKey('pk_e5f81cea310948fbab3ffe675d64d12c')
+window.OpenPay.setId('mv6scwapmuqsocsjucwh')
 window.OpenPay.setSandboxMode(true) // true || false
+console.log(window.OpenPay.deviceData())
 
 // firebase config
 const firebase = {
