@@ -39,5 +39,6 @@ const Alert = styled(AlertBase)`
   min-height: 70px;
   align-items: center;
   font-size: 1.2em;
+  box-shadow: 2px 2px 5px #000;
 `
 export default Notification

@@ -10,7 +10,7 @@ import LoyaltyIcon from '@material-ui/icons/Loyalty'
 
 const View = props => {
   return (
-    <Layout>
+    <Layout title='Mis Pedidos'>
       <Title>Mis Pedidos</Title>
       <PeriodSelector {...props} />
       {props.items.length > 0 && !props.loading && (

@@ -87,7 +87,7 @@ const MyArticles = () => {
   }
 
   return (
-    <LayoutAdmin>
+    <LayoutAdmin title='Mis Productos'>
       <Header>
         <PageTitle>Mis Productos</PageTitle>
         <Search query={query} onQueryChange={onQueryChange} />

@@ -1,14 +1,21 @@
 import React from 'react'
-import propTypes from 'prop-types'
+import propTypes, { string } from 'prop-types'
 import styled from 'styled-components'
 import shortText from '../../helpers/short_text'
 import { Button } from '@material-ui/core'
 import currency from '../../helpers/currency'
+import { useHistory } from 'react-router-dom'
 
 const Article = (props) => {
+  const history = useHistory()
+
+  const onCLick = event => {
+    history.push(`/item/${props.id}`)
+  }
+
   return (
     <Wrapped>
-      <ItemContent>
+      <ItemContent onClick={onCLick}>
         {!props.isActive && (<Shadow />)}
         <Picture src={props.picture} />
         <Actions>
@@ -16,7 +23,7 @@ const Article = (props) => {
           <Title>{props.title}</Title>
           <Description>{shortText(props.description)}</Description>
         </Actions>
-        <ButtonContainer>
+        <ButtonContainer onClick={event => event.stopPropagation()}>
           <ButtonStyled onClick={() => props.handleEdit(props)} color='secondary' variant='outlined'>Editar</ButtonStyled>
           <ButtonStyled onClick={() => props.handleStatus(props)} color='secondary' variant='contained'>{props.isActive ? 'Desactivar' : 'Activar'}</ButtonStyled>
           <ButtonStyled onClick={() => props.handleDelete(props)} color='secondary' variant='contained'>Eliminar</ButtonStyled>
@@ -34,7 +41,8 @@ Article.propTypes = {
   handleEdit: propTypes.func,
   handleDelete: propTypes.func,
   handleStatus: propTypes.func,
-  isActive: propTypes.bool
+  isActive: propTypes.bool,
+  id: string
 }
 
 const Wrapped = styled.article`
@@ -48,12 +56,18 @@ const Wrapped = styled.article`
 `
 
 const ItemContent = styled('div')`
+  cursor: pointer;
   position: relative;
   border-radius: 7px;
   overflow: hidden;
   display: block;
   min-height: 100%;
-  box-shadow: 1px 1px 3px #008ffd38;
+  border: 1px solid #008ffd38;
+  transition: all 300ms;
+  &:hover{
+    box-shadow: 0px 0px 5px #008ffd38;
+    transform: scale(1.03)
+  }
 `
 const Picture = styled.img`
   width: 100%;

@@ -4,11 +4,12 @@ import Container from '../../components/layout_admin'
 import Stepper from './stepper'
 import GeneralInfo from './general_info'
 import Multimedia from './multimedia'
-import { Typography, Button } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import propTypes from 'prop-types'
 import Summary from './summary'
 import Loading from './loading'
 import Success from './success'
+import Title from '../../components/page_title'
 
 const View = (props) => {
   const handleClick = () => {
@@ -79,10 +80,6 @@ const ButtonsContainer = styled('div')`
   @media screen and (max-width:500px){
     justify-content: center;
   }
-`
-
-const Title = styled(Typography)`
-  color: var(--main-blue);
 `
 const ButtonStyled = styled(Button)`
   min-width: 120px;

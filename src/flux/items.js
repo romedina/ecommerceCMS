@@ -1,7 +1,7 @@
 import createFlux from '../createFlux'
 import article from '../modules/article'
 import { toObject, toArray } from '../helpers/transformer'
-
+import { setNotification } from './notification'
 const flux = createFlux('ITEMS')
 const initialState = {
   items: {},
@@ -56,6 +56,10 @@ export const disable = (id) => async (dispatch) => {
 export const deleteItems = (id) => async (dispatch) => {
   await article.delete(id)
   dispatch(deleteItem(id))
+  dispatch(setNotification({
+    type: 'info',
+    message: 'Su artículo se ha eliminado.'
+  }))
 }
 
 // actions

@@ -8,7 +8,7 @@ import Responsive from '../../components/responsive'
 const ContainerComponent = (props) => {
   return (
     <>
-      <Responsive rule='max-width:600px'>
+      <Responsive rule='max-width:700px'>
         <HeaderMobile {...props} />
       </Responsive>
       <Container id='container_admin'>

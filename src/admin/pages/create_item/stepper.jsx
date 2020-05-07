@@ -3,7 +3,7 @@ import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
 import styled from 'styled-components'
-import { string, array } from 'prop-types'
+import { array, number } from 'prop-types'
 
 const StepLabelStyled = styled(StepLabel)`
   @media screen and (max-width:600px){
@@ -27,6 +27,6 @@ export default function StepperComponent (props) {
   )
 }
 StepperComponent.propTypes = {
-  currentStep: string,
+  currentStep: number,
   steps: array
 }

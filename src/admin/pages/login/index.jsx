@@ -22,7 +22,8 @@ const Login = () => {
     setPassword(event.target.value)
   }
 
-  const handleClick = () => {
+  const onSubmit = event => {
+    event.preventDefault()
     dispatch(start({ email, password }))
   }
 
@@ -33,7 +34,7 @@ const Login = () => {
           <CircularProgress />
         )}
         {!loading && (
-          <Box>
+          <Box onSubmit={onSubmit}>
             <Fade in={error}>
               <Alert severity='error'>Correo o contraseña incorrecta</Alert>
             </Fade>
@@ -59,7 +60,7 @@ const Login = () => {
               />
             </InputGroup>
             <InputGroup>
-              <Button onClick={handleClick} variant='contained' color='primary'>Entrar</Button>
+              <Button type='submit' variant='contained' color='primary'>Entrar</Button>
             </InputGroup>
           </Box>
         )}
@@ -69,7 +70,7 @@ const Login = () => {
 }
 
 const Content = styled('div')`
-  min-height: 95vh;
+  min-height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,7 +98,7 @@ const OutlinedInputStyled = styled(OutlinedInput)`
     color: var(--main-blue)
   }
 `
-const Box = styled('div')`
+const Box = styled('form')`
   width: 40%;
   font-size: 1.2em;
   @media screen and (max-width:1000px){

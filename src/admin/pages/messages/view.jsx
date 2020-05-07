@@ -11,7 +11,7 @@ import Modal from './modal'
 
 const ViewMessages = props => {
   return (
-    <Layout>
+    <Layout title='Mensajes'>
       <Modal {...props} />
       <Content>
         <Title>Mensajes</Title>

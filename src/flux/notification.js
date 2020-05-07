@@ -21,7 +21,7 @@ export const setNotification = data => async dispatch => {
   setTimeout(event => dispatch(remove(key)), 5000)
 }
 
-export const addNotification = flux.createAction('SET_NOTIFICATION', (state, payload) => {
+const addNotification = flux.createAction('SET_NOTIFICATION', (state, payload) => {
   return [{ ...payload, open: true }, ...state]
 })
 
