@@ -2,13 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 import HeaderSuccess from './components/success'
 import TicketStore from './components/store_ticket'
+import Container from '../../components/container'
 
 const successStore = props => {
   return (
-    <Content>
+    <>
       <HeaderSuccess />
-      <TicketStore {...props} />
-    </Content>
+      <Container>
+        <Content>
+          <TicketStore {...props} />
+        </Content>
+      </Container>
+    </>
   )
 }
 

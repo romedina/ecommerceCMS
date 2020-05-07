@@ -1,28 +1,28 @@
 import styled from 'styled-components'
-import CheckRoundedIcon from '@material-ui/icons/CheckRounded'
+import { CheckCircleOutlined } from '@material-ui/icons'
 
 export const Content = styled.div`
   display: flex;
-  background: #fff;
-  border: 1px solid #cdcdcd;
-  padding: 10px;
+  background: #25ae88;
+  padding: 50px 15px;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   flex-direction: column;
+  color: #fff;
 `
 export const Title = styled.h1`
   color: inherit;
 `
-export const Icon = styled(CheckRoundedIcon)`
+export const Icon = styled(CheckCircleOutlined)`
   color: inherit;
   font-size: 100px;
 `
 
 export const Message = styled.p`
   color: inherit;
-  font-size: 1.1em;
+  font-size: 1.3em;
   text-align: center;
 `

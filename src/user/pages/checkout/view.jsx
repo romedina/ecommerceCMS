@@ -12,23 +12,27 @@ import SuccessSPei from './components/success_spei'
 const View = props => {
   return (
     <Layout>
-      <Container>
-        {props.currentView === 'form' && (
+      {props.currentView === 'form' && (
+        <Container>
           <Form {...props} />
-        )}
-        {props.currentView === 'loading' && (
+        </Container>
+      )}
+      {props.currentView === 'loading' && (
+        <Container>
           <Loading />
-        )}
-        {props.currentView === 'payedSuccess' && (
+        </Container>
+      )}
+      {props.currentView === 'payedSuccess' && (
+        <Container>
           <SuccessPaypal />
-        )}
-        {props.currentView === 'successCash' && (
-          <SuccessCash {...props} />
-        )}
-        {props.currentView === 'successSpei' && (
-          <SuccessSPei {...props} />
-        )}
-      </Container>
+        </Container>
+      )}
+      {props.currentView === 'successCash' && (
+        <SuccessCash {...props} />
+      )}
+      {props.currentView === 'successSpei' && (
+        <SuccessSPei {...props} />
+      )}
     </Layout>
   )
 }
