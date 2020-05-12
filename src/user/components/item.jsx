@@ -58,9 +58,8 @@ const ItemBody = styled(ButtonBase)`
   flex-direction: column;
   justify-content: flex-start;
   transition: all 300ms;
-  border: 1px solid #cdcdcd;
   &:hover {
-    transform: scale(1.03);
+    transform: scale(1.01);
     box-shadow: 2px 2px 10px gray;
   }
 `

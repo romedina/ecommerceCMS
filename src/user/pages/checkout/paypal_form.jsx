@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import ButtonBase from '../../../components/inputs/Button'
-import { func } from 'prop-types'
+import { func, number } from 'prop-types'
 
 // paypal config
 const paypalConfig = props => {
@@ -27,8 +27,9 @@ const paypalConfig = props => {
 const PaypalForm = props => {
   // render button paypal
   useEffect(any => {
+    window.document.getElementById('render_button').innerHTML = ''
     window.paypal.Buttons(paypalConfig({ ...props })).render('#render_button')
-  }, [])
+  }, [props.totalPrice])
 
   return (
     <ContentPaypal>
@@ -39,10 +40,11 @@ const PaypalForm = props => {
 }
 
 PaypalForm.propTypes = {
-  goToStep: func
+  goToStep: func,
+  totalPrice: number
 }
 const Button = styled(ButtonBase)`
-  width: 100%
+  width: 100%;
 `
 
 const ContentPaypal = styled.div`

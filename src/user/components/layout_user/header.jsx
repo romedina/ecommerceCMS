@@ -18,7 +18,9 @@ const Header = (props) => {
 }
 
 const HeaderContainer = styled('div')`
-
+  position: sticky;
+  top: 0;
+  z-index: 10;
 `
 
 export default Header

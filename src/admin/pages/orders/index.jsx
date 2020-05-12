@@ -16,7 +16,7 @@ const Orders = props => {
   // fetch items if not exists
   useEffect(() => {
     if (!itemOnCurrentPeriod.length) dispatch(fetchItems(currentPeriod))
-  }, [currentPeriod, dispatch])
+  }, [currentPeriod, dispatch, itemOnCurrentPeriod.length])
 
   return (
     <View

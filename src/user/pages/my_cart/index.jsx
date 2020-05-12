@@ -6,7 +6,7 @@ import Item from './compoenents/item'
 import { updateQuantity, RemoveItem } from '../../../flux/cart'
 import { setAlert } from '../../../flux/alert'
 import Currency from '../../../helpers/currency'
-import Button from '../../components/button'
+import Button from '../../../components/inputs/Button'
 import sumePrice from '../../../helpers/sumPrice'
 import Empty from './compoenents/empty'
 

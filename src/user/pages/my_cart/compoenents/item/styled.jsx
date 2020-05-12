@@ -7,7 +7,6 @@ export const Content = styled.div`
   padding: 10px;
   margin: 5px 0px;
   border-radius: 5px;
-  border: 1px solid var(--user-gray-light);
   justify-content: space-between;
   font-size: 1.2em;
   font-weight: bold;

@@ -14,7 +14,7 @@ const Messages = props => {
   useEffect(() => {
     dispatch(resetCounter())
     if (items.length === 0) dispatch(fetchItems())
-  }, [])
+  }, [dispatch, items.length])
 
   // pagination with scroll
   useEffect(event => {

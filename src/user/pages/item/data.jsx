@@ -76,7 +76,6 @@ const Button = styled(ButtonBase)`
 const ItemContent = styled.div`
   background-color: var(--background-secondary);
   border-radius: 5px;
-  border: 1px solid #cdcdcd;
   padding: 50px 20px;
   display: flex;
   align-items: center;

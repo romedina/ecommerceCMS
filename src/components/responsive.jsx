@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import propTypes from 'prop-types'
 
 const Responsive = (props) => {
-  const { matches } = window.matchMedia(`(${props.rule})`)
+  const mediaQuery = window.matchMedia(`(${props.rule})`)
+  const [, reRender] = useState(0)
 
-  if (!matches) return null
+  const handleChangeSize = event => {
+    reRender(current => current + 1)
+  }
+
+  useEffect(() => {
+    mediaQuery.addListener(handleChangeSize)
+    return event => mediaQuery.removeListener(handleChangeSize)
+  }, [mediaQuery])
+
+  if (!mediaQuery.matches) return null
+
   return (
     <>
       {props.children}
@@ -17,4 +28,4 @@ Responsive.propTypes = {
   rule: propTypes.string
 }
 
-export default Responsive
+export default memo(Responsive)

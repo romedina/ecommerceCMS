@@ -3,7 +3,6 @@ import React from 'react'
 import useObjectState from '../../../../../hooks/useObjectState'
 import { Alert } from '@material-ui/lab'
 import { requires } from '../../../../../helpers/validateform'
-import { Fade } from '@material-ui/core'
 import { func, object, oneOfType, string, number } from 'prop-types'
 import api from '../../../../../api'
 const { validateCardNumber, validateCVC, validateExpiry } = window.OpenPay.card
@@ -137,11 +136,9 @@ const CreditCard = props => {
   return (
     <>
       <Row>
-        <Fade in={!!formState.message}>
-          <div>
-            <Alert severity='error'>{formState.message || ''}</Alert>
-          </div>
-        </Fade>
+        {!!formState.message && (
+          <Alert severity='error'>{formState.message || ''}</Alert>
+        )}
       </Row>
       <Form id='credit_card_form'>
         <Row>

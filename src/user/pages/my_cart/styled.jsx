@@ -46,6 +46,7 @@ export const ButtonContainer = styled.div`
 `
 export const ButtonStyled = styled.div`
   max-width:180px;
+  width:100%;
   padding-top: 15px;
   padding-bottom: 15px;
 `

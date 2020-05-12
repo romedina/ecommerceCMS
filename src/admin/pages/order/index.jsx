@@ -15,7 +15,7 @@ const Order = props => {
   // fetch if not exist
   useEffect(() => {
     if (!itemSelected) dispatch(fetchItems(period))
-  }, [])
+  }, [itemSelected, dispatch, period])
 
   // update viewed
   useEffect(() => {
