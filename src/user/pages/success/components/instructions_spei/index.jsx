@@ -2,12 +2,13 @@ import React from 'react'
 import { Button, TitleCenter, Row, Content, Logo, Amount, PriceBox, Title, Text, PriceShadow, Body, InstructionsContent, Instructions } from './styled'
 import LogoSRC from '../../../../../assets/logo.png'
 import { Box } from '@material-ui/core'
-import { companyName } from '../../../../../config'
+import { companyName, payDayLimitForBank } from '../../../../../config'
 import currency from '../../../../../helpers/currency'
-import { object } from 'prop-types'
+import { object, number, string } from 'prop-types'
+import { toString, addDays } from '../../../../../helpers/date'
 
 const InstructionsSpei = props => {
-  const data = { ...props.successMetadata }
+  var payDayLimit = toString(addDays(props.creation_date, payDayLimitForBank))
 
   return (
     <>
@@ -16,7 +17,7 @@ const InstructionsSpei = props => {
         <Body>
           <Amount>
             <Title>Fecha limite de pago</Title>
-            <Text>12 de abril 1999</Text>
+            <Text>{payDayLimit}</Text>
             <Title>Beneficiario</Title>
             <Text>{companyName}</Text>
           </Amount>
@@ -24,7 +25,7 @@ const InstructionsSpei = props => {
             <TitleCenter>Transferencia Interbancaria (SPEI)</TitleCenter>
             <br />
             <PriceShadow>
-              $ {currency.formatMoney(data.amount)} MXN
+              $ {currency.formatMoney(props.amount)} MXN
             </PriceShadow>
           </PriceBox>
         </Body>
@@ -35,11 +36,11 @@ const InstructionsSpei = props => {
               <TitleCenter>Desde BBVA</TitleCenter>
               <ol>
                 <li>Dentro del menú de "Pagar" seleccione la opción "De Servicios" e ingrese al siguiente "Número de convenio CIE":</li>
-                <Row><span>Número de Convenio CIE:</span> {data.payment_method.agreement}</Row>
+                <Row><span>Número de Convenio CIE:</span> {props.payment_method.agreement}</Row>
                 <li>Ingrese los datos de registro para concluir con la operación.</li>
-                <Row><span>Referencia:</span> 00000000</Row>
-                <Row><span>Importe:</span> $ {currency.formatMoney(data.amount)} MXN</Row>
-                <Row><span>Concepto:</span> pago de compra</Row>
+                <Row><span>Referencia:</span> {props.payment_method.name}</Row>
+                <Row><span>Importe:</span> $ {currency.formatMoney(props.amount)} MXN</Row>
+                <Row><span>Concepto:</span> Checkout</Row>
               </ol>
             </Instructions>
             <Instructions>
@@ -50,9 +51,9 @@ const InstructionsSpei = props => {
                 </li>
                 <Row><span>Beneficiario:</span> {companyName}</Row>
                 <Row><span>Banco Destino:</span>BBVA Bancomer</Row>
-                <Row><span>CLABE:</span>{data.payment_method.clabe}</Row>
-                <Row><span>Concepto de Pago:</span> {data.payment_method.name}</Row>
-                <Row><span>Referencia:</span> 1411217</Row>
+                <Row><span>CLABE:</span>{props.payment_method.clabe}</Row>
+                <Row><span>Concepto de Pago:</span> {props.payment_method.name}</Row>
+                <Row><span>Referencia:</span> {props.payment_method.agreement}</Row>
               </ol>
             </Instructions>
           </InstructionsContent>
@@ -68,7 +69,9 @@ const InstructionsSpei = props => {
 }
 
 InstructionsSpei.propTypes = {
-  successMetadata: object
+  payment_method: object,
+  amount: number,
+  creation_date: string
 }
 
 export default InstructionsSpei
