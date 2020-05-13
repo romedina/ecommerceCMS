@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { CheckCircleOutlined } from '@material-ui/icons'
 
 export const Content = styled.div`
+  min-height: 350px;
   display: flex;
   background: #25ae88;
   padding: 50px 15px;

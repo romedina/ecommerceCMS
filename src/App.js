@@ -26,6 +26,7 @@ import Contact from './user/pages/contact'
 import admin from './admin/hoc/admin'
 import Search from './user/pages/search'
 import Loading from './components/loading'
+import Success from './user/pages/success'
 
 function App () {
   return (
@@ -51,6 +52,7 @@ function App () {
               <Route exact path='/order/:period/:id' component={Order} />
               <Route exact path='/admin' component={admin(props => (<Redirect to='/my-articles' />))} />
               <Route exact path='/search' component={Search} />
+              <Route exact path='/success' component={Success} />
             </Switch>
           </Background>
         </DefineListeners>

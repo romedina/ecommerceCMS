@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useState } from 'react'
+import React from 'react'
 import View from './view'
 import useObjectState from '../../../hooks/useObjectState'
 import orders from '../../../modules/orders'
@@ -8,12 +8,12 @@ import { setInitialState } from '../../../flux/cart'
 import sumPrice from '../../../helpers/sumPrice'
 import { activeLoading, hideLoading } from '../../../flux/loading'
 import { dispatch } from '../../../store'
+import { useHistory } from 'react-router-dom'
 
 const Checkout = props => {
+  const history = useHistory()
   const itemsOncart = useSelector(state => state.cart)
-  const [currentView, setCurrentView] = useState('form') // form || payedSuccess || successCash || successSpei
   const [data, setData] = useObjectState({})
-  const [successMetadata, setSuccessMetadata] = useState(null)
 
   const shipping = 50
   const subTotal = sumPrice(itemsOncart)
@@ -23,7 +23,7 @@ const Checkout = props => {
     setData({ [name]: value })
   }
 
-  const saveOperation = async (status, metadata = {}) => {
+  const saveOperation = async (status, metadata = {}, successMetadata = {}) => {
     const { email, name, lastname, street_number, suburb, city, state, postal_code, number, methodPay } = data
     const items = itemsOncart.map(item => {
       const { id, price, quantity, sku, title, picture } = item
@@ -40,16 +40,8 @@ const Checkout = props => {
       methodPay,
       items
     })
-    if (data.methodPay === 'PayPal' || data.methodPay === 'card') {
-      setCurrentView('payedSuccess')
-    }
-    if (data.methodPay === 'cash') {
-      setCurrentView('successCash')
-    }
-    if (data.methodPay === 'spei') {
-      setCurrentView('successSpei')
-    }
     endProcess()
+    history.push('/success', { ...successMetadata, methodPay })
     dispatch(setInitialState())
   }
 
@@ -60,16 +52,12 @@ const Checkout = props => {
     <View
       startProcess={startProcess}
       endProcess={endProcess}
-      currentView={currentView}
-      setCurrentView={setCurrentView}
       data={data}
       handleChange={handleChange}
       saveOperation={saveOperation}
       shipping={shipping}
       totalPrice={totalPrice}
       subTotal={subTotal}
-      successMetadata={successMetadata}
-      setSuccessMetadata={setSuccessMetadata}
     />
   )
 }

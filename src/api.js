@@ -1,11 +1,16 @@
 import axios from 'axios'
 
 const connect = async config => {
-  const defautlConfig = {
-    method: 'post'
+  try {
+    const defautlConfig = {
+      method: 'post'
+    }
+    const response = await axios({ ...defautlConfig, ...config })
+    return response.data
+  } catch (error) {
+    console.log(error.response.data)
+    return error.response.data
   }
-  const response = await axios({ ...defautlConfig, ...config })
-  return response.data
 }
 
 export const payWidthCard = data => {

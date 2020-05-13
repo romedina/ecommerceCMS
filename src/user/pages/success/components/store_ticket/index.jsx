@@ -4,12 +4,9 @@ import Logosrc from '../../../../../assets/logo.png'
 import paynetStoresSrc from '../../../../../assets/paynetStores.gif'
 import paynetLogo from '../../../../../assets/paynet.png'
 import currency from '../../../../../helpers/currency'
-
-import { object } from 'prop-types'
+import { string, object, number } from 'prop-types'
 
 const StoreTickect = props => {
-  const data = { ...props.successMetadata }
-
   const onPrint = event => {
     window.print()
   }
@@ -26,22 +23,22 @@ const StoreTickect = props => {
         </Header>
         <Body>
           <Title>Orden:</Title>
-          <Text>{data.order_id}</Text>
+          <Text>{props.order_id}</Text>
         </Body>
         <Body>
           <Title>Fecha limite de pago:</Title>
-          <Text>{data.creation_date}</Text>
+          <Text>{props.creation_date}</Text>
         </Body>
         <Body>
           <Title>Codigo de barras:</Title>
-          <Barcode src={data.payment_method.barcode_url} />
-          <Text>{data.payment_method.reference}</Text> <br />
+          <Barcode src={props.payment_method.barcode_url} />
+          <Text>{props.payment_method.reference}</Text> <br />
           <Text>En caso de no poder leer el código de barras, escribir el código tal como se muestra.</Text>
         </Body>
         <Body>
           <BoxPrice>
             Total a pagar <br />
-            {currency.formatMoney(data.amount)} MXN
+            {currency.formatMoney(props.amount)} MXN
           </BoxPrice>
         </Body>
         <InstructionsContent>
@@ -74,7 +71,11 @@ const StoreTickect = props => {
 }
 
 StoreTickect.propTypes = {
-  successMetadata: object
+  order_id: string,
+  creation_date: string,
+  payment_method: object,
+  amount: number
+
 }
 
 export default StoreTickect

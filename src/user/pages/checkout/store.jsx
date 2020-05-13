@@ -12,23 +12,26 @@ const Store = props => {
   }
 
   const payWithStore = async () => {
-    console.log('paying with store')
-    props.startProcess()
-    const response = await api.payouts.store({
-      iva: '10',
-      subtotal: props.totalPrice.toString(),
-      method: 'store',
-      deviceId: window.OpenPay.deviceData.setup(),
-      description: 'pago de compras',
-      name: props.data.name,
-      phone: props.data.number,
-      mail: props.data.email,
-      amount: props.totalPrice.toString()
-    })
-
-    console.log('response', response)
-    props.setSuccessMetadata(response)
-    props.saveOperation('pending', response)
+    try {
+      console.log('paying with store')
+      props.startProcess()
+      const response = await api.payouts.store({
+        iva: '10',
+        subtotal: props.totalPrice.toString(),
+        method: 'store',
+        deviceId: window.OpenPay.deviceData.setup(),
+        description: 'pago de compras',
+        name: props.data.name,
+        phone: props.data.number,
+        mail: props.data.email,
+        amount: props.totalPrice.toString()
+      })
+      console.log('response', response)
+      await props.saveOperation('pending', null, response.charge)
+    } catch (error) {
+      props.endProcess()
+      console.error('error intentalo nuevamente')
+    }
     props.endProcess()
   }
 
@@ -37,7 +40,7 @@ const Store = props => {
     props.startProcess()
     const response = await api.payouts.spei(false)
     props.setSuccessMetadata(response)
-    props.saveOperation('pending', response)
+    props.saveOperation('pending', null, response.charge)
     props.endProcess()
   }
 

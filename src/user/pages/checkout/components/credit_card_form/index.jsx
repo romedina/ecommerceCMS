@@ -104,26 +104,33 @@ const CreditCard = props => {
     },
     async response => {
       const token = response.data.id
-      const payStatus = await api.payouts.card({
-        iva: '10',
-        subtotal: props.totalPrice.toString(),
-        method: 'card',
-        deviceId: deviceSessionId,
-        description: 'pago de compras',
-        token,
-        name: state.name,
-        phone: props.data.number,
-        mail: props.data.email,
-        amount: props.totalPrice.toString()
-      })
-      console.log(payStatus)
+      var payStatus
+      try {
+        payStatus = await api.payouts.card({
+          iva: '10',
+          subtotal: props.totalPrice.toString(),
+          method: 'card',
+          deviceId: deviceSessionId,
+          description: 'pago de compras',
+          token,
+          name: state.name,
+          phone: props.data.number,
+          mail: props.data.email,
+          amount: props.totalPrice.toString()
+        })
+      } catch (error) {
+        console.warn('api not response')
+        payStatus = {
+          error_code: 5000
+        }
+      }
 
-      if (payStatus.error) {
+      if (payStatus.error_code) {
         setFormState({ message: 'No se pudo realizar el pago, intentalo nuevamente con otro método de pago' })
         props.endProcess()
-      } else {
-        props.setSuccessMetadata(payStatus)
-        props.saveOperation('payed', response)
+      } else if (payStatus.charge) {
+        await props.saveOperation('payed', response)
+        props.endProcess()
       }
     },
     () => {
@@ -214,7 +221,6 @@ CreditCard.propTypes = {
   startProcess: func,
   endProcess: func,
   goToStep: func,
-  setSuccessMetadata: func,
   data: object,
   totalPrice: oneOfType([string, number])
 }
