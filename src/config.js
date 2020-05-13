@@ -65,6 +65,9 @@ const message = {
 
 export const companyName = 'somos csm'
 
+export const payDayLimitForStore = 3
+export const payDayLimitForBank = 3
+
 export default {
   firebase,
   specificData,

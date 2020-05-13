@@ -5,8 +5,15 @@ import paynetStoresSrc from '../../../../../assets/paynetStores.gif'
 import paynetLogo from '../../../../../assets/paynet.png'
 import currency from '../../../../../helpers/currency'
 import { string, object, number } from 'prop-types'
+import { payDayLimitForStore } from '../../../../../config'
+import { addDays, toString } from '../../../../../helpers/date'
+import useScroll from '../../../../../hooks/useScroll'
 
 const StoreTickect = props => {
+  var payDayLimit = toString(addDays(props.creation_date, payDayLimitForStore))
+
+  useScroll()
+
   const onPrint = event => {
     window.print()
   }
@@ -27,7 +34,7 @@ const StoreTickect = props => {
         </Body>
         <Body>
           <Title>Fecha limite de pago:</Title>
-          <Text>{props.creation_date}</Text>
+          <Text>{payDayLimit}</Text>
         </Body>
         <Body>
           <Title>Codigo de barras:</Title>
@@ -47,7 +54,7 @@ const StoreTickect = props => {
             <ol>
               <li>Acude a cualquier tienda afiliada</li>
               <li>Entrega al cajero el código de barras y menciona que realizarás un pago de servicio Paynet</li>
-              <li>Realizar el pago en efectivo por $9,000.00 MXN </li>
+              <li>Realizar el pago en efectivo por {currency.formatMoney(props.amount)} MXN </li>
               <li>Conserva el ticket para cualquier aclaración</li>
             </ol>
           </Instructions>
