@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { db, firebase } from './firebase'
 import snapshotParser from '../helpers/snapshotparser'
 
@@ -37,14 +38,51 @@ export const onCounterChange = handler => {
   return unsubscribe
 }
 
-export const save = async (data) => {
+export const create = async ({ email, name, lastname, street_number, suburb, city, state, postal_code, number, subTotal, shipping, totalPrice, methodPay, itemsOncart }) => {
+  try {
+    const items = itemsOncart.map(item => {
+      const { id, price, quantity, sku, title, picture } = item
+      return { id, price, quantity, sku, title, picture }
+    })
+    const date = new Date()
+    const period = `${date.getMonth() + 1}-${date.getFullYear()}`
+    const result = await db.collection(`Ordenes/Pedidos/${period}`).add({
+      isViewed: false,
+      items,
+      subTotal,
+      shipping,
+      totalPrice,
+      date,
+      methodPay,
+      user: { email, name, lastname, number },
+      shipTo: { street_number, suburb, city, state, postal_code }
+    })
+    await db.doc(`Ordenes/Pedidos/${period}/${result.id}`).update({ id: result.id })
+    return result.id
+  } catch (error) {
+    console.error('error_description:', error)
+    return false
+  }
+}
+
+export const success = async ({ id, status = 'pending', meta = {}, notific = null }) => {
   try {
     const date = new Date()
     const period = `${date.getMonth() + 1}-${date.getFullYear()}`
-    const result = await db.collection(`Ordenes/Pedidos/${period}`).add({ ...data, date })
-    await db.doc(`Ordenes/Pedidos/${period}/${result.id}`).update({ id: result.id })
-    await db.doc('Ordenes/Pedidos').update({ counter: firebase.firestore.FieldValue.increment(1) })
-    return result.id
+    await db.doc(`Ordenes/Pedidos/${period}/${id}`).update({ status, meta })
+    if (notific) await db.doc('Ordenes/Pedidos').update({ counter: firebase.firestore.FieldValue.increment(1) })
+    return true
+  } catch (error) {
+    console.error('error_description:', error)
+    return false
+  }
+}
+
+export const failed = async id => {
+  try {
+    const date = new Date()
+    const period = `${date.getMonth() + 1}-${date.getFullYear()}`
+    await db.doc(`Ordenes/Pedidos/${period}/${id}`).delete()
   } catch (error) {
     console.error('error_description:', error)
     return false
@@ -56,5 +94,7 @@ export default {
   changeStatus,
   onCounterChange,
   setViewed,
-  save
+  create,
+  success,
+  failed
 }

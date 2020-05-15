@@ -12,7 +12,7 @@ const Success = props => {
   var { state = {} } = useLocation()
   console.log('state', state)
 
-  if (state.methodPay === 'PayPal' || state.methodPay === 'card') {
+  if (state.methodPay === 'PayPal' || state.methodPay === 'card' || state.methodPay === 'paypal') {
     return (
       <Layout>
         <HeaderSuccess />

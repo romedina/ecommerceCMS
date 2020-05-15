@@ -21,6 +21,7 @@ import Home from './user/pages/home'
 import Item from './user/pages/item'
 import MyCart from './user/pages/my_cart'
 import Checkout from './user/pages/checkout'
+import Checkout2 from './user/pages/checkout2'
 import About from './user/pages/about'
 import Contact from './user/pages/contact'
 import admin from './admin/hoc/admin'
@@ -44,7 +45,8 @@ function App () {
               <Route exact path='/login' component={Login} />
               <Route exact path='/item/:id' component={Item} />
               <Route exact path='/my-cart' component={MyCart} />
-              <Route exact path='/checkout' component={Checkout} />
+              <Route exact path='/checkout-2' component={Checkout} />
+              <Route exact path='/checkout' component={Checkout2} />
               <Route exact path='/about' component={About} />
               <Route exact path='/contact' component={Contact} />
               <Route exact path='/messages' component={Messages} />

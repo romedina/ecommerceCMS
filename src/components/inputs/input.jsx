@@ -16,6 +16,7 @@ const Input = props => {
   if (props.placeholder) inputProps.label = props.placeholder
   if (props.error) inputProps.error = props.error
   if (props.onFocus) inputProps.onFocus = props.onFocus
+  if (props.type) inputProps.type = props.type
 
   return (
     <InputStyled
@@ -38,7 +39,8 @@ Input.propTypes = {
   placeholder: string,
   error: bool,
   onFocus: func,
-  maxlength: number
+  maxlength: number,
+  type: string
 }
 
 const InputStyled = styled(TextField)`

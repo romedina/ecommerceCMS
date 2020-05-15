@@ -1,6 +1,6 @@
 import React from 'react'
 import { Select as SelectBase, MenuItem, InputLabel, FormControl } from '@material-ui/core'
-import propTypes, { number, string, bool } from 'prop-types'
+import propTypes, { number, string, bool, func } from 'prop-types'
 import styled from 'styled-components'
 
 const Select = props => {
@@ -17,7 +17,7 @@ const Select = props => {
   if (props.placeholder) inputProps.label = props.placeholder
   if (props.fullWidth) inputProps.fullWidth = true
   if (props.error) inputProps.error = true
-
+  if (props.onFocus) inputProps.onFocus = props.onFocus
   const valueCalculated = props.value ? props.value.toString() : ''
 
   return (
@@ -68,7 +68,8 @@ Select.propTypes = {
   name: propTypes.string.isRequired,
   placeholder: propTypes.string,
   fullWidth: propTypes.bool,
-  error: bool
+  error: bool,
+  onFocus: func
 }
 
 export default Select

@@ -5,6 +5,8 @@ import { string, func, oneOfType, object } from 'prop-types'
 import { useHistory } from 'react-router-dom'
 
 const Button = styled(ButtonBase)`
+  position: relative;
+  overflow: hidden;
   font-size: 1.2em;
   padding: 10px 0px;
   border-radius: 5px;
