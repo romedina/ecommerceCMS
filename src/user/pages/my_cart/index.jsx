@@ -9,13 +9,15 @@ import Currency from '../../../helpers/currency'
 import Button from '../../../components/inputs/Button'
 import sumePrice from '../../../helpers/sumPrice'
 import Empty from './compoenents/empty'
+import { taxPorcent } from '../../../config'
 
 const MyCart = props => {
   const myCart = useSelector(state => state.cart)
   const dispatch = useDispatch()
   const subtotal = sumePrice(myCart)
   const shipping = 50
-  const total = subtotal + shipping
+  const tax = Math.ceil((subtotal + shipping) * (taxPorcent / 100))
+  const total = subtotal + shipping + tax
 
   const handleRemoveItem = data => {
     dispatch(
@@ -58,6 +60,12 @@ const MyCart = props => {
                 <span>Envio:</span>
                 $ {Currency.formatMoney(shipping)}
               </div>
+              {!!tax && (
+                <div>
+                  <span>Impuestos:</span>
+                  $ {Currency.formatMoney(tax)}
+                </div>
+              )}
             </Summary>
           </FlexEnd>
           <FlexEnd>

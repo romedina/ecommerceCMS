@@ -38,7 +38,7 @@ export const onCounterChange = handler => {
   return unsubscribe
 }
 
-export const create = async ({ email, name, lastname, street_number, suburb, city, state, postal_code, number, subTotal, shipping, totalPrice, methodPay, itemsOncart }) => {
+export const create = async ({ tax = '', email, name, lastname, street_number, suburb, city, state, postal_code, number, subTotal, shipping, totalPrice, methodPay, itemsOncart }) => {
   try {
     const items = itemsOncart.map(item => {
       const { id, price, quantity, sku, title, picture } = item
@@ -54,6 +54,7 @@ export const create = async ({ email, name, lastname, street_number, suburb, cit
       totalPrice,
       date,
       methodPay,
+      tax,
       user: { email, name, lastname, number },
       shipTo: { street_number, suburb, city, state, postal_code }
     })

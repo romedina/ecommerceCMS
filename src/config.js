@@ -66,6 +66,9 @@ export const companyName = 'somos csm'
 
 export const payDayLimitForStore = 3
 export const payDayLimitForBank = 3
+export const taxPorcent = 16
+export const limitCheckout = 10000
+export const shipping = 50
 
 export default {
   firebase,

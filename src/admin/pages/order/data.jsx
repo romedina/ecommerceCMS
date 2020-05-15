@@ -14,6 +14,12 @@ const Data = props => {
         <span>Envío:</span>
         $ {currency.formatMoney(props.shipping)}
       </div>
+      {!!props.tax && (
+        <div className='rows'>
+          <span>Impuestos:</span>
+          $ {currency.formatMoney(props.tax)}
+        </div>
+      )}
       <Button>Total $ {currency.formatMoney(props.totalPrice)}</Button>
     </Content>
   )
@@ -22,7 +28,8 @@ const Data = props => {
 Data.propTypes = {
   totalPrice: number,
   subTotal: number,
-  shipping: number
+  shipping: number,
+  tax: number
 }
 
 const Content = styled.div`

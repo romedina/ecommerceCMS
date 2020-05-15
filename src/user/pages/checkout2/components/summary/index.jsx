@@ -68,6 +68,12 @@ const Summary = props => {
           <span>Envío:</span>
           <span>$ {currency.formatMoney(props.shipping)}</span>
         </Row>
+        {!!props.tax && (
+          <Row>
+            <span>Impuesto:</span>
+            <span>$ {currency.formatMoney(props.tax)}</span>
+          </Row>
+        )}
         <Row>
           <span>Total:</span>
           <span>{currency.formatMoney(props.totalPrice)}</span>
@@ -94,7 +100,8 @@ Summary.propTypes = {
   totalPrice: number,
   onConfirm: func,
   currentStep: number,
-  data: object
+  data: object,
+  tax: number
 }
 
 export default Summary

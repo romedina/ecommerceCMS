@@ -11,6 +11,8 @@ import { dispatch } from '../../../store'
 import { useHistory } from 'react-router-dom'
 import validateForm from '../../../helpers/validateform'
 import api from '../../../api'
+import { taxPorcent, shipping } from '../../../config'
+
 const { validateCardNumber, validateCVC, validateExpiry } = window.OpenPay.card
 
 const Checkout = props => {
@@ -21,9 +23,9 @@ const Checkout = props => {
   const [input, setInputError] = useObjectState({ errors: [], message: null })
 
   const steps = ['Información de envío', '¿Cómo quieres pagar?', 'Datos de la tarjeta', 'Confirmación']
-  const shipping = 50
   const subTotal = sumPrice(itemsOncart)
-  const totalPrice = subTotal + shipping
+  const tax = Math.ceil((subTotal + shipping) * (taxPorcent / 100))
+  const totalPrice = subTotal + shipping + tax
 
   const onAnyInputChange = event => {
     setData({ [event.target.name]: event.target.value })
@@ -53,6 +55,7 @@ const Checkout = props => {
       subTotal,
       shipping,
       totalPrice,
+      tax,
       itemsOncart
     })
     return idCreated
@@ -138,7 +141,7 @@ const Checkout = props => {
         const token = response.data.id
         var payStatus = await api.payouts.card({
           pId: idCreated,
-          iva: '0',
+          iva: tax,
           subtotal: totalPrice.toString(),
           method: 'card',
           deviceId: deviceSessionId,
@@ -174,7 +177,7 @@ const Checkout = props => {
     try {
       const response = await api.payouts.store({
         pId: idCreated,
-        iva: '0',
+        iva: tax,
         subtotal: totalPrice.toString(),
         method: 'store',
         deviceId: window.OpenPay.deviceData.setup(),
@@ -200,7 +203,7 @@ const Checkout = props => {
     try {
       const response = await api.payouts.spei({
         pId: idCreated,
-        iva: '0',
+        iva: tax,
         subtotal: totalPrice.toString(),
         method: 'bank_account',
         deviceId: window.OpenPay.deviceData.setup(),
@@ -247,6 +250,7 @@ const Checkout = props => {
       onConfirm={onConfirm}
       successOperation={successOperation}
       failedOperation={failedOperation}
+      tax={tax}
     />
   )
 }

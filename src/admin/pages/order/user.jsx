@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { object, string } from 'prop-types'
+import { methodPayEs } from '../../../constants'
 
 const User = props => {
   return (
@@ -21,7 +22,7 @@ const User = props => {
       </Row>
       <Row>
         <Describe>Método de pago:</Describe>
-        <Value>{props.methodPay}</Value>
+        <Value>{methodPayEs[props.methodPay]}</Value>
       </Row>
       <DividerStyled />
       <SubTitle>Datos de Envío</SubTitle>
