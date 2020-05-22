@@ -59,7 +59,7 @@ export const create = async ({ tax = '', email, name, lastname, street_number, s
       shipTo: { street_number, suburb, city, state, postal_code }
     })
     await db.doc(`Ordenes/Pedidos/${period}/${result.id}`).update({ id: result.id })
-    return result.id
+    return { id: result.id, path: result.path }
   } catch (error) {
     console.error('error_description:', error)
     return false

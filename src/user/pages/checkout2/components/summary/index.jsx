@@ -8,7 +8,8 @@ const paypalConfig = props => {
     createOrder: function (data, actions) {
       return actions.order.create({
         purchase_units: [{
-          amount: { value: props.totalPrice }
+          amount: { value: props.totalPrice },
+          path: 'custom_path'
         }]
       })
     },
@@ -40,7 +41,7 @@ const Summary = props => {
 
   // media query handler
   const handleCheckMediaQuery = mediaQuery => {
-    if (!mediaQuery.matches || (mediaQuery.matches && props.currentStep === 3)) return setRender(true)
+    if (!mediaQuery.matches || props.currentStep === 3) return setRender(true)
     return setRender(false)
   }
 

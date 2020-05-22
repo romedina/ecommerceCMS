@@ -27,6 +27,8 @@ const Checkout = props => {
   const tax = Math.ceil((subTotal + shipping) * (taxPorcent / 100))
   const totalPrice = subTotal + shipping + tax
 
+  console.log('debugin____', subTotal, totalPrice)
+
   const onAnyInputChange = event => {
     setData({ [event.target.name]: event.target.value })
   }
@@ -50,7 +52,7 @@ const Checkout = props => {
 
   const saveOperation = async () => {
     startProcess()
-    const idCreated = await orders.create({
+    const result = await orders.create({
       ...data,
       subTotal,
       shipping,
@@ -58,7 +60,7 @@ const Checkout = props => {
       tax,
       itemsOncart
     })
-    return idCreated
+    return result
   }
 
   const handleNext = event => {
@@ -136,13 +138,14 @@ const Checkout = props => {
       cvv2: data.card_cvv
     },
     async response => {
-      var idCreated = await saveOperation()
+      var { id: idCreated, path } = await saveOperation()
       try {
         const token = response.data.id
         var payStatus = await api.payouts.card({
+          path,
           pId: idCreated,
           iva: tax,
-          subtotal: totalPrice.toString(),
+          subtotal: subTotal.toString(),
           method: 'card',
           deviceId: deviceSessionId,
           description: 'checkout',
@@ -173,12 +176,13 @@ const Checkout = props => {
   }
 
   const payWithStore = async () => {
-    var idCreated = await saveOperation()
+    var { id: idCreated, path } = await saveOperation()
     try {
       const response = await api.payouts.store({
+        path,
         pId: idCreated,
         iva: tax,
-        subtotal: totalPrice.toString(),
+        subtotal: subTotal.toString(),
         method: 'store',
         deviceId: window.OpenPay.deviceData.setup(),
         description: 'checkout',
@@ -199,12 +203,13 @@ const Checkout = props => {
   }
 
   const payWithSpei = async () => {
-    var idCreated = await saveOperation()
+    var { id: idCreated, path } = await saveOperation()
     try {
       const response = await api.payouts.spei({
+        path,
         pId: idCreated,
         iva: tax,
-        subtotal: totalPrice.toString(),
+        subtotal: subTotal.toString(),
         method: 'bank_account',
         deviceId: window.OpenPay.deviceData.setup(),
         description: 'checkout',

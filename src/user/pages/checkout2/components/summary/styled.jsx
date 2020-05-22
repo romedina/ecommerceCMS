@@ -49,7 +49,6 @@ export const Button = styled(ButtonBase)`
 `
 export const ShadowPaypal = styled.div`
   position: absolute;
-  background: red;
   width: 100%;
   height: 100%;
   width: 400px;
