@@ -160,7 +160,7 @@ const Checkout = props => {
           setInputError({ message: 'No se pudo realizar el pago, intentalo nuevamente con otro método de pago' })
           failedOperation(idCreated)
         } else if (payStatus.charge) {
-          successOperation({ id: idCreated, metadata: response, status: 'payed' })
+          successOperation({ notific: true, id: idCreated, metadata: response, status: 'payed' })
         }
       } catch (error) {
         setInputError({ message: 'No se pudo realizar el pago, intentalo nuevamente con otro método de pago' })
@@ -192,7 +192,7 @@ const Checkout = props => {
         amount: totalPrice.toString()
       })
       if (!response.error_code) {
-        return successOperation({ nitific: true, id: idCreated, successData: response.charge, metadata: null, status: 'pending' })
+        return successOperation({ notific: true, id: idCreated, successData: response.charge, metadata: null, status: 'pending' })
       }
       failedOperation(idCreated)
       setInputError({ message: 'Error, intenta con un método diferente' })

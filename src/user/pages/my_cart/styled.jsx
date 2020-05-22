@@ -18,7 +18,10 @@ export const Summary = styled.div`
     color: var(--user-gray);
     margin-right: 10px;
   }
-  @media screen and (max-width:400px) {width: 100%}
+  @media screen and (max-width: 400px) {width: 100%}
+  @media screen and (max-width: 700px) { 
+    font-size: 1.1em;
+  }
 `
 export const Total = styled.div`
   margin-top: 10px;
@@ -35,6 +38,9 @@ export const Total = styled.div`
     margin-right: 10px;
   }
   @media screen and (max-width:400px) {width: 100%}
+  @media screen and (max-width: 700px) { 
+    font-size: 1.1em;
+  }
 `
 export const Container = styled(ContainerBase)`
   max-width: 1000px;

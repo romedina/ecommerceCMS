@@ -3,13 +3,19 @@ import { Content, Title, Box, Row, Button, ShadowPaypal } from './styled'
 import { array, number, func, object } from 'prop-types'
 import currency from '../../../../../helpers/currency'
 
+var idOrder = null
+
 const paypalConfig = props => {
   return {
-    createOrder: function (data, actions) {
+    createOrder: async function (data, actions) {
+      const { id, path } = await props.saveOperation()
+      idOrder = id
+      console.log('debug', path, id)
       return actions.order.create({
         purchase_units: [{
           amount: { value: props.totalPrice },
-          path: 'custom_path'
+          path,
+          order_id: id
         }]
       })
     },
@@ -18,13 +24,23 @@ const paypalConfig = props => {
       const status = actions.order.capture().then((details) => {
         const asyncOperation = async () => {
           const { id, payer } = details
-          const idCreated = await props.saveOperation()
-          await props.successOperation({ notific: true, id: idCreated, metadata: { id, payer }, status: 'payed' })
+          await props.successOperation({ notific: true, id: idOrder, metadata: { id, payer }, status: 'payed' })
         }
         asyncOperation()
       })
       return status
+    },
+    onError: (error) => {
+      console.log('error:', error)
+      props.endProcess()
+      props.failedOperation(idOrder)
+    },
+    onCancel: () => {
+      console.log('error:', 'cancel')
+      props.endProcess()
+      props.failedOperation(idOrder)
     }
+
   }
 }
 
