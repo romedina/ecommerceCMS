@@ -53,12 +53,15 @@ const TableCellStatus = styled(TableCell)`
 
 const LinkStyled = styled(Link)`
   text-decoration: none;
-  color: initial;
+  color: #fff;
+  border-radius: 5px;
   font-weight: bold;
+  background: var(--main-blue);
+  padding: 5px 10px;
 `
 
 const TableRowStyled = styled(TableRow)`
-  background: ${props => !props.noview ? 'none' : '#f0f8ff'}
+  background: ${props => !props.noview ? 'none' : '#f0f8ff'};
 `
 
 export default OrderItem

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import LayoutAdmin from '../../components/layout_admin'
 import { Button, CircularProgress, Fade, OutlinedInput } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,7 +27,7 @@ const Login = () => {
   }
 
   return (
-    <LayoutAdmin>
+    <FullWidth>
       <Content>
         {loading && (
           <CircularProgress />
@@ -65,9 +64,14 @@ const Login = () => {
           </Box>
         )}
       </Content>
-    </LayoutAdmin>
+    </FullWidth>
   )
 }
+
+const FullWidth = styled.div`
+  background: #fff;
+  min-height: 100vh;
+`
 
 const Content = styled('div')`
   min-height: 70vh;
