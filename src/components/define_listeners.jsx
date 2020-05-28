@@ -5,9 +5,17 @@ import { onCounterChange } from '../modules/orders'
 import { setCounter as setCounterOrder } from '../flux/orders'
 import { setCounter } from '../flux/messages'
 import { useSelector } from 'react-redux'
+import { getConfig } from '../flux/config'
 
 const DefineListeners = props => {
   const sessionId = useSelector(state => state.session.id)
+
+  // getconfig
+  useEffect(() => {
+    if (sessionId) {
+      dispatch(getConfig())
+    }
+  }, [sessionId])
 
   // subscribe on counter messages
   useEffect(any => {

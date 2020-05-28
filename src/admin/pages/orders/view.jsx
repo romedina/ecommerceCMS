@@ -4,21 +4,31 @@ import Layout from '../../components/layout_admin'
 import Title from '../../components/page_title'
 import PeriodSelector from './period_selector'
 import Order from './order'
-import propTypes from 'prop-types'
+import propTypes, { oneOf } from 'prop-types'
 import Skeleton from './skeleton'
 import LoyaltyIcon from '@material-ui/icons/Loyalty'
+import ViewSelector from './selectorView'
+import List from './list'
 
 const View = props => {
   return (
     <Layout title='Mis Pedidos'>
       <Title>Mis Pedidos</Title>
-      <PeriodSelector {...props} />
-      {props.items.length > 0 && !props.loading && (
+      <FlexCntent>
+        <PeriodSelector {...props} />
+        {props.isTableAvalible && (
+          <ViewSelector />
+        )}
+      </FlexCntent>
+      {props.items.length > 0 && !props.loading && props.viewType === 'grid' && (
         <Flex>
           {props.items.map(item => (
             <Order {...item} key={item.id} />
           ))}
         </Flex>
+      )}
+      {props.items.length > 0 && !props.loading && props.viewType === 'list' && (
+        <List items={props.items} />
       )}
       {props.items.length === 0 && props.loading && (
         <Skeleton />
@@ -35,7 +45,9 @@ const View = props => {
 
 View.propTypes = {
   items: propTypes.array,
-  loading: propTypes.bool
+  loading: propTypes.bool,
+  viewType: oneOf(['list', 'grid']),
+  isTableAvalible: propTypes.bool
 }
 
 const Flex = styled.div`
@@ -56,6 +68,11 @@ const Empty = styled.div`
     font-size: 150px;
     color: #008ffd4d;
   }
+`
+const FlexCntent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 export default View
