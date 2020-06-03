@@ -2,6 +2,8 @@ import { SelectStyled, Row, Form, Input, Flex, FlexItem, Container } from './sty
 import React from 'react'
 import { Alert } from '@material-ui/lab'
 import { func, object, oneOfType, string, number } from 'prop-types'
+import Icons from '../icons'
+
 // import api from '../../../../../api'
 
 var months = [
@@ -104,7 +106,7 @@ const CreditCard = props => {
         </Row>
         <input type='hidden' name='card_code' />
       </Form>
-
+      <Icons type='card' />
     </Container>
   )
 }
