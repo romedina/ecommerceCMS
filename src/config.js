@@ -25,16 +25,6 @@ export const firebase = {
 
 export const apiBaseUrl = 'https://us-central1-somos-marketplace.cloudfunctions.net'
 
-var firebaseConfig = {
-  apiKey: 'AIzaSyBg0hMneTSq_vEVZxPt0xrL8iBjChJNHX4',
-  authDomain: 'santa-cruz-b6454.firebaseapp.com',
-  databaseURL: 'https://santa-cruz-b6454.firebaseio.com',
-  projectId: 'santa-cruz-b6454',
-  storageBucket: 'santa-cruz-b6454.appspot.com',
-  messagingSenderId: '39634087486',
-  appId: '1:39634087486:web:4bd1f45a776059953aab6f'
-}
-
 // cover pictures
 export const coverPictures = [
   {
@@ -83,7 +73,7 @@ export const limitCheckout = 10000
 export const shipping = 50
 
 export default {
-  firebase: firebaseConfig,
+  firebase,
   specificData,
   contacts,
   message,
