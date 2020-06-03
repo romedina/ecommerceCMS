@@ -44,6 +44,7 @@ img {
   --search-color: gray;
 
   /* backgrounds */
+  --background: #fafafa;
   --background-secondary: white;
 
   /* text */
@@ -51,11 +52,15 @@ img {
   --primary: black;
   --paragraph: black;
   --empty-messages: #cce9ff;
-
 }
 * {
   box-sizing: border-box;
 }
 .paypal-button {
+  display: none;
+}
+
+/* hide openpay's iframe */
+#_op_data_antifraud {
   display: none;
 }

@@ -28,40 +28,42 @@ const Login = () => {
 
   return (
     <FullWidth>
-      <Content>
+      <Content id='content'>
         {loading && (
           <CircularProgress />
         )}
         {!loading && (
-          <Box onSubmit={onSubmit}>
+          <Form onSubmit={onSubmit}>
             <Fade in={error}>
               <Alert severity='error'>Correo o contraseña incorrecta</Alert>
             </Fade>
-            <InputGroup>
-              <Label>Ingresa tu correo electrónico</Label>
-              <OutlinedInputStyled
-                placeholder='nombre@mail.com'
-                type='text'
-                fullWidth
-                value={email}
-                onChange={handleEmailChange}
-              />
-            </InputGroup>
-            <InputGroup>
-              <Label>Contraseña</Label>
-              <OutlinedInputStyled
-                placeholder='contraseña'
-                type={showPasword ? 'text' : 'password'}
-                fullWidth
-                value={password}
-                onChange={handlePasswordChange}
-                endAdornment={showPasword ? <Visibility onClick={e => setShowPasword(false)} /> : <VisibilityOff onClick={e => setShowPasword(true)} />}
-              />
-            </InputGroup>
-            <InputGroup>
-              <Button type='submit' variant='contained' color='primary'>Entrar</Button>
-            </InputGroup>
-          </Box>
+            <Box>
+              <InputGroup>
+                <Label>Ingresa tu correo electrónico</Label>
+                <OutlinedInputStyled
+                  placeholder='nombre@mail.com'
+                  type='text'
+                  fullWidth
+                  value={email}
+                  onChange={handleEmailChange}
+                />
+              </InputGroup>
+              <InputGroup>
+                <Label>Contraseña</Label>
+                <OutlinedInputStyled
+                  placeholder='contraseña'
+                  type={showPasword ? 'text' : 'password'}
+                  fullWidth
+                  value={password}
+                  onChange={handlePasswordChange}
+                  endAdornment={showPasword ? <Visibility onClick={e => setShowPasword(false)} /> : <VisibilityOff onClick={e => setShowPasword(true)} />}
+                />
+              </InputGroup>
+              <InputGroup>
+                <Button type='submit' variant='contained' color='primary'>Entrar</Button>
+              </InputGroup>
+            </Box>
+          </Form>
         )}
       </Content>
     </FullWidth>
@@ -69,8 +71,14 @@ const Login = () => {
 }
 
 const FullWidth = styled.div`
-  background: #fff;
+  background: var(--background);
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width:480px){
+    background: #fff;
+  }
 `
 
 const Content = styled('div')`
@@ -78,6 +86,7 @@ const Content = styled('div')`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `
 const InputGroup = styled('div')`
   margin-bottom: 15px;
@@ -102,14 +111,24 @@ const OutlinedInputStyled = styled(OutlinedInput)`
     color: var(--main-blue)
   }
 `
-const Box = styled('form')`
-  width: 40%;
+const Form = styled('form')`
+  width: 70%;
+  max-width: 500px;
   font-size: 1.2em;
   @media screen and (max-width:1000px){
-    width: 70%;
-  }
-  @media screen and (max-width:1000px){
     width: 90%;
+  }
+`
+
+const Box = styled.div`
+  margin-top: 10px;
+  padding: 50px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 10px 10px 50px #9e9e9e5e;
+  @media screen and (max-width:480px){
+    box-shadow: none;
+    padding: 10px;
   }
 `
 
