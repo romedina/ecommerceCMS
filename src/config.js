@@ -23,6 +23,8 @@ export const firebase = {
   measurementId: 'G-PV24KTN13F'
 }
 
+export const apiBaseUrl = 'https://us-central1-somos-marketplace.cloudfunctions.net'
+
 var firebaseConfig = {
   apiKey: 'AIzaSyBg0hMneTSq_vEVZxPt0xrL8iBjChJNHX4',
   authDomain: 'santa-cruz-b6454.firebaseapp.com',
