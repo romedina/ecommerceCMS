@@ -13,9 +13,15 @@ export const add = async data => {
       date: new Date()
     })
     await db.doc(`contact/messages/items/${id}`).update({ id })
-    await db.doc('contact/messages').update({
-      counter: firebase.firestore.FieldValue.increment(1)
-    })
+    try {
+      await db.doc('contact/messages').update({
+        counter: firebase.firestore.FieldValue.increment(1)
+      })
+    } catch (error) {
+      await db.doc('contact/messages').set({
+        counter: firebase.firestore.FieldValue.increment(1)
+      })
+    }
     return true
   } catch (error) {
     console.error('error_description:', error)
@@ -43,6 +49,7 @@ export const getList = async (last, limit) => {
 
 export const onCounterCHange = handler => {
   const unsubscribe = db.doc('contact/messages').onSnapshot(snap => {
+    console.log('snap', snap)
     const data = snapshotParser(snap)
     handler(data ? data.counter : 0)
   })

@@ -71,7 +71,13 @@ export const success = async ({ id, status = 'pending', meta = {}, notific = nul
     const date = new Date()
     const period = `${date.getMonth() + 1}-${date.getFullYear()}`
     await db.doc(`Ordenes/Pedidos/${period}/${id}`).update({ status, meta })
-    if (notific) await db.doc('Ordenes/Pedidos').update({ counter: firebase.firestore.FieldValue.increment(1) })
+    if (notific) {
+      try {
+        await db.doc('Ordenes/Pedidos').update({ counter: firebase.firestore.FieldValue.increment(1) })
+      } catch (error) {
+        await db.doc('Ordenes/Pedidos').set({ counter: firebase.firestore.FieldValue.increment(1) })
+      }
+    }
     return true
   } catch (error) {
     console.error('error_description:', error)
