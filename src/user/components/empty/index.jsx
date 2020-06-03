@@ -1,11 +1,12 @@
 import React from 'react'
 import { Content, Text, Icon } from './styled'
-import { string } from 'prop-types'
+import { string, element } from 'prop-types'
 
 const Empty = props => {
   return (
     <Content>
-      <Icon />
+      {props.icon && (<Icon as={props.icon} />)}
+      {!props.icon && (<Icon />)}
       <Text>
         {props.message || 'Aún no tienes artículos en tu carrito'}
       </Text>
@@ -14,7 +15,8 @@ const Empty = props => {
 }
 
 Empty.propTypes = {
-  message: string
+  message: string,
+  icon: element
 }
 
 export default Empty

@@ -8,6 +8,8 @@ import styled from 'styled-components'
 import { CircularProgress } from '@material-ui/core'
 import Skeleton from './skeleton'
 import Modal from './modal'
+import Empty from '../../../user/components/empty'
+import { Textsms } from '@material-ui/icons'
 
 const ViewMessages = props => {
   return (
@@ -30,6 +32,12 @@ const ViewMessages = props => {
       )}
       {props.items.length === 0 && props.loading && (
         <Skeleton />
+      )}
+      {!props.items.length && !props.loading && (
+        <Empty
+          icon={Textsms}
+          message='Aun no tienes mensajes'
+        />
       )}
     </Layout>
   )
