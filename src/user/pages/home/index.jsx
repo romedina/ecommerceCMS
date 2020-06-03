@@ -12,6 +12,7 @@ import lastPosition from '../../../helpers/last_position'
 import { CircularProgress } from '@material-ui/core'
 import styled from 'styled-components'
 import { toArray } from '../../../helpers/transformer'
+import Empty from '../../components/empty'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -51,6 +52,11 @@ const Home = () => {
           <ListItem
             loading={loading}
             items={itemsFiltered}
+          />
+        )}
+        {!loading && !itemsFiltered.length && (
+          <Empty
+            message='Aun no hay articulos en la tienda'
           />
         )}
         {itemsFiltered.length > 0 && loading && (

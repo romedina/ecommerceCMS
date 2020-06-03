@@ -3,9 +3,14 @@ const snapshotParser = (snapshot) => {
     const items = snapshot.docs.map(doc => doc.data())
     return items
   } else {
-    const data = snapshot.data()
-    data._id = snapshot.id
-    return data
+    try {
+      const data = snapshot.data()
+      data._id = snapshot.id
+      return data
+    } catch (error) {
+      console.error('error', error)
+      return null
+    }
   }
 }
 

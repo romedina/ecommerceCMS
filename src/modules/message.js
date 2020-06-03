@@ -44,7 +44,7 @@ export const getList = async (last, limit) => {
 export const onCounterCHange = handler => {
   const unsubscribe = db.doc('contact/messages').onSnapshot(snap => {
     const data = snapshotParser(snap)
-    handler(data.counter)
+    handler(data ? data.counter : 0)
   })
   return unsubscribe
 }

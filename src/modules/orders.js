@@ -33,7 +33,7 @@ export const changeStatus = async ({ status, id, period }) => {
 export const onCounterChange = handler => {
   const unsubscribe = db.doc('Ordenes/Pedidos').onSnapshot(snap => {
     const data = snapshotParser(snap)
-    handler(data.counter)
+    handler(data ? data.counter : 0)
   })
   return unsubscribe
 }

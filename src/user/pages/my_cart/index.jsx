@@ -8,7 +8,7 @@ import { setAlert } from '../../../flux/alert'
 import Currency from '../../../helpers/currency'
 import Button from '../../../components/inputs/Button'
 import sumePrice from '../../../helpers/sumPrice'
-import Empty from './compoenents/empty'
+import Empty from '../../components/empty'
 import { taxPorcent } from '../../../config'
 
 const MyCart = props => {

@@ -26,7 +26,7 @@ const DefineListeners = props => {
     }
   }, [sessionId])
 
-  // subscribe on counter messages
+  // subscribe on counter orders
   useEffect(any => {
     if (sessionId) {
       return onCounterChange(counter => {

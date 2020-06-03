@@ -12,7 +12,7 @@ window.OpenPay.setId('mv6scwapmuqsocsjucwh')
 window.OpenPay.setSandboxMode(true) // true || false
 
 // firebase config
-const firebase = {
+export const firebase = {
   apiKey: 'AIzaSyDGmuP3Cp8D3LgMAr89IcZBfq4y1g9fzj4',
   authDomain: 'somos-marketplace.firebaseapp.com',
   databaseURL: 'https://somos-marketplace.firebaseio.com',
@@ -21,6 +21,16 @@ const firebase = {
   messagingSenderId: '404758906021',
   appId: '1:404758906021:web:b405f16b3359f1d881b94c',
   measurementId: 'G-PV24KTN13F'
+}
+
+var firebaseConfig = {
+  apiKey: 'AIzaSyBg0hMneTSq_vEVZxPt0xrL8iBjChJNHX4',
+  authDomain: 'santa-cruz-b6454.firebaseapp.com',
+  databaseURL: 'https://santa-cruz-b6454.firebaseio.com',
+  projectId: 'santa-cruz-b6454',
+  storageBucket: 'santa-cruz-b6454.appspot.com',
+  messagingSenderId: '39634087486',
+  appId: '1:39634087486:web:4bd1f45a776059953aab6f'
 }
 
 // cover pictures
@@ -71,7 +81,7 @@ export const limitCheckout = 10000
 export const shipping = 50
 
 export default {
-  firebase,
+  firebase: firebaseConfig,
   specificData,
   contacts,
   message,
