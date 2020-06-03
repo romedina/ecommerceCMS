@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom'
 import validateForm from '../../../helpers/validateform'
 import api from '../../../api'
 import { taxPorcent, shipping } from '../../../config'
+import errorDictionary from './error_dictionary'
 
 const { validateCardNumber, validateCVC, validateExpiry } = window.OpenPay.card
 
@@ -26,8 +27,6 @@ const Checkout = props => {
   const subTotal = sumPrice(itemsOncart)
   const tax = Math.ceil((subTotal + shipping) * (taxPorcent / 100))
   const totalPrice = subTotal + shipping + tax
-
-  console.log('debugin____', subTotal, totalPrice)
 
   const onAnyInputChange = event => {
     setData({ [event.target.name]: event.target.value })
@@ -93,7 +92,7 @@ const Checkout = props => {
       if (!validateCardNumber(data.card_number)) {
         return setInputError({
           errors: ['card_number'],
-          message: 'El número de la tarjeta no es valido'
+          message: 'El número de la tarjeta no es válido'
         })
       }
       if (!validateCVC(data.card_cvv)) {
@@ -157,7 +156,7 @@ const Checkout = props => {
         })
 
         if (payStatus.error_code) {
-          setInputError({ message: 'No se pudo realizar el pago, intentalo nuevamente con otro método de pago' })
+          setInputError({ message: errorDictionary[payStatus.error_code] })
           failedOperation(idCreated)
         } else if (payStatus.charge) {
           successOperation({ notific: true, id: idCreated, metadata: response, status: 'payed' })
@@ -167,12 +166,12 @@ const Checkout = props => {
         failedOperation(idCreated)
       }
     },
-    () => {
+    error => {
+      console.log('error-----------------------------', error)
       setInputError({ message: 'Pago incorrecto, intentelo de nuevo' })
       setCurrenStep(1)
       endProcess()
-    }
-    )
+    })
   }
 
   const payWithStore = async () => {
